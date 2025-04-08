@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Visit;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class VisitSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Visit::factory()->times(50)->create();
     }
 }

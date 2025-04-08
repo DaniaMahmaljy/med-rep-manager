@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Municipal;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class RepresentativeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'municipal_id' => Municipal::inRandomOrder()->first()?->id,
+            'address' => $this->faker->address,
+            // Somewhere in Syria
+            'latitude' => $this->faker->latitude(32.0, 37.5),
+            'longitude' => $this->faker->longitude(35.5, 42.0),
         ];
     }
 }
