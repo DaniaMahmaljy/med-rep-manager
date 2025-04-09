@@ -14,6 +14,12 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::factory()->times(15)->has(User::factory(), 'user')->create();
+       $admins = Admin::factory()->times(15)->has(User::factory(), 'user')->create();
+
+       foreach ($admins as $admin)
+       {
+        $admin->user->assignRole('admin');
+       }
+
     }
 }

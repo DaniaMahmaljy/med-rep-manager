@@ -14,7 +14,12 @@ class RepresentativeSeeder extends Seeder
      */
     public function run(): void
     {
-        Representative::factory()->times(15)->has(User::factory(), 'user')->create();
+        $representatives = Representative::factory()->times(15)->has(User::factory(), 'user')->create();
+
+        foreach ($representatives as $representative)
+        {
+            $representative->user->assignRole('representative');
+        }
 
     }
 }
