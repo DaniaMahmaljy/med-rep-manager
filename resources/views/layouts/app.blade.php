@@ -21,12 +21,25 @@
         <div id="sidebar">
             <x-sidebar />
         </div>
-        <div id="main">
+      <div id="main">
+        @if (session()->has('success'))
+        <div class="alert alert-light-success color-success"><i class="bi bi-check-circle"></i>
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
+    @if (session()->has('error'))
+        <div class="alert alert-light-danger color-danger" role="alert"><i class="bi bi-exclamation-circle"></i> {{ session()->get('error') }}
+        </div>
+    @endif
+
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
+
             </header>
+
             @yield('content')
             @include('layouts.footer')
         </div>

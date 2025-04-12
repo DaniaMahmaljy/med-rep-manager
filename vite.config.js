@@ -8,12 +8,17 @@ export default defineConfig({
 
               'resources/sass/app.scss',
 
-                'resources/js/app.js',
+              'resources/js/app.js',
+
+              'resources/static/js/pages/user-form.js'
             ],
 
             refresh: true,
         }),
     ],
+
+
+
 
     resolve: {
         alias: {
@@ -21,7 +26,7 @@ export default defineConfig({
           '~': '/resources/scss',
           '~themes': '/resources/scss/themes',
           '~bootstrap-icons': 'bootstrap-icons',
-
+          '~@fontsource': '/node_modules/@fontsource',
         }
       },
 

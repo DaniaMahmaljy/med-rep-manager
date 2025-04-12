@@ -10,6 +10,9 @@ class Supervisor extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $guarded = ['id', 'created_at', 'update_at'];
+
+
     public function user()
     {
         return $this->morphOne(User::class, 'userable');
@@ -18,5 +21,10 @@ class Supervisor extends Model
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function representatives()
+    {
+    return $this->hasMany(Representative::class);
     }
 }

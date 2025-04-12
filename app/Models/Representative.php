@@ -34,4 +34,9 @@ class Representative extends Model
         return $this->hasMany(Visit::class);
       }
 
+      public function supervisor()
+      {
+        return $this->belongsTo(Supervisor::class);
+      }
+
 }
