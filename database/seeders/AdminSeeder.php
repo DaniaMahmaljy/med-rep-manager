@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Contracts\Role;
 
 class AdminSeeder extends Seeder
 {
@@ -14,12 +15,14 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-       $admins = Admin::factory()->times(15)->has(User::factory(), 'user')->create();
-
-       foreach ($admins as $admin)
-       {
-        $admin->user->assignRole('admin');
-       }
-
+        Admin::factory()
+            ->count(15)
+            ->has(
+                User::factory()->afterCreating(function (User $user) {
+                    $user->assignRole('admin');
+                }),
+                'user'
+            )
+            ->create();
     }
 }

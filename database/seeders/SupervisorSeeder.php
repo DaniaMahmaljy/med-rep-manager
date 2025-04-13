@@ -14,12 +14,14 @@ class SupervisorSeeder extends Seeder
      */
     public function run(): void
     {
-       $supervisors = Supervisor::factory()->times(15)->has(User::factory(), 'user')->create();
-
-       foreach ($supervisors as $supervisor)
-       {
-        $supervisor->user->assignRole('supervisor');
-       }
-
+       Supervisor::factory()
+            ->count(15)
+            ->has(
+                User::factory()->afterCreating(function (User $user) {
+                    $user->assignRole('supervisor');
+                }),
+                'user'
+            )
+            ->create();
     }
 }
