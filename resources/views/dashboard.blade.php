@@ -2,10 +2,6 @@
 
 
 @section('title', 'Dashnoard')
-{{-- {% set filename = 'layout-default.html' %} --}}
-
-
-
 @section('content')
 <div class="page-heading">
     <div class="page-title">

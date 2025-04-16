@@ -107,26 +107,32 @@
                             @endforeach
                         </select>
                     </fieldset>
-                    {{-- <div class="form-group">
-                        <label for="latitude">Latitude</label>
-                        <input type="text" class="form-control" name="latitude">
-                    </div>
+
                     <div class="form-group">
-                        <label for="longitude">Longitude</label>
-                        <input type="text" class="form-control" name="longitude">
-                    </div> --}}
-                    <div class="form-group">
-                        <label for="address">{{ __('Address') }}</label>
-                        <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" @if(old('user_type') == App\Enums\UserTypeEnum::REPRESENTATIVE->value) required @endif>
+                        <div id="municipal-info" style="margin-top: 10px;"></div>
+                        <div id="map" style="width: 100%; height: 400px;"></div>
+                        <input type="hidden" id="latitude" name="latitude">
+                        @error('latitude')
+                            <div class="text-danger mt-1">
+                                <i class="bx bx-radio-circle"></i> {{ $message }}
+                            </div>
+                        @enderror
+
+                        <input type="hidden" id="longitude" name="longitude">
+                        @error('longitude')
+                            <div class="text-danger mt-1">
+                                <i class="bx bx-radio-circle"></i> {{ $message }}
+                            </div>
+                        @enderror
+
+                        <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="{{ __('Address') }}">
                         @error('address')
-                        <div class="invalid-feedback">
-                            <i class="bx bx-radio-circle"></i> {{ $message }}
-                        </div>
+                            <div class="invalid-feedback">
+                                <i class="bx bx-radio-circle"></i> {{ $message }}
+                            </div>
                         @enderror
                     </div>
-                </div>
-            </div>
-
+                 </div>
             <div class="row">
                 <div class="col-12 d-flex justify-content-end">
                   <button type="submit" class="btn btn-primary me-1 mb-1">{{ __('Submit') }} </button>
@@ -145,5 +151,5 @@
 @endsection
 
 @section('js')
-@vite('resources/static/js/pages/user-form.js')
+@vite(['resources/static/js/pages/user-form.js','resources/static/js/pages/ui-map-leaflet.js'])
 @endsection

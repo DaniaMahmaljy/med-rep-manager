@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    @vite('resources/static/js/initTheme.js')
+    @vite(['resources/static/js/initTheme.js'])
     <div id="app">
         <div id="sidebar">
             <x-sidebar />
@@ -45,11 +45,12 @@
         </div>
     </div>
 
+    <script src=""></script>
+
     @vite([
-        'resources/static/js/initTheme.js',
-        'resources/static/js/components/dark.js',
-        'resources/js/app.js'
-    ])
+        'resources/js/app.js',
+        'resources/static/js/components/dark.js'
+        ])
 
     {{-- @env
     <script src="assets/compiled/js/app.js"></script>

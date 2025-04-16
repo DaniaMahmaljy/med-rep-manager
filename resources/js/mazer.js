@@ -5,3 +5,5 @@ window.bootstrap = bootstrapBundle
 
 // We could import PerfectScrollbar directly in the sidebar module
 
+// Prefix with /assets/static to point to public folder
+import '/resources/static/js/components/sidebar.js';

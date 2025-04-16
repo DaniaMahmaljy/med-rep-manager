@@ -19,13 +19,36 @@ class Sidebar extends Component
         $this->sidebarItems = collect([
             [
                 'name' => 'Dashboard',
-                'icon' => 'house',
+                'icon' => 'grid-fill',
                 'url' => route('dashboard'),
                 'isTitle' => false,
                 'submenu' => [],
                 'key' => 'dashboard',
             ],
 
+            [
+                'name' => 'Users',
+                'key' => 'Users',
+                'icon' => 'people-fill',
+                'submenu' => [
+                    [
+                        'name' => 'Add User',
+                        'key' => 'Add User',
+                        'url' => route('user.create'),
+                    ],
+                ]
+            ],
+            [
+                'name' => 'Another Menu',
+                'key' => 'Another  Menu',
+                'icon' => 'three-dots',
+                'submenu' => [
+                    [
+                        'name' => 'Second Level Menu',
+                        'url' => route('dashboard')
+                    ],
+                ]
+            ],
         ]);
     }
 

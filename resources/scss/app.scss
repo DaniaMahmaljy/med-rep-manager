@@ -15,9 +15,6 @@ body .bi::before, [class^=bi-]::before, [class*=" bi-"]::before {
 // Import fonts
 
 
-@import "@fontsource/nunito/400.css";
-@import "@fontsource/nunito/600.css";
-@import "@fontsource/nunito/700.css";
 @import "./_fonts.scss";
 
 

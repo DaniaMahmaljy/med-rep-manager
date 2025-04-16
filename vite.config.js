@@ -5,12 +5,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-
               'resources/sass/app.scss',
-
               'resources/js/app.js',
-
-              'resources/static/js/pages/user-form.js'
+              'resources/js/pages/user-form.js',
+              'resources/js/pages/ui-map-leaflet.js'
             ],
 
             refresh: true,
@@ -27,6 +25,7 @@ export default defineConfig({
           '~themes': '/resources/scss/themes',
           '~bootstrap-icons': 'bootstrap-icons',
           '~@fontsource': '/node_modules/@fontsource',
+          '/assets/static/js':'/public/static/js',
         }
       },
 
