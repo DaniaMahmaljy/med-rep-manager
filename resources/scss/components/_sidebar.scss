@@ -17,7 +17,7 @@
 
 #sidebar {
     @include sidebar-inactive();
-    
+
     @media screen and (min-width: 1200px) {
         @include sidebar-active();
     }
@@ -31,7 +31,7 @@
             left: 0;
         }
     }
-    
+
 }
 .sidebar-wrapper {
     width: 300px;
@@ -72,7 +72,7 @@
             font-weight: 600;
             color:  $sidebar-link-color;
         }
-        
+
         .sidebar-link {
             display: block;
             padding: .7rem 1rem;
@@ -100,7 +100,7 @@
             list-style: none;
             margin-top: .5rem;
             position: relative;
-            
+
             &.active {
                 &.has-sub {
                     .sidebar-link:after {
@@ -161,10 +161,54 @@
                     }
                 }
             }
-            
+
+        }
+    }
+
+    .sidebar-item.logout-item {
+        margin-top: auto;
+
+        .sidebar-link-form {
+            display: block;
+            width: 100%;
+
+            button.logout-btn {
+                @extend .sidebar-link;
+                width: 100%;
+                text-align: left;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 0.7rem 1rem;
+                font-size: 1rem;
+                font-weight: 600;
+                color: $sidebar-link-color;
+                display: flex;
+                align-items: center;
+                border-radius: 0.5rem;
+                transition: all 0.5s;
+
+                i {
+                    color: #7c8db5;
+                }
+
+                span {
+                    margin-left: 1rem;
+                }
+
+                &:hover {
+                    background-color: $sidebar-link-hover-bg;
+                    color:  #dc3545;
+
+                    i {
+                        color: #dc3545;
+                    }
+                }
+            }
         }
     }
 }
+
 @mixin caret {
     content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9" style="fill:none;stroke:gray;stroke-width:1"></polyline></svg>');
     position: absolute;

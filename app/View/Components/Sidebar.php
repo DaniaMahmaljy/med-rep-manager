@@ -49,6 +49,13 @@ class Sidebar extends Component
                     ],
                 ]
             ],
+            [
+                'name' => 'Logout',
+                'key' => 'logout',
+                'icon' => 'power',
+                'url' => route('logout'),
+                'isForm' => true,
+            ]
         ]);
     }
 

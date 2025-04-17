@@ -71,6 +71,7 @@ return [
         // ],
     ],
 
+    'remember_lifetime' => 1440,  // 24 hours in minutes
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords

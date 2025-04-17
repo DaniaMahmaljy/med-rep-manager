@@ -35,6 +35,7 @@
     <div class="sidebar-menu">
         <ul class="menu">
             @foreach($sidebarItems as $sidebarItem)
+
                 @if($sidebarItem['isTitle'] ?? false)
                     <li class="sidebar-title">{{ $sidebarItem['name'] }}</li>
                 @else
@@ -44,12 +45,24 @@
                         $hasSubmenu = !empty($sidebarItem['submenu']);
                     @endphp
 
-                    <li class="sidebar-item {{ $isActive ? 'active' : '' }} {{ $hasSubmenu ? 'has-sub' : '' }}">
+                        @if(!empty($sidebarItem['isForm']) && $sidebarItem['isForm'])
+                        <li class="sidebar-item logout-item">
+                        <form id="logout-form" method="POST" action="{{ $sidebarItem['url'] }}" class="sidebar-link-form">
+                            @csrf
+                            <button type="submit" class="logout-btn">
+                                <i class="bi bi-{{ $sidebarItem['icon'] }}"></i>
+                                <span>{{ $sidebarItem['name'] }}</span>
+                            </button>
+                        </form>
+                    </li>
+                        @else
+
+                        <li class="sidebar-item {{ $isActive ? 'active' : '' }} {{ $hasSubmenu ? 'has-sub' : '' }}">
                         <a href="{{ $sidebarItem['url'] ?? '#' }}" class="sidebar-link">
                             <i class="bi bi-{{ $sidebarItem['icon'] }}"></i>
                             <span>{{ $sidebarItem['name'] }}</span>
                         </a>
-
+                        @endif
                         @if($hasSubmenu)
                             <ul class="submenu {{ $isActive ? 'active' : '' }}">
                                 @foreach($sidebarItem['submenu'] as $sub)
