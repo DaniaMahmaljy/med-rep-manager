@@ -18,7 +18,7 @@ class Sidebar extends Component
     {
         $this->sidebarItems = collect([
             [
-                'name' => 'Dashboard',
+                'name' => __('local.Dashboard'),
                 'icon' => 'grid-fill',
                 'url' => route('dashboard'),
                 'isTitle' => false,
@@ -27,12 +27,12 @@ class Sidebar extends Component
             ],
 
             [
-                'name' => 'Users',
+                'name' => __('local.Users'),
                 'key' => 'Users',
                 'icon' => 'people-fill',
                 'submenu' => [
                     [
-                        'name' => 'Add User',
+                        'name' => __('local.Add User'),
                         'key' => 'Add User',
                         'url' => route('user.create'),
                     ],
@@ -50,7 +50,7 @@ class Sidebar extends Component
                 ]
             ],
             [
-                'name' => 'Logout',
+                'name' => __('local.Logout'),
                 'key' => 'logout',
                 'icon' => 'power',
                 'url' => route('logout'),

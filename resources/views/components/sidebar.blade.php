@@ -56,7 +56,6 @@
                         </form>
                     </li>
                         @else
-
                         <li class="sidebar-item {{ $isActive ? 'active' : '' }} {{ $hasSubmenu ? 'has-sub' : '' }}">
                         <a href="{{ $sidebarItem['url'] ?? '#' }}" class="sidebar-link">
                             <i class="bi bi-{{ $sidebarItem['icon'] }}"></i>
@@ -92,4 +91,17 @@
             @endforeach
         </ul>
     </div>
+    <div class="sidebar-footer px-3 py-2 d-flex gap-2">
+        @foreach($available_locales as $locale => $localeData)
+            <form action="{{ route('swap') }}" method="GET">
+                @csrf
+                <input type="hidden" name="locale" value="{{ $locale }}">
+                <button type="submit"
+                        class="btn btn-sm {{ $current_locale == $locale ? 'btn-primary' : 'btn-outline-secondary' }}">
+                    {{ strtoupper($locale) }}
+                </button>
+            </form>
+        @endforeach
+    </div>
+
 </div>

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}"
+    dir="{{ config('local.available_locales')[app()->getLocale()]['dir'] ?? 'ltr' }}">
+
 
 <head>
     <meta charset="UTF-8">

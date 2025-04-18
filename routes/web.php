@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\LanguageController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Role;
@@ -20,6 +21,7 @@ Route::get('login', [AuthController::class, 'showLoginForm'])->name('login.form'
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth',)->group(function () {
+    Route::get('swap', [LanguageController::class, 'swap'])->name('swap');
     Route::post('logout',[AuthController::class, 'destroy'])->name('logout');
 
     Route::middleware('role:superadmin|admin|supervisor')->group(function () {
