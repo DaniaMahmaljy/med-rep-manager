@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Factory as FakerFactory;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Brand>
@@ -16,9 +18,18 @@ class BrandFactory extends Factory
      */
     public function definition(): array
     {
+        $fakerEn = FakerFactory::create('en_US');
+        $fakerAr = FakerFactory::create('ar_SA');
+
         return [
-            'name' => $this->faker->unique()->name,
-            'description' => $this->faker->sentence,
+            'en' => [
+                'name' => $fakerEn->unique()->name,
+                'description' => $fakerEn->sentence,
+            ],
+            'ar' => [
+                'name' => $fakerAr->unique()->name,
+                'description' => $fakerAr->sentence,
+            ],
         ];
     }
 }

@@ -16,8 +16,6 @@ return new class extends Migration
     {
         Schema::create('samples', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
             $table->foreignIdFor(Brand::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(SampleClass::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('quantity_available')->default(1);
