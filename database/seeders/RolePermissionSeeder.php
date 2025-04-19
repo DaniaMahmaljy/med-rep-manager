@@ -22,7 +22,12 @@ class RolePermissionSeeder extends Seeder
             'role_management_access',
             'permission_management_access',
             'ticket_management_access',
-            'view visits',
+            'view_visits',
+            'view_add_user',
+            'create_user',
+            'create_admin',
+            'create_supervisor',
+            'create_representative',
         ];
 
         foreach ($permissions as $permission) {
@@ -30,12 +35,13 @@ class RolePermissionSeeder extends Seeder
         }
 
         $superadmin = Role::firstOrCreate(['name' => 'superadmin']);
-        Role::firstOrCreate(['name' => 'admin']);
+        $admin = Role::firstOrCreate(['name' => 'admin']);
         Role::firstOrCreate(['name' => 'supervisor']);
         Role::firstOrCreate(['name' => 'representative']);
 
         $superadmin->syncPermissions(Permission::all());
 
+        $admin->syncPermissions(['view_add_user', 'create_user', 'create_supervisor','create_representative']);
 
 
     }

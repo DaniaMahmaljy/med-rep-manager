@@ -33,13 +33,14 @@
 
         <form action="{{ route('user.store') }}" method="POST" class="form" id="create-user" enctype="multipart/form-data">
             @csrf
-
             <div class="mb-3">
                 <div class="btn-group" role="group" aria-label="User Type Selection">
-                    <input type="radio" class="btn-check" name="user_type" id="admin" autocomplete="off" value="{{ App\Enums\UserTypeEnum::ADMIN->value }}"{{ old('user_type') == App\Enums\UserTypeEnum::ADMIN->value ? 'checked' : '' }}>
-                    <label class="btn btn-outline-primary" for="admin">{{ __('local.Admin') }}</label>
+                    @can('create_admin')
+                        <input type="radio" class="btn-check" name="user_type" id="admin" autocomplete="off" value="{{ App\Enums\UserTypeEnum::ADMIN->value }}"{{ old('user_type') == App\Enums\UserTypeEnum::ADMIN->value ? 'checked' : '' }}>
+                        <label class="btn btn-outline-primary" for="admin">{{ __('local.Admin') }}</label>
+                    @endcan
 
-                    <input type="radio" class="btn-check" name="user_type" id="supervisor" autocomplete="off" value="{{ App\Enums\UserTypeEnum::SUPERVISOR->value }}"{{ old('user_type') == App\Enums\UserTypeEnum::SUPERVISOR->value ? 'checked' : '' }}>
+                    <input type="radio" class="btn-check" name="user_type" id="supervisor" autocomplete="off" value="{{ App\Enums\UserTypeEnum::SUPERVISOR->value }}"{{ old('user_type') == App\Enums\UserTypeEnum::SUPERVISOR->value ? 'checked' : (!old('user_type') ? 'checked' : '') }}>
                     <label class="btn btn-outline-primary" for="supervisor">{{ __('local.Supervisor') }}</label>
 
                     <input type="radio" class="btn-check" name="user_type" id="representative" autocomplete="off" value="{{ App\Enums\UserTypeEnum::REPRESENTATIVE->value }}"{{ old('user_type') == App\Enums\UserTypeEnum::REPRESENTATIVE->value ? 'checked' : '' }}>
@@ -111,21 +112,21 @@
                     <div class="form-group">
                         <div id="municipal-info" style="margin-top: 10px;"></div>
                         <div id="map" style="width: 100%; height: 400px;"></div>
-                        <input type="hidden" id="latitude" name="latitude">
+                        <input type="hidden" id="latitude" name="latitude"  value="{{ old('latitude') }}">
                         @error('latitude')
                             <div class="text-danger mt-1">
                                 <i class="bx bx-radio-circle"></i> {{ $message }}
                             </div>
                         @enderror
 
-                        <input type="hidden" id="longitude" name="longitude">
+                        <input type="hidden" id="longitude" name="longitude"  value="{{ old('longitude') }}">
                         @error('longitude')
                             <div class="text-danger mt-1">
                                 <i class="bx bx-radio-circle"></i> {{ $message }}
                             </div>
                         @enderror
 
-                        <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="{{ __('local.Address') }}">
+                        <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="{{ __('local.Address') }}"  value="{{ old('address') }}">
                         @error('address')
                             <div class="invalid-feedback">
                                 <i class="bx bx-radio-circle"></i> {{ $message }}

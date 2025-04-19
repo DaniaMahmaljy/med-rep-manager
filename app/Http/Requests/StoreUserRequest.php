@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Enums\UserTypeEnum;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -13,7 +14,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can( 'create', [User::class, $this->input('user_type')] );
     }
 
 

@@ -28,10 +28,7 @@ Route::middleware('auth',)->group(function () {
         Route::get('/', function () {return view('dashboard');})->name('dashboard');
     });
 
-    Route::middleware('role:superadmin|admin')->group(function () {
-        Route::get('user', [UserController::class, 'create'])->name('user.create');
-        Route::post('user', [UserController::class, 'store'])->name('user.store');
-
-});
+        Route::get('user', [UserController::class, 'create'])->name('user.create')->middleware('can:view_add_user');
+        Route::post('user', [UserController::class, 'store'])->name('user.store')->middleware('can:create_user');
 
 });
