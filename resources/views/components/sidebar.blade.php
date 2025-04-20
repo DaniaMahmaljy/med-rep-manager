@@ -16,7 +16,7 @@
                             <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
                             <circle cx="220.5" cy="11.5" r="4"></circle>
                             <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path>
-                        </g>
+                    </g>
                     </g>
                 </svg>
                 <div class="form-check form-switch fs-6">

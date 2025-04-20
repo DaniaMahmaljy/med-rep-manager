@@ -41,7 +41,7 @@ class RolePermissionSeeder extends Seeder
 
         $superadmin->syncPermissions(Permission::all());
 
-        $admin->syncPermissions(['view_add_user', 'create_user', 'create_supervisor','create_representative']);
+        $admin->syncPermissions(['user_management_access','view_add_user', 'create_user', 'create_supervisor','create_representative']);
 
 
     }

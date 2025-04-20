@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Services\SidebarService;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -14,49 +15,11 @@ class Sidebar extends Component
 
      public $sidebarItems;
 
-    public function __construct()
+    public function __construct(protected SidebarService $sidebarService)
     {
-        $this->sidebarItems = collect([
-            [
-                'name' => __('local.Dashboard'),
-                'icon' => 'grid-fill',
-                'url' => route('dashboard'),
-                'isTitle' => false,
-                'submenu' => [],
-                'key' => 'dashboard',
-            ],
 
-            [
-                'name' => __('local.Users'),
-                'key' => 'Users',
-                'icon' => 'people-fill',
-                'submenu' => [
-                    [
-                        'name' => __('local.Add User'),
-                        'key' => 'Add User',
-                        'url' => route('user.create'),
-                    ],
-                ]
-            ],
-            [
-                'name' => 'Another Menu',
-                'key' => 'Another  Menu',
-                'icon' => 'three-dots',
-                'submenu' => [
-                    [
-                        'name' => 'Second Level Menu',
-                        'url' => route('dashboard')
-                    ],
-                ]
-            ],
-            [
-                'name' => __('local.Logout'),
-                'key' => 'logout',
-                'icon' => 'power',
-                'url' => route('logout'),
-                'isForm' => true,
-            ]
-        ]);
+        $this->sidebarItems = $sidebarService->generate();
+
     }
 
 
