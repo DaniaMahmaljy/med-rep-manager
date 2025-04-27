@@ -31,5 +31,10 @@ class Doctor extends Model
         return $this->morphMany(Ticket::class, 'ticketable');
     }
 
+   public function getFullNameAttribute()
+    {
+         return "{$this->first_name} {$this->last_name}";
+    }
+
 
 }

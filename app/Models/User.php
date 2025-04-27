@@ -65,4 +65,14 @@ class User extends Authenticatable
         return $this->morphMany(Ticket::class, 'ticketable');
     }
 
+    public function createdVisits() {
+        return $this->hasMany(Visit::class, 'created_by');
+    }
+
+
+    public function getFullNameAttribute()
+    {
+         return "{$this->first_name} {$this->last_name}";
+    }
+
 }

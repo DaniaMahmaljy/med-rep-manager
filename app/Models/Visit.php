@@ -15,7 +15,9 @@ class Visit extends Model
 
 
     protected $casts = [
-        'status' => VisitStatusEnum::class
+        'status' => VisitStatusEnum::class,
+        'scheduled_at' => 'datetime',
+
     ];
 
     public function doctor()
@@ -42,6 +44,19 @@ class Visit extends Model
         return $this->morphMany(Ticket::class, 'ticketable');
     }
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'created_by');
+    }
 
+    public function scopeVisibleTo($query, $user)
+    {
+        if ($user->hasRole('supervisor')) {
+            return $query->whereHas('representative.supervisor.user', function ($q) use ($user) {
+                return $q->where('id', $user->id);
+        });
+        }
+        return $query;
+    }
 
 }

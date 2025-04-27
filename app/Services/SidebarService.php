@@ -39,13 +39,13 @@ class SidebarService extends Service
                 ]
             ],
             [
-                'name' => 'Another Menu',
-                'key' => 'Another  Menu',
-                'icon' => 'three-dots',
+                'name' => __('local.Visits'),
+                'key' => 'Visits',
+                'icon' => 'calendar-check-fill',
                 'submenu' => [
                     [
-                        'name' => 'Second Level Menu',
-                        'url' => route('dashboard')
+                        'name' => __('local.View Visits'),
+                        'url' => route('visits.index')
                     ],
                 ]
             ],

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\LanguageController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\VisitController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Role;
 
@@ -30,5 +31,9 @@ Route::middleware('auth',)->group(function () {
 
         Route::get('user', [UserController::class, 'create'])->name('user.create')->middleware('can:view_add_user');
         Route::post('user', [UserController::class, 'store'])->name('user.store')->middleware('can:create_user');
+
+        Route::get('visits', [VisitController::class, 'index'])->name('visits.index');
+        Route::get('visits/{id}', [VisitController::class, 'show'])->name('visits.show');
+
 
 });

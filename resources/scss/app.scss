@@ -6,6 +6,9 @@ $bootstrap-icons-font-src: url('bootstrap-icons/font/fonts/bootstrap-icons.woff2
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
 
+@import 'flatpickr/dist/flatpickr.min.css';
+
+
 
 // Fix icon placement
 body .bi::before, [class^=bi-]::before, [class*=" bi-"]::before {

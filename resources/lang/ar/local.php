@@ -32,9 +32,30 @@ return [
     'Supervisor' => 'مشرف',
     'Representative' => 'مندوب',
 
+    //View visits
+
+    'Visits Tracking' => 'تتبع الزيارات',
+    'Manage and track all visits' => 'إدارة وتتبع جميع الزيارات',
+    'Visits Schedule' => 'جدول الزيارات',
+    'Filters'=> 'الفلترة',
+    'From' => 'من',
+    'To' => 'إلى',
+    'Filter' => 'تطبيق الفلترة',
+
+    'status' => [
+        'scheduled' => 'مجدول',
+        'completed' => 'مكتمل',
+        'canceled' => 'ملغى',
+        'missed' => 'فائت'
+    ],
+
+    'Select date' => 'اختر التاريخ..',
+
 
     //sidebar
     'Users' => 'المستخدمون',
-     'Add User' => 'إضافة مستخدم',
-     'Logout' => 'تسجيل الخروج',
+    'Add User' => 'إضافة مستخدم',
+    'Visits' => 'الزيارات',
+    'View Visits' => 'عرض الزيارات',
+    'Logout' => 'تسجيل الخروج',
 ];

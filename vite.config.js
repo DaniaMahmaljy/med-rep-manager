@@ -6,9 +6,13 @@ export default defineConfig({
         laravel({
             input: [
               'resources/sass/app.scss',
+              'resources/scss/pages/datatables.scss',
               'resources/js/app.js',
               'resources/js/pages/user-form.js',
-              'resources/js/pages/ui-map-leaflet.js'
+              'resources/js/pages/ui-map-leaflet.js',
+              'resources/static/js/pages/datatables.js',
+              'resources/static/js/pages/visitsTable.js',
+
             ],
 
             refresh: true,
@@ -26,6 +30,7 @@ export default defineConfig({
           '~bootstrap-icons': 'bootstrap-icons',
           '~@fontsource': '/node_modules/@fontsource',
           '/assets/static/js':'/public/static/js',
+          'jquery': 'jquery/dist/jquery.min.js',
         }
       },
 

@@ -33,9 +33,28 @@ return [
     'Supervisor' => 'Supervisor',
     'Representative' => 'Representative',
 
+    //View visits
+    'Visits Tracking' => 'Visits Tracking',
+    'Manage and track all visits' => 'Manage and track all visits',
+    'Visits Schedule' => 'Visits Schedule',
+    'Filters'=> 'Filters',
+    'From' => 'From',
+    'To' => 'To',
+    'Filter' => 'Filter',
+
+    'status' => [
+        'scheduled' => 'Scheduled',
+        'completed' => 'Completed',
+        'canceled' => 'Canceled',
+        'missed' => 'Missed'
+    ],
+
+    'Select date' => 'Select date..',
 
     //sidebar
     'Users' => 'Users',
     'Add User' => 'Add User',
+    'Visits' => 'Visits',
+    'View Visits' => 'View Visits',
     'Logout' => 'Logout',
 ];
