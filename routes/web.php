@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\LanguageController;
+use App\Http\Controllers\Dashboard\RepresentativeController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\VisitController;
 use Illuminate\Support\Facades\Route;
@@ -26,14 +27,20 @@ Route::middleware('auth',)->group(function () {
     Route::post('logout',[AuthController::class, 'destroy'])->name('logout');
 
     Route::middleware('role:superadmin|admin|supervisor')->group(function () {
+
         Route::get('/', function () {return view('dashboard');})->name('dashboard');
+
+        Route::get('visits', [VisitController::class, 'index'])->name('visits.index');
+        Route::get('visits/{id}', [VisitController::class, 'show'])->name('visits.show');
+
+        Route::get('representatives', [RepresentativeController::class, 'index'])->name('representatives.index');
+        Route::get('representatives/{id}', [RepresentativeController::class, 'show'])->name('representatives.show');
+
     });
 
         Route::get('user', [UserController::class, 'create'])->name('user.create')->middleware('can:view_add_user');
         Route::post('user', [UserController::class, 'store'])->name('user.store')->middleware('can:create_user');
 
-        Route::get('visits', [VisitController::class, 'index'])->name('visits.index');
-        Route::get('visits/{id}', [VisitController::class, 'show'])->name('visits.show');
 
 
 });

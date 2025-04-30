@@ -6,12 +6,20 @@ return [
         'doctor' => 'Doctor',
         'scheduled_at' => 'Scheduled At',
         'status' => 'Status',
-        'action' => 'Actions'
+        'action' => 'Actions',
+        'name' => 'Name',
+        'supervisor' => 'Supervisor',
+        'municipal' => 'Municipal (City)',
+
     ],
     'ui' => [
         'processing' => 'Processing...',
         'search' => 'Search:',
-        'searchPlaceholder' => 'Search reps or doctors',
+        'searchPlaceholder' => [
+        'reps' => 'Name, municipal, city',
+        'visits' => 'Search reps or doctors',
+        ],
+
         'lengthMenu' => 'Show _MENU_ entries',
         'info' => 'Showing _START_ to _END_ of _TOTAL_ entries',
         'infoEmpty' => 'No data available',

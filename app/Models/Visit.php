@@ -11,7 +11,7 @@ class Visit extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = ['id', 'created_at', 'update_at'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
 
     protected $casts = [
@@ -52,9 +52,9 @@ class Visit extends Model
     public function scopeVisibleTo($query, $user)
     {
         if ($user->hasRole('supervisor')) {
-            return $query->whereHas('representative.supervisor.user', function ($q) use ($user) {
-                return $q->where('id', $user->id);
-        });
+            return $query->whereHas('representative', function ($q) use ($user) {
+                $q->where('supervisor_id', $user->userable_id);
+            });
         }
         return $query;
     }

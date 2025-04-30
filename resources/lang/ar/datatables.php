@@ -6,14 +6,22 @@ return [
         'doctor' => 'الطبيب',
         'scheduled_at' => 'الموعد',
         'status' => 'الحالة',
-        'action' => 'الإجراءات'
+        'action' => 'الإجراءات',
+        'name' => 'الاسم',
+        'supervisor' => 'المشرف',
+        'municipal' => 'المنطقة (المدينة)',
+
     ],
     'ui' => [
         'processing' => 'جار المعالجة...',
         'search' => 'بحث:',
-        'searchPlaceholder' => 'ابحث عن مناديب أو أطباء',
+        'searchPlaceholder' => [
+        'reps' => 'الاسم اوالبلدية اوالمدينة',
+        'visits' => 'ابحث عن مناديب أو أطباء',
+        ],
+
         'lengthMenu' => 'عرض _MENU_ سجلات',
-        'info' => 'عرض _START_ إلى _END_ من _TOTAL_ سجل',
+        'info' => 'عرض _START_ إلى _END_ من _TOTAL_ سجلات',
         'infoEmpty' => 'لا توجد بيانات',
         'infoFiltered' => '(مصفاة من _MAX_ إدخالات)',
         'loadingRecords' => 'جار التحميل...',

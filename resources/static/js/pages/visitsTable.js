@@ -41,7 +41,10 @@ function initializeTable() {
             }
         },
 
-        language: translations.ui,
+         language: {
+            ...translations.ui,
+            searchPlaceholder: translations.ui.searchPlaceholder.visits
+        },
 
         rowGroup: {
             dataSrc: () => currentGroupBy

@@ -51,10 +51,17 @@ return [
 
     'Select date' => 'اختر التاريخ..',
 
+    //view reps
+    'Representative Overview' => 'عرض المناديب',
+    'Manage and track all Representatives' => 'إدارة وتتبع جميع المناديب',
+    'Representative List' => 'قائمة المناديب',
+
 
     //sidebar
     'Users' => 'المستخدمون',
-    'Add User' => 'إضافة مستخدم',
+    'Add New' => 'إضافة جديد',
+    'Representatives' => 'المناديب',
+    'View All' => 'عرض الكل',
     'Visits' => 'الزيارات',
     'View Visits' => 'عرض الزيارات',
     'Logout' => 'تسجيل الخروج',

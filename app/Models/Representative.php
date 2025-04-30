@@ -10,7 +10,7 @@ class Representative extends Model
 {
     use HasFactory , SoftDeletes;
 
-    protected $guarded = ['id', 'created_at', 'update_at'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
 
     public function user()
@@ -20,7 +20,7 @@ class Representative extends Model
 
     public function residingMunicipal() // where the representative resides
     {
-        return $this->belongsTo(Municipal::class);
+        return $this->belongsTo(Municipal::class, 'municipal_id');
     }
 
 
@@ -38,5 +38,13 @@ class Representative extends Model
       {
         return $this->belongsTo(Supervisor::class);
       }
+
+      public function scopeVisibleTo($query, $user)
+        {
+            if ($user->hasRole('supervisor')) {
+                return $query->where('supervisor_id', $user->userable_id);
+            }
+            return $query;
+        }
 
 }

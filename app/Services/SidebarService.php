@@ -31,21 +31,34 @@ class SidebarService extends Service
                 'permission' => 'user_management_access',
                 'submenu' => [
                     [
-                        'name' => __('local.Add User'),
+                        'name' => __('local.Add New'),
                         'key' => 'Add User',
                         'url' => route('user.create'),
                         'permission' => 'view_add_user',
                     ],
                 ]
             ],
+
             [
                 'name' => __('local.Visits'),
                 'key' => 'Visits',
                 'icon' => 'calendar-check-fill',
                 'submenu' => [
                     [
-                        'name' => __('local.View Visits'),
+                        'name' => __('local.View All'),
                         'url' => route('visits.index')
+                    ],
+                ]
+            ],
+
+             [
+                'name' => __('local.Representatives'),
+                'key' => 'Representatives',
+                'icon' => 'briefcase-fill',
+                'submenu' => [
+                    [
+                        'name' => __('local.View All'),
+                        'url' => route('representatives.index')
                     ],
                 ]
             ],

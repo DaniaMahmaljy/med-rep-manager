@@ -68,11 +68,12 @@ class VisitService extends Service
                 return $v->doctor->full_name ?? 'No Doctor Assigned';
             })
             ->addColumn('scheduled_at', function($v) {
-                return $v->scheduled_at->format('Y-m-d H:i');
+                 $format = app()->getLocale() === 'ar' ? 'j F Y H:i' : 'Y-m-d H:i';
+                return $v->scheduled_at->translatedFormat($format);
             })
 
             ->addColumn('status', function($v) {
-            return '<span class="status-badge bg-'.$v->status->color().'">'.$v->status->label().'</span>';
+            return '<span class="badge bg-light-'.$v->status->color().'">'.$v->status->label().'</span>';
             })
 
           ->addColumn('action', function($v) {

@@ -14,7 +14,7 @@ class Sample extends Model implements TranslatableContract
     use HasFactory, SoftDeletes;
     use Translatable;
 
-    protected $guarded = ['id', 'created_at', 'update_at'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $translatedAttributes = ['name', 'description'];
 
 

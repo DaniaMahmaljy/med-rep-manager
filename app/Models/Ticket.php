@@ -12,7 +12,7 @@ class Ticket extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = ['id', 'created_at', 'update_at'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
         'priority' => TicketPriorityEnum::class,

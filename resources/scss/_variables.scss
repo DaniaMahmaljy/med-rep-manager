@@ -1633,3 +1633,17 @@ $choices-highlight-bg:      $card-bg;
 // Placeholder Bootstrap
 $placeholder-opacity-max:           .5;
 $placeholder-opacity-min:           .2;
+
+.avatar-hover {
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(74, 59, 107, 0.3));
+
+    @media (prefers-color-scheme: dark) {
+      filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.1));
+    }
+  }
+}

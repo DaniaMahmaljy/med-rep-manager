@@ -14,7 +14,7 @@ class City extends Model implements TranslatableContract
 
     protected $translatedAttributes = ['name'];
 
-    protected $guarded = ['id', 'created_at', 'update_at'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function municipals()
     {

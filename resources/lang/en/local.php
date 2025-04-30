@@ -51,9 +51,18 @@ return [
 
     'Select date' => 'Select date..',
 
+    //view reps
+    'Representative Overview' => 'Representative Overview',
+    'Manage and track all Representatives' => 'Manage and track all Representatives',
+    'Representative List' => 'Representative List',
+
+
+
     //sidebar
     'Users' => 'Users',
-    'Add User' => 'Add User',
+    'Add New' => 'Add New',
+    'Representatives' => 'Representatives',
+    'View All' => 'View All',
     'Visits' => 'Visits',
     'View Visits' => 'View Visits',
     'Logout' => 'Logout',

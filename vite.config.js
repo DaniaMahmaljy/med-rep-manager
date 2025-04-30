@@ -8,11 +8,11 @@ export default defineConfig({
               'resources/sass/app.scss',
               'resources/scss/pages/datatables.scss',
               'resources/js/app.js',
-              'resources/js/pages/user-form.js',
+              'resources/static/js/pages/user-form.js',
               'resources/js/pages/ui-map-leaflet.js',
               'resources/static/js/pages/datatables.js',
               'resources/static/js/pages/visitsTable.js',
-
+              'resources/static/js/pages/viewRepMap.js',
             ],
 
             refresh: true,
