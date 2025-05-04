@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\SampleVisitStatus;
 use App\Models\Sample;
 use App\Models\Visit;
 use Illuminate\Database\Migrations\Migration;
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Sample::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(Visit::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('quantity');
+            $table->tinyInteger('status')->default(SampleVisitStatus::RETURNED->value);
             $table->timestamps();
         });
     }

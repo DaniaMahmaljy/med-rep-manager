@@ -32,9 +32,15 @@ Route::middleware('auth',)->group(function () {
 
         Route::get('visits', [VisitController::class, 'index'])->name('visits.index');
         Route::get('visits/{id}', [VisitController::class, 'show'])->name('visits.show');
+        Route::get('representatives/{representative}/visits', [VisitController::class, 'byRepresentative'])
+         ->name('representatives.visits');
 
         Route::get('representatives', [RepresentativeController::class, 'index'])->name('representatives.index');
         Route::get('representatives/{id}', [RepresentativeController::class, 'show'])->name('representatives.show');
+        Route::get('representatives/{representative}/today-visits', [RepresentativeController::class, 'todayVisits'])
+        ->name('representatives.today-visits');
+        Route::get('representatives/{representative}/stats-json', [RepresentativeController::class, 'statistics'])
+       ->name('representatives.statistics');
 
     });
 

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\City;
+use App\Models\Municipal;
 use App\Models\Representative;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,6 +16,8 @@ class RepresentativeSeeder extends Seeder
      */
     public function run(): void
     {
+        $cities = City::with('municipals')->get();
+
         Representative::factory()
             ->count(15)
             ->has(
@@ -22,6 +26,14 @@ class RepresentativeSeeder extends Seeder
                 }),
                 'user'
             )
+
+            ->afterCreating(function($rep) use ($cities) {
+                $city = $cities->random();
+                $municipals = $city->municipals->pluck('id');
+                $rep->workingMunicipals()->attach($municipals);
+                $rep->update(['municipal_id' => $municipals->first()]);
+            })
+
             ->create();
     }
 }

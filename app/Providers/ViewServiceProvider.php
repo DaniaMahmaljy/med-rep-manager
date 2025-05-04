@@ -27,5 +27,16 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('current_locale', $current_locale);
             $view->with('available_locales', $available_locales);
         });
+        View::composer([
+        'representatives.show',
+    ], function ($view) {
+        $view->with('badgeColors', [
+            'primary',
+            'secondary',
+            'success',
+            'warning',
+            'info',
+        ]);
+    });
     }
 }

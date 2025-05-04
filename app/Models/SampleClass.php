@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SampleVisitStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
@@ -15,6 +16,10 @@ class SampleClass extends Model implements TranslatableContract
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $translatedAttributes = ['name', 'description'];
 
+     protected $cast =
+    [
+        'status' => SampleVisitStatus::class,
+    ];
 
     public function samples()
 {

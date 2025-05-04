@@ -18,6 +18,7 @@
         "@sweetalert2/theme-dark": "^5.0.27",
         "bootstrap": "^5.3.6",
         "bootstrap-icons": "^1.11.3",
+        "chart.js": "^4.4.9",
         "datatables.net": "^2.3.0",
         "datatables.net-bs5": "^2.3.0",
         "datatables.net-buttons": "^3.2.3",

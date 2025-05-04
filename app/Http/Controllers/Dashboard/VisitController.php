@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IndexRepVisitsRequest;
 use App\Http\Requests\IndexVisitRequest;
+use App\Models\Representative;
 use App\Models\Visit;
 use App\Services\VisitService;
 use Illuminate\Http\Request;
@@ -53,6 +55,17 @@ class VisitController extends Controller
         $visit = $this->visitService->show($id);
         return view('visits.show',compact('visit'));
     }
+
+    public function byRepresentative(IndexRepVisitsRequest $request, Representative $representative)
+    {
+        $this->authorize('view', $representative);
+        if ($request->ajax()) {
+            $filters = $request->filters();
+            return $this->visitService->getVisitsForRepresentativeDataTable($representative, $filters);
+        }
+        return view('visits.by-representative', compact('representative'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -46,7 +46,8 @@ return [
         'scheduled' => 'مجدول',
         'completed' => 'مكتمل',
         'canceled' => 'ملغى',
-        'missed' => 'فائت'
+        'missed' => 'فائت',
+        'pending' => 'قيد الانتظار',
     ],
 
     'Select date' => 'اختر التاريخ..',
@@ -55,6 +56,37 @@ return [
     'Representative Overview' => 'عرض المناديب',
     'Manage and track all Representatives' => 'إدارة وتتبع جميع المناديب',
     'Representative List' => 'قائمة المناديب',
+
+    //show rep
+    'Representative Profile' => 'ملف المندوب',
+    'Informations' => 'المعلومات',
+    'Location' => 'الموقع',
+    'Statistics' => 'الإحصائيات',
+    'Personal Info' => 'المعلومات الشخصية',
+    'Residing Municipal' => 'المنطقة المقيم فيها',
+    'Working Municipals' => 'المناطق التي يعمل بها',
+    'No working municipals assigned' => 'لا توجد مناطق معينة يعمل بها',
+    'Representative Location' => 'موقع المندوب',
+    'Open in Google Maps' => 'فتح في خرائط جوجل',
+    'Todays Visits' => 'زيارات اليوم',
+    'Scheduled for' => 'مجدولة ل',
+    'View All Visits' => 'عرض جميع الزيارات',
+    'Statistics' => 'الإحصائيات',
+    'Representative profile overview and visit history' => 'نظرة عامة على ملف المندوب وتاريخ الزيارات',
+    'Visits assigned to this representative' => 'الزيارات المخصصة لهذا المندوب',
+    'Visits for :name' => 'زيارات لـ :name',
+    'Visits Schedule for :name' => 'جدول زيارات لـ :name',
+    'Doctor' => 'الطبيب',
+    'Time' => 'الوقت',
+    'Status' => 'الحالة',
+    'Samples (Quantity)' => 'العينات (الكمية)',
+    'No visits scheduled for today' => 'لا توجد زيارات مجدولة لهذا اليوم',
+    'No samples' => 'لا توجد عينات',
+    'Total Visits' => 'إجمالي الزيارات',
+    'Linked Doctors' => 'الأطباء المرتبطين',
+    'Completion Rate' => 'معدل الإنجاز',
+    'visit_completion_overview' => 'نظرة عامة على إنجاز الزيارات',
+
 
 
     //sidebar

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexRepresentativeRequest;
+use App\Models\Representative;
 use App\Services\RepresentativeService;
 use Illuminate\Http\Request;
 
@@ -27,21 +28,6 @@ class RepresentativeController extends Controller
        return view('representatives.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -49,8 +35,30 @@ class RepresentativeController extends Controller
     public function show(string $id)
     {
         $representative = $this->representativeService->show(id: $id,  withes: ['visits', 'user', 'workingMunicipals','residingMunicipal.city','supervisor']);
+        $this->authorize('view', $representative);
         return view('representatives.show',compact('representative'));
     }
+
+    public function todayVisits(Representative $representative)
+    {
+        $this->authorize('view', $representative);
+        $visits = $this->representativeService->getTodayVisits($representative);
+
+        return view('representatives.partials.visits-table', compact($representative, $visits));
+    }
+
+
+public function statistics(Representative $representative)
+{
+    $this->authorize('view', $representative);
+
+    $stats = $this->representativeService->getStatistics($representative);
+
+    return response()->json($stats);
+}
+
+
+
 
     /**
      * Show the form for editing the specified resource.

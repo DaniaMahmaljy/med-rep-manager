@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Representative;
 use App\Models\Visit;
 use Yajra\DataTables\DataTables;
 
@@ -91,6 +92,65 @@ class VisitService extends Service
     {
         return Visit::with($withes)->find($id);
     }
+
+    public function getVisitsForRepresentativeDataTable(Representative $representative, $filters = [])
+{
+       $groupBy = $filters['group_by'];
+        $search = $filters['search'];
+        $dateFrom = $filters['date_from'];
+        $dateTo = $filters['date_to'];
+        $user = $filters['user'];
+
+    $query = $representative->visits()
+        ->with(['doctor', 'samples']);
+
+     $query->when($search, function($query) use ($search) {
+                $searchTerm = '%' . str_replace(' ', '%', $search) . '%';
+                $query->where(function($q) use ($searchTerm) {
+                    $q->whereHas('doctor', function($q2) use ($searchTerm) {
+                        $q2->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", [$searchTerm])
+                           ->orWhere('first_name', 'LIKE', $searchTerm)
+                           ->orWhere('last_name', 'LIKE', $searchTerm);
+                    });
+                });
+            })
+            ->when($dateFrom, function ($q) use ($dateFrom) {
+                 return $q->whereDate('scheduled_at', '>=', $dateFrom);
+            })
+            ->when($dateTo, function($q) use ($dateTo) {
+                return $q->whereDate('scheduled_at', '<=', $dateTo);
+            })
+
+        ->when($groupBy === 'doctor', function($query) {
+            $query->orderBy('doctor_id');
+        })
+         ->when($groupBy === 'scheduled_at', function($query) {
+               $query ->orderBy('scheduled_at','DESC');
+            })
+         ->when($groupBy === 'status', function($query) {
+               $query ->orderBy('status');
+            })
+         ->latest('scheduled_at');
+
+
+    return $this->dataTables->eloquent($query)
+        ->addColumn('doctor', function($v) {
+            return $v->doctor->full_name ?? 'No Doctor Assigned';
+        })
+        ->addColumn('scheduled_at', function($v) {
+            $format = app()->getLocale() === 'ar' ? 'j F Y H:i' : 'Y-m-d H:i';
+            return $v->scheduled_at->translatedFormat($format);
+        })
+        ->addColumn('status', function($v) {
+            return '<span class="badge bg-light-'.$v->status->color().'">'.$v->status->label().'</span>';
+        })
+        ->addColumn('action', function($v) {
+            $icon = app()->getLocale() === 'ar' ? 'bi-box-arrow-up-left' : 'bi-box-arrow-up-right';
+            return '<a href="'.route('visits.show', $v->id).'"><i class="bi ' . $icon . '"></i></a>';
+        })
+        ->rawColumns(['status', 'action'])
+        ->toJson();
+}
 
 }
 

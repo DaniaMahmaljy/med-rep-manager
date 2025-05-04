@@ -24,6 +24,9 @@ flatpickr("#dateTo", {
   dateFormat: "Y-m-d",
 });
 
+import Chart from 'chart.js/auto';
+window.Chart = Chart;
+
 
 
 import PerfectScrollbar from 'perfect-scrollbar';

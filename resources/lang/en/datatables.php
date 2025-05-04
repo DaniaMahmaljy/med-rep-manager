@@ -18,6 +18,7 @@ return [
         'searchPlaceholder' => [
         'reps' => 'Name, municipal, city',
         'visits' => 'Search reps or doctors',
+        'repsVisits' => 'Search for doctors',
         ],
 
         'lengthMenu' => 'Show _MENU_ entries',

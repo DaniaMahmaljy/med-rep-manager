@@ -13,6 +13,8 @@ export default defineConfig({
               'resources/static/js/pages/datatables.js',
               'resources/static/js/pages/visitsTable.js',
               'resources/static/js/pages/viewRepMap.js',
+              'resources/static/js/pages/repAllVisits.js',
+              'resources/static/js/pages/repStatistics.js',
             ],
 
             refresh: true,

@@ -18,6 +18,7 @@ return [
         'searchPlaceholder' => [
         'reps' => 'الاسم اوالبلدية اوالمدينة',
         'visits' => 'ابحث عن مناديب أو أطباء',
+        'repsVisits' => 'ابحث عن طبيب',
         ],
 
         'lengthMenu' => 'عرض _MENU_ سجلات',
