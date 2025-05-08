@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             DoctorSeeder::class,
             VisitSeeder::class,
             NoteSeeder::class,
+            SampleSpecialtySeeder::class,
         ]);
 
 

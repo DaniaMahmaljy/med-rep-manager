@@ -2,9 +2,16 @@
 
 namespace App\Services;
 
+use App\Enums\NoteTypeEnum;
+use App\Enums\SampleVisitStatus;
+use App\Enums\VisitStatusEnum;
+use App\Models\Doctor;
 use App\Models\Representative;
+use App\Models\Sample;
 use App\Models\Visit;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 
 class VisitService extends Service
@@ -151,6 +158,66 @@ class VisitService extends Service
         ->rawColumns(['status', 'action'])
         ->toJson();
 }
+
+
+   public function create()
+    {
+        $user = auth()->user();
+
+        $representatives = Representative::with('user','workingMunicipals')->visibleTo($user)->get();
+        $doctors = Doctor::with('municipal')->visibleTo($user)->get();
+
+        return [
+            'representatives' => $representatives,
+            'doctors'         => $doctors,
+            'samples'         => [],
+        ];
+    }
+
+
+    public function store($data)
+    {
+
+        return DB::transaction(function () use ($data) {
+        $visit = Visit::create([
+            'representative_id' => $data['representative_id'],
+            'doctor_id'         => $data['doctor_id'],
+            'created_by'        => $data['user_id'],
+            'status'            => VisitStatusEnum::SCHEDULED->value,
+            'scheduled_at'      => $data['scheduled_at'],
+        ]);
+
+        if (!empty($data['samples'])) {
+            foreach ($data['samples'] as $sampleData) {
+                $sample = Sample::findOrFail($sampleData['id']);
+
+                if ($sample->quantity_available < $sampleData['quantity_assigned']) {
+                    throw ValidationException::withMessages([
+                        'samples' => ["Sample '{$sample->name}' has only {$sample->quantity_available} available."],
+                    ]);
+                }
+
+                $visit->samples()->attach($sample->id, [
+                    'quantity_assigned' => $sampleData['quantity_assigned'],
+                    'status'            => SampleVisitStatus::PENDING->value,
+                ]);
+
+                $sample->decrement('quantity_available', $sampleData['quantity_assigned']);
+            }
+        }
+
+        if (!empty($data['notes'])) {
+                $visit->notes()->create([
+                    'user_id' => $data['user_id'],
+                    'content' => $data['notes'],
+                    'type'    => $data['type'] ??  NoteTypeEnum::INSTRUCTION->value,
+                ]);
+        }
+
+        return $visit;
+        });
+    }
+
 
 }
 

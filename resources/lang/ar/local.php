@@ -28,6 +28,8 @@ return [
     'Submit' => 'تاكيد',
     'Reset' => 'إعادة تعيين',
 
+    'User created successfully' => 'تم إنشاء المستخدم بنجاح' ,
+
     'Admin' => 'مدير للنظام',
     'Supervisor' => 'مشرف',
     'Representative' => 'مندوب',
@@ -48,6 +50,7 @@ return [
         'canceled' => 'ملغى',
         'missed' => 'فائت',
         'pending' => 'قيد الانتظار',
+        'partially_delivered' => 'تم التسليم جزئيًا',
     ],
 
     'Select date' => 'اختر التاريخ..',
@@ -86,6 +89,26 @@ return [
     'Linked Doctors' => 'الأطباء المرتبطين',
     'Completion Rate' => 'معدل الإنجاز',
     'visit_completion_overview' => 'نظرة عامة على إنجاز الزيارات',
+
+
+    //add visit
+    'Schedule New Visit' => 'جدولة زيارة جديدة',
+    'Complete the form to schedule a doctor visit' => 'أكمل النموذج لجدولة زيارة الطبيب',
+    'New Visit' => 'زيارة جديدة',
+    'Visit Details' => 'تفاصيل الزيارة',
+    'Visit created successfully.' => 'تم إنشاء الزيارة بنجاح.',
+    'Create New Visit' => 'إنشاء زيارة جديدة',
+    'Visit Information' => 'معلومات الزيارة',
+    'Select Doctor' => 'اختر الطبيب',
+    'Select Representative' => 'اختر المندوب',
+    'Sample Assignment' => 'تعيين العينات',
+    'Only samples matching doctor specialty are shown' => 'يتم عرض العينات المتوافقة مع تخصص الطبيب فقط',
+    'Notes' => 'ملاحظات',
+    'Date & Time' => 'التاريخ والوقت',
+    'Schedule' => 'جدولة',
+    'Instruction' => 'تعليمات',
+    'Report' => 'تقرير',
+
 
 
 

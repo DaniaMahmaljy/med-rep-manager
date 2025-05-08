@@ -15,6 +15,7 @@ export default defineConfig({
               'resources/static/js/pages/viewRepMap.js',
               'resources/static/js/pages/repAllVisits.js',
               'resources/static/js/pages/repStatistics.js',
+              'resources/static/js/pages/doctorSamples.js',
             ],
 
             refresh: true,

@@ -38,7 +38,7 @@ class Visit extends Model
     public function samples()
     {
         return $this->belongsToMany(Sample::class, 'sample_visit')
-        ->withPivot('status', 'quantity');
+        ->withPivot('status', 'quantity_assigned', 'quantity_used');
     }
 
     public function tickets() {

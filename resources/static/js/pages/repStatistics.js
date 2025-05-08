@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             title: {
               display: true,
-              text: window.translations["local.visit_completion_overview"] || "Visit Completion Overview",
+              text: window.translations["local.visit_completion_overview"],
               fontColor: textColor,
               font: {
                 size: 18,
@@ -69,6 +69,13 @@ document.addEventListener("DOMContentLoaded", function () {
               backgroundColor: isDarkMode ? "#222" : "#fff",
               borderColor: textColor,
               borderWidth: 1,
+              callbacks: {
+                label: function (tooltipItem) {
+                    const label = tooltipItem.label || '';
+                    const value = tooltipItem.raw || 0;
+                    return `${label}: ${value}`;
+                }
+              }
             },
           },
         },

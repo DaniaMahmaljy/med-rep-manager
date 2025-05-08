@@ -25,6 +25,10 @@ class Supervisor extends Model
 
     public function representatives()
     {
-    return $this->hasMany(Representative::class);
+        return $this->hasMany(Representative::class);
+    }
+    public function doctors()
+    {
+        return $this->belongsToMany(Doctor::class, 'doctor_supervisor');
     }
 }

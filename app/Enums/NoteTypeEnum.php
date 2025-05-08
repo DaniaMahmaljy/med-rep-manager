@@ -11,4 +11,13 @@ enum NoteTypeEnum: int
     {
         return constant("self::$name");
     }
+
+    public static function labels(): array
+    {
+        return [
+            self::REPORT => __('local.Report'),
+            self::INSTRUCTION => __('local.Instruction'),
+        ];
+    }
+
 }

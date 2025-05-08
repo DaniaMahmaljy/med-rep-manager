@@ -35,7 +35,21 @@ class Sample extends Model implements TranslatableContract
 
     public function visits()
     {
-        return $this->belongsToMany(Visit::class, 'sample_visit');
+        return $this->belongsToMany(Visit::class, 'sample_visit')->withPivot([
+            'quantity_assigned',
+            'quantity_used',
+            'status',
+        ]);
+    }
+
+    public function specialties()
+    {
+        return $this->belongsToMany(Specialty::class, 'sample_specialty');
+    }
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('quantity_available', '>', 0);
     }
 
 

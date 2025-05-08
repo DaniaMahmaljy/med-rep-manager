@@ -25,7 +25,7 @@
                             <ul class="list-group-flush small">
                                 @foreach($visit->samples as $sample)
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-1">
-                                        <span>{{ $sample->name }} ({{ $sample->pivot->quantity }})</span>
+                                        <span>{{ $sample->name }} ({{ $sample->pivot->quantity_assigned }})</span>
                                         <span class="badge bg-{{ App\Enums\SampleVisitStatus::from($sample->pivot->status)->color() }}">
                                             {{ App\Enums\SampleVisitStatus::from($sample->pivot->status)->label() }}
                                         </span>

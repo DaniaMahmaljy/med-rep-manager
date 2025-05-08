@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexRepVisitsRequest;
 use App\Http\Requests\IndexVisitRequest;
+use App\Http\Requests\StoreVisitRequest;
 use App\Models\Representative;
 use App\Models\Visit;
 use App\Services\VisitService;
@@ -36,15 +37,26 @@ class VisitController extends Controller
      */
     public function create()
     {
-        //
+        $data = $this->visitService->create();
+        return view('visits.create', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreVisitRequest $request)
     {
-        //
+         $data = $request->afterValidation();
+         $visit = $this->visitService->store($data);
+         if ($request->expectsJson()) {
+        return response()->json([
+            'success' => true,
+            'redirect_url' => route('visits.show', $visit->id),
+        ]);
+    }
+
+    return redirect()->route('visits.show', $visit->id)
+        ->with('success', __('local.Visit created successfully.'));
     }
 
     /**
@@ -65,7 +77,6 @@ class VisitController extends Controller
         }
         return view('visits.by-representative', compact('representative'));
     }
-
 
     /**
      * Show the form for editing the specified resource.

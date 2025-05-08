@@ -7,6 +7,8 @@ enum SampleVisitStatus: int
     case PENDING = 1;
     case DELIVERED = 2;
     case RETURNED = 3;
+    case PARTIALLY_DELIVERED = 4;
+
 
 
     public static function fromName($name)
@@ -20,6 +22,7 @@ enum SampleVisitStatus: int
             self::PENDING => __('local.status.pending'),
             self::DELIVERED => __('local.status.delivered'),
             self::RETURNED => __('local.status.returned'),
+            self::PARTIALLY_DELIVERED => ('local.partially_delivered'),
         };
     }
 
@@ -29,6 +32,7 @@ enum SampleVisitStatus: int
             self::PENDING => 'warning',
             self::DELIVERED => 'success',
             self::RETURNED => 'danger',
+            self::PARTIALLY_DELIVERED => 'info',
         };
     }
 }

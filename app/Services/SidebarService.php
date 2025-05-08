@@ -48,6 +48,10 @@ class SidebarService extends Service
                         'name' => __('local.View All'),
                         'url' => route('visits.index')
                     ],
+                    [
+                        'name' => __('local.Add New'),
+                        'url' => route('visits.create')
+                    ],
                 ]
             ],
 

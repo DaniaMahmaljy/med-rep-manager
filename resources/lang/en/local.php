@@ -28,6 +28,7 @@ return [
     'Address' => 'Address',
     'Submit' => 'Submit',
     'Reset' => 'Reset',
+    'User created successfully' => 'User created successfully',
 
     'Admin' => 'Admin',
     'Supervisor' => 'Supervisor',
@@ -48,8 +49,9 @@ return [
         'canceled' => 'Canceled',
         'missed' => 'Missed',
         'delivered' => 'Delivered',
+        'partially_delivered' => 'Partially Delivered',
         'returned' => 'Returned',
-        'pending' => 'pending'
+        'pending' => 'Pending'
     ],
 
     'Select date' => 'Select date..',
@@ -88,6 +90,26 @@ return [
     'Linked Doctors' => 'Linked Doctors',
     'Completion Rate'=> 'Completion Rate',
     'visit_completion_overview' => 'Visits completion overview',
+
+    //add visit
+    'Schedule New Visit' => 'Schedule New Visit',
+    'Complete the form to schedule a doctor visit' => 'Complete the form to schedule a doctor visit',
+    'New Visit' => 'New Visit',
+    'Visit Details' => 'Visit Details',
+    'Visit created successfully.' => 'Visit created successfully.',
+    'Create New Visit' => 'Create New Visit',
+    'Visit Information' => 'Visit Information',
+    'Select Doctor' => 'Select Doctor',
+    'Select Representative' => 'Select Representative',
+    'Sample Assignment' => 'Sample Assignment',
+    'Only samples matching doctor specialty are shown' => 'Only samples matching doctor specialty are shown',
+    'Date & Time' => 'Date & Time',
+    'Notes' => 'Notes',
+    'Schedule' => 'Schedule',
+    'Instruction' => 'Instruction',
+    'Report' => 'Report',
+
+
     //sidebar
     'Users' => 'Users',
     'Add New' => 'Add New',

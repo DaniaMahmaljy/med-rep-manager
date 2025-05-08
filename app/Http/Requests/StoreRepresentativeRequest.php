@@ -22,7 +22,7 @@ class StoreRepresentativeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "municipal_id" => ['requierd',  'numeric', 'exists:municipals,id'],
+            "municipal_id" => ['required',  'numeric', 'exists:municipals,id'],
             'latitude' => ['required', 'numeric', 'between:-90,90'],
             'longitude' => ['required', 'numeric', 'between:-180,180'],
             'address' => ['nullable', 'string', 'max:1000'],

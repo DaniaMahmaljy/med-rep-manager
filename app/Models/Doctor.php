@@ -27,14 +27,30 @@ class Doctor extends Model
         return $this->belongsTo(Municipal::class);
     }
 
-    public function tickets() {
+    public function tickets()
+    {
         return $this->morphMany(Ticket::class, 'ticketable');
     }
+
+    public function supervisors()
+    {
+        return $this->belongsToMany(Supervisor::class, 'doctor_supervisor');
+    }
+
 
    public function getFullNameAttribute()
     {
          return "{$this->first_name} {$this->last_name}";
     }
 
+    public function scopeVisibleTo($query, $user)
+    {
+        if ($user->hasRole('supervisor')) {
+        return $query->whereHas('doctots', function ($q) use ($user) {
+            $q->where('supervisor_id', $user->userable_id);
+            });
+        }
+         return $query;
+    }
 
 }

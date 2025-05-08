@@ -21,4 +21,10 @@ class Specialty extends Model implements TranslatableContract
         $this->hasMany(Doctor::class);
     }
 
+    public function samples()
+    {
+        return $this->belongsToMany(Sample::class, 'sample_specialty');
+    }
+
+
 }
