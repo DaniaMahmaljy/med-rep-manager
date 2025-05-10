@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\VisitStatusEnum;
 use App\Models\Representative;
+use App\Models\Visit;
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
@@ -148,4 +149,27 @@ public function getStatistics(Representative $representative)
 }
 
 
+public function allVisits($data = [], $paginated = true, $withes = [], $today = false)
+{
+        $representative = $data['representative'];
+
+        $query = $representative->visits()
+         ->with($withes)->latest();
+
+
+        if ($today) {
+           $query->whereDate('scheduled_at', Carbon::today())
+            ->orderBy('scheduled_at');
+        }
+
+        if ($paginated) {
+             return $query->paginate();
+        }
+
+
+        else {
+            return  $query->get();
+        }
 }
+
+};

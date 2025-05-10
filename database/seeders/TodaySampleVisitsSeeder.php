@@ -37,7 +37,7 @@ class TodaySampleVisitsSeeder extends Seeder
                 $pivotStatus =$visit->status;
 
                 $visit->samples()->attach($sample->id, [
-                    'quantity' => rand(1, min(3, $sample->quantity_available)),
+                    'quantity_assigned' => rand(1, min(3, $sample->quantity_assigned)),
                     'status' => $pivotStatus->value,
                     'created_at' => $visit->scheduled_at,
                     ]);
