@@ -3,8 +3,11 @@
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\LanguageController;
+use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\RepresentativeController;
 use App\Http\Controllers\Dashboard\SampleController;
+use App\Http\Controllers\Dashboard\TicketController;
+use App\Http\Controllers\Dashboard\TicketReplyController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\VisitController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +23,9 @@ use Spatie\Permission\Contracts\Role;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Broadcast::routes(['middleware' => ['web', 'auth:sanctum']]);
+
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('login', [AuthController::class, 'login'])->name('login');
@@ -47,6 +53,15 @@ Route::middleware('auth',)->group(function () {
         Route::get('representatives/{representative}/today-visits', [RepresentativeController::class, 'todayVisits'])->name('representatives.today-visits');
         Route::get('representatives/{representative}/stats-json', [RepresentativeController::class, 'statistics'])->name('representatives.statistics');
 
+
+        Route::get('tickets', [TicketController::class, 'index'])->name('tickets.index');
+        Route::put('tickets/{ticket}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
+        Route::get('tickets/{id}', [TicketController::class, 'show'])->name('tickets.show');
+
+        Route::post('tickets/{ticket}/replies', [TicketReplyController::class, 'store'])->name('tickets.replies.store');
+
+        Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+        Route::get('notifications/read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.read');
 
     });
 

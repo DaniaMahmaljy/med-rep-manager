@@ -30,6 +30,7 @@ return [
 
     'User created successfully' => 'تم إنشاء المستخدم بنجاح' ,
 
+    'Super Admin' => 'المشرف الرئيسي',
     'Admin' => 'مدير للنظام',
     'Supervisor' => 'مشرف',
     'Representative' => 'مندوب',
@@ -108,6 +109,31 @@ return [
     'Schedule' => 'جدولة',
     'Instruction' => 'تعليمات',
     'Report' => 'تقرير',
+
+    //tickets
+    'open' => 'مفتوح',
+    'In Progress' => 'قيد المعالجة',
+    'resolved' => 'تم الحل',
+    'closed' => 'مغلق',
+    'Low' => 'منخفض',
+    'Medium' => 'متوسط',
+    'High' => 'عالي',
+    'Tickets Management' => 'إدارة البلاغات',
+    'Tickets' => 'البلاغات',
+    'Manage and track all support tickets' => 'إدارة وتتبع جميع البلاغات',
+    'Tickets List' => 'قائمة البلاغات',
+    'Ticket' => 'بلاغ',
+    'Ticket Details' => 'تفاصيل البلاغ',
+    'Priority' => 'الأولوية',
+    'Created At' => 'تم الإنشاء في',
+    'Created By' => 'تم الإنشاء بواسطة',
+    'Created For' => 'تم الإنشاء لصالح',
+    'Last Updated' => 'آخر تحديث',
+    'Change Status' => 'تغيير الحالة',
+    'Replies' => 'الردود',
+    'Add Reply' => 'إضافة رد',
+    'Send' => 'إرسال',
+    'Update' => 'تحديث',
 
 
 

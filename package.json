@@ -27,9 +27,11 @@
         "feather-icons": "^4.29.2",
         "flatpickr": "^4.6.13",
         "jquery": "^3.7.1",
+        "laravel-echo": "^2.1.4",
         "leaflet": "^1.9.4",
         "leaflet-control-geocoder": "^3.1.0",
         "perfect-scrollbar": "^1.5.6",
+        "pusher-js": "^8.4.0",
         "sweetalert2": "^11.19.1",
         "typeface-nunito": "^1.1.13"
     }

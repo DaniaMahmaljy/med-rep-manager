@@ -32,4 +32,19 @@ class Ticket extends Model
         return $this->hasMany(TicketReply::class);
     }
 
+    public function scopeVisibleTo($query, $user)
+    {
+        if ($user->hasRole('supervisor')) {
+            $representativeUserIds = $user->userable->representatives()->with('user')->get() ->pluck('user.id')
+                ->filter()
+                ->toArray();
+
+            return $query->whereIn('user_id', $representativeUserIds);
+        }
+
+        return $query;
+    }
+
+
+
 }

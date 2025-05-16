@@ -10,6 +10,10 @@ return [
         'name' => 'Name',
         'supervisor' => 'Supervisor',
         'municipal' => 'Municipal (City)',
+        'user' => 'User',
+        'created_at' => 'Created At',
+        'priority'  => 'Priority',
+        'title' => 'Title',
 
     ],
     'ui' => [
@@ -19,6 +23,7 @@ return [
         'reps' => 'Name, municipal, city',
         'visits' => 'Search reps or doctors',
         'repsVisits' => 'Search for doctors',
+         'tickets' => 'Search representatives ',
         ],
 
         'lengthMenu' => 'Show _MENU_ entries',

@@ -6,10 +6,12 @@ namespace App\Providers;
 
 use App\Models\Doctor;
 use App\Models\Representative;
+use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Visit;
 use App\Policies\DoctorPolicy;
 use App\Policies\RepresentativePolicy;
+use App\Policies\TicketPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\VisitPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Representative::class => RepresentativePolicy::class,
         Doctor::class => DoctorPolicy::class,
         Visit::class => VisitPolicy::class,
+        Ticket::class => TicketPolicy::class,
     ];
 
     /**

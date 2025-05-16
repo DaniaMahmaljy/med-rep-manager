@@ -30,6 +30,7 @@ return [
     'Reset' => 'Reset',
     'User created successfully' => 'User created successfully',
 
+    'Super Admin' => 'Super Admin',
     'Admin' => 'Admin',
     'Supervisor' => 'Supervisor',
     'Representative' => 'Representative',
@@ -51,7 +52,7 @@ return [
         'delivered' => 'Delivered',
         'partially_delivered' => 'Partially Delivered',
         'returned' => 'Returned',
-        'pending' => 'Pending'
+        'pending' => 'Pending',
     ],
 
     'Select date' => 'Select date..',
@@ -109,6 +110,30 @@ return [
     'Instruction' => 'Instruction',
     'Report' => 'Report',
 
+    //tickets
+    'open' => 'Open',
+    'In Progress' => 'In Progress',
+    'resolved' => 'Resolved',
+    'closed' => 'Closed',
+    'Low' => 'Low',
+    'Medium' => 'Medium',
+    'High' => 'High',
+    'Tickets Management' => 'Tickets Management',
+    'Tickets' => 'Tickets',
+    'Manage and track all support tickets' => 'Manage and track all support tickets',
+    'Tickets List' => 'Tickets List',
+    'Ticket' => 'Ticket',
+    'Ticket Details' => 'Ticket Details',
+    'Priority' => 'Priority',
+    'Created At' => 'Created At',
+    'Created By' => 'Created By',
+    'Created For' => 'Created For',
+    'Last Updated' => 'Last Updated',
+    'Change Status' => 'Change Status',
+    'Replies' => 'Replies',
+    'Add Reply' => 'Add Reply',
+    'Send' => 'Send',
+    'Update' => 'Update',
 
     //sidebar
     'Users' => 'Users',

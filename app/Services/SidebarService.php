@@ -66,6 +66,17 @@ class SidebarService extends Service
                     ],
                 ]
             ],
+             [
+                'name' => __('local.Tickets'),
+                'key' => 'Tickets',
+                'icon' => 'calendar-check-fill',
+                'submenu' => [
+                    [
+                        'name' => __('local.View All'),
+                        'url' => route('tickets.index')
+                    ],
+                ]
+            ],
             [
                 'name' => __('local.Logout'),
                 'key' => 'logout',

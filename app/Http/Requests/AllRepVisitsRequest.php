@@ -29,13 +29,13 @@ class AllRepVisitsRequest extends FormRequest
 
     public function afterValidation()
     {
-        $validated = $this->validated();
+        $data = $this->validated();
 
         $user = auth()->user();
+        $data['representative'] = $user->userable;
 
 
-        return [
-            'representative' => $user->userable,
-            ];
+
+        return $data;
     }
 }

@@ -16,6 +16,7 @@ export default defineConfig({
               'resources/static/js/pages/repAllVisits.js',
               'resources/static/js/pages/repStatistics.js',
               'resources/static/js/pages/doctorSamples.js',
+              'resources/static/js/pages/ticketsTable.js',
             ],
 
             refresh: true,
