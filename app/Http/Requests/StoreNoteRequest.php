@@ -2,23 +2,18 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\TicketStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateTicketStatusRequest extends FormRequest
+class StoreNoteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        $ticket = $this->route('ticket');
+        return $this->user()->can('addNote', $this->route('visit'));
 
-        return $this->user()->can('update', $this->route('ticket'));
     }
-
-
 
     /**
      * Get the validation rules that apply to the request.
@@ -28,14 +23,16 @@ class UpdateTicketStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-             'status' => ['required', Rule::in(array_column(TicketStatusEnum::cases(), 'value'))],
+            'content' => ['required', 'string', 'max:65000'],
         ];
     }
 
-    public function afterValidation()
+      public function afterValidation()
     {
+        $user = auth()->user();
         $data = $this->validated();
-        $data['ticket_id'] = $this->route('ticket')->id;
+        $data['visit_id'] = $this->route('visit')->id;
+        $data['user_id'] = $user->id;
         return $data;
     }
 

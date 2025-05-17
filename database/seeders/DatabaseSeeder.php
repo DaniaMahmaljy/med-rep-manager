@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\TicketReply;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,7 +30,7 @@ class DatabaseSeeder extends Seeder
             NoteSeeder::class,
             SampleSpecialtySeeder::class,
             TicketSeeder::class,
-            TicketReply::class,
+            TicketReplySeeder::class,
         ]);
 
 

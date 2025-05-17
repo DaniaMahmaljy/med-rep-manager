@@ -2,6 +2,8 @@
 
 namespace App\Policies;
 
+use App\Enums\VisitStatusEnum;
+use App\Models\Admin;
 use App\Models\Doctor;
 use App\Models\Representative;
 use App\Models\Supervisor;
@@ -24,7 +26,22 @@ class VisitPolicy
      */
     public function view(User $user, Visit $visit): bool
     {
-        return true;
+        if ($user->userable instanceof Admin) {
+            return true;
+        }
+
+        if ($user->userable instanceof Supervisor) {
+            return $user->userable->representatives()
+                ->where('id', $visit->representative_id)
+                ->exists();
+        }
+
+        if ($user->userable instanceof Representative) {
+            return $user->userable->id === $visit->representative_id;
+        }
+
+        return false;
+
     }
 
     /**
@@ -48,7 +65,28 @@ class VisitPolicy
      */
     public function update(User $user, Visit $visit): bool
     {
-        return true;
+
+        if ($user->userable instanceof Supervisor) {
+            return $user->userable->representatives()
+                ->where('id', $visit->representative_id)
+                ->exists();
+        }
+
+        if ($user->userable instanceof Representative) {
+            return $user->userable->id === $visit->representative_id;
+        }
+
+        return false;
+
+    }
+
+    public function addNote(User $user, Visit $visit): bool
+    {
+        if (!$this->view($user, $visit)) {
+            return false;
+        }
+        else return true;
+
     }
 
     /**

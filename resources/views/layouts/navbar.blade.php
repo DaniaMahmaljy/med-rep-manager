@@ -33,14 +33,14 @@
                     </a>
                     <ul class="dropdown-menu dropdown-center dropdown-menu-sm-end notification-dropdown">
                         <li class="dropdown-header">
-                            <h6>Notifications</h6>
+                            <h6>{{__('local.Notifications')}}</h6>
                         </li>
                         @foreach(auth()->user()->unreadNotifications as $notification)
                             <li class="dropdown-item notification-item">
                                 <a href="{{ route('notifications.read', $notification->id) }}">
                                     <div class="notification-text ms-4">
                                         <p class="notification-title font-bold">
-                                            {{ ucfirst($notification->data['type'] ?? '') }} {{ $notification->data['title'] ?? 'Notification' }}
+                                            {{ ucfirst($notification->data['type'] ?? '') }}: {{ $notification->data['title'] ?? 'Notification' }}
                                         </p>
                                         <span class="text-xs text-muted">
                                             {{ $notification->created_at->diffForHumans() }}
@@ -50,7 +50,7 @@
                             </li>
                         @endforeach
                         <li>
-                            <p class="text-center py-2 mb-0"><a href="{{ route('notifications.index') }}">See all notifications</a></p>
+                            <p class="text-center py-2 mb-0"><a href="{{ route('notifications.index') }}">{{__('local.See all notifications')}}</a></p>
                         </li>
                     </ul>
                 </li>
@@ -87,7 +87,7 @@
                     <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My Profile</a></li>
                     <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i> Settings</a></li>
                     <hr class="dropdown-divider">
-                    <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="icon-mid bi bi-power me-2"></i> Logout</a></li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="icon-mid bi bi-power me-2"></i> {{('local.Logout')}}</a></li>
                 </ul>
             </div>
         </div>

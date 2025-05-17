@@ -5,6 +5,7 @@ use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\RepresentativeController;
 use App\Http\Controllers\API\TicketController;
 use App\Http\Controllers\API\TicketReplyController;
+use App\Http\Controllers\API\VisitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +30,15 @@ Route::post('logout', [AuthController::class, 'logout']) ->middleware('auth:sanc
 Route::middleware('role:representative', 'auth:sanctum')->group(function () {
 
     Route::get('visits', [RepresentativeController::class, 'allVisits']);
+
     Route::get('visits/today', [RepresentativeController::class, 'todayVisits']);
+
+    Route::put('visits/{visit}/status', [VisitController::class, 'updateStatus']);
+    Route::put('visits/{visit}/complete', [VisitController::class, 'completeVisit']);
+    Route::get('visits/{visit}', [VisitController::class, 'show']);
+
+
+
 
     Route::get('tickets', [TicketController::class, 'index']);
     Route::post('tickets', [TicketController::class, 'store']);

@@ -9,6 +9,7 @@ use App\Models\Doctor;
 use App\Models\Representative;
 use App\Models\Sample;
 use App\Models\Visit;
+use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -95,9 +96,10 @@ class VisitService extends Service
     }
 
 
-    public function show($id, $withes =[])
+    public function show($data, $withes =[])
     {
-        return Visit::with($withes)->find($id);
+
+        return Visit::with($withes)->findOrFail($data['visit_id']);
     }
 
     public function getVisitsForRepresentativeDataTable(Representative $representative, $filters = [])
@@ -217,6 +219,44 @@ class VisitService extends Service
         return $visit;
         });
     }
+
+
+    public function updateStatus($data, $visit)
+    {
+
+        $visit->status = $data['status'];
+
+        $visit->save();
+
+        return $visit;
+    }
+
+
+    public function completeVisit(array $data, Visit $visit): Visit
+{
+    return DB::transaction(function () use ($data, $visit) {
+        $visit->status = VisitStatusEnum::COMPLETED->value;
+        $visit->actual_visit_time = Carbon::now();
+        $visit->save();
+
+        foreach ($data['samples'] as $sample) {
+            $visit->samples()->updateExistingPivot($sample['id'], [
+                'status' => $sample['status'],
+                'quantity_used' => $sample['quantity_used'] ?? null,
+            ]);
+        }
+
+        if (!empty($data['notes'])) {
+            $visit->notes()->create([
+                'user_id' => $data['user_id'],
+                'content' => $data['notes'],
+                'type' => NoteTypeEnum::REPORT->value,
+            ]);
+        }
+
+        return $visit->load(['doctor', 'samples', 'notes.user']);
+    });
+}
 
 
 }

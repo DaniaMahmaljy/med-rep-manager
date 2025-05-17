@@ -135,6 +135,40 @@ return [
     'Send' => 'Send',
     'Update' => 'Update',
 
+    //notifications
+    'My Notifications' => 'My Notifications',
+    'All your notification history' => 'All your notification history',
+    'unread' => 'unread',
+    'New' => 'New',
+    'No notifications yet' => 'No notifications yet',
+    'You\'ll see notifications here when you receive them' => 'You\'ll see notifications here when you receive them',
+
+    //sample unit
+    'Piece' => 'Piece',
+    'Box' => 'Box',
+    'Bottle' => 'Bottle',
+    'Tube' => 'Tube',
+    'Injection' => 'Injection',
+
+    //view visit
+    'Visit' => 'Visit',
+    'Scheduled At' => 'Scheduled At',
+    'Actual Visit Time' => 'Actual Visit Time',
+    'Samples' => 'Samples',
+    'Name' => 'Name',
+    'Brand' => 'Brand',
+    'Assigned' => 'Assigned',
+    'Used' => 'Used',
+    'Details' => 'Details',
+    'Add Note' => 'Add Note',
+    'Change Status' => 'Change Status',
+    'Close' => 'Close',
+    'Class' => 'Class',
+    'Quantity Available' => 'Quantity Available',
+    'Expiration Date' => 'Expiration Date',
+    'Assigned Quantity' => 'Assigned Quantity',
+    'Used Quantity' => 'Used Quantity',
+
     //sidebar
     'Users' => 'Users',
     'Add New' => 'Add New',
@@ -143,4 +177,8 @@ return [
     'Visits' => 'Visits',
     'View Visits' => 'View Visits',
     'Logout' => 'Logout',
+
+    //navbar
+    'Notifications' => 'Notifications',
+    'See all notifications' => 'See all notifications',
 ];

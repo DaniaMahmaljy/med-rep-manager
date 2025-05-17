@@ -20,7 +20,8 @@ class Sample extends Model implements TranslatableContract
 
     protected $cast =
     [
-        'unit' => SampleUnitEnum::class
+        'unit' => SampleUnitEnum::class,
+        'expiration_date' => 'date',
     ];
 
     public function brand()

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\LanguageController;
+use App\Http\Controllers\Dashboard\NoteController;
 use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\RepresentativeController;
 use App\Http\Controllers\Dashboard\SampleController;
@@ -41,11 +42,17 @@ Route::middleware('auth',)->group(function () {
         Route::get('visits', [VisitController::class, 'index'])->name('visits.index');
         Route::get('visits/create', [VisitController::class, 'create'])->name('visits.create');
         Route::post('visits/store', [VisitController::class, 'store'])->name('visits.store');
-        Route::get('visits/{id}', [VisitController::class, 'show'])->name('visits.show');
+        Route::get('visits/{visit}', [VisitController::class, 'show'])->name('visits.show');
+        Route::put('visits/{visit}/status', [VisitController::class, 'updateStatus'])->name('visits.updateStatus');
+
+
+        Route::post('visits/{visit}/notes', [NoteController::class, 'store'])->name('visits.notes.store');
 
         Route::get('representatives/{representative}/visits', [VisitController::class, 'byRepresentative'])->name('representatives.visits');
 
         Route::get('samples/by-doctor/{doctor}', [SampleController::class, 'getByDoctor'])->name('samples.byDoctor');
+
+
 
 
         Route::get('representatives', [RepresentativeController::class, 'index'])->name('representatives.index');

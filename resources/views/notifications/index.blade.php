@@ -5,14 +5,14 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>My Notifications</h3>
-                <p class="text-subtitle text-muted">All your notification history</p>
+                <h3>{{__('local.My Notifications')}}</h3>
+                <p class="text-subtitle text-muted">{{__('local.All your notification history')}}</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Notifications</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{__('local.Dashboard')}}</a></li>
+                        <li class="breadcrumb-item active">{{__('local.Notifications')}}</li>
                     </ol>
                 </nav>
             </div>
@@ -23,9 +23,9 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title m-0">
-                    Notifications
+                    {{__('local.Notifications')}}
                     @if($unreadCount > 0)
-                    <span class="badge bg-danger ms-2">{{ $unreadCount }} unread</span>
+                    <span class="badge bg-danger ms-2">{{ $unreadCount }} {{__('local.unread')}}</span>
                     @endif
                 </h4>
             </div>
@@ -55,7 +55,7 @@
                                     <h5 class="mb-1 fw-semibold">
                                         {{ $notification->data['title'] ?? 'Notification' }}
                                         @if($notification->unread())
-                                        <span class="badge bg-danger ms-2">New</span>
+                                        <span class="badge bg-danger ms-2">{{__('local.New')}}</span>
                                         @endif
                                     </h5>
                                     <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
@@ -70,8 +70,8 @@
                         <div class="avatar bg-light-info p-3 rounded-circle mb-3">
                             <i class="bi bi-bell-slash fs-1 text-info"></i>
                         </div>
-                        <h5 class="text-muted">No notifications yet</h5>
-                        <p class="text-muted small">You'll see notifications here when you receive them</p>
+                        <h5 class="text-muted">{{__('local.No notifications yet')}}</h5>
+                        <p class="text-muted small">{{__('local.You\'ll see notifications here when you receive them')}}</p>
                     </div>
                     @endforelse
                 </div>

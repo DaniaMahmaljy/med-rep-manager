@@ -12,12 +12,13 @@ enum NoteTypeEnum: int
         return constant("self::$name");
     }
 
-    public static function labels(): array
+
+    public function label(): string
     {
-        return [
-            self::REPORT => __('local.Report'),
+        return match($this) {
+            self::REPORT =>  __('local.Report'),
             self::INSTRUCTION => __('local.Instruction'),
-        ];
+        };
     }
 
 }

@@ -135,8 +135,40 @@ return [
     'Send' => 'إرسال',
     'Update' => 'تحديث',
 
+    //notifications
+    'My Notifications' => 'إشعاراتي',
+    'All your notification history' => 'سجل الإشعارات بالكامل',
+    'unread' => 'غير مقروء',
+    'New' => 'جديد',
+    'No notifications yet' => 'لا توجد إشعارات حتى الآن',
+    'You\'ll see notifications here when you receive them' => 'ستظهر الإشعارات هنا عند استلامها',
 
 
+    //sample unit
+    'Piece' => 'قطعة',
+    'Box' => 'علبة',
+    'Bottle' => 'زجاجة',
+    'Tube' => 'أنبوب',
+    'Injection' => 'حقنة',
+
+    //show visit
+    'Visit' => 'زيارة',
+    'Scheduled At' => 'مجدولة في',
+    'Actual Visit Time' => 'وقت الزيارة الفعلي',
+    'Samples' => 'العينات',
+    'Name' => 'الاسم',
+    'Brand' => 'العلامة التجارية',
+    'Assigned' => 'مكلف',
+    'Used' => 'مستخدم',
+    'Details' => 'تفاصيل',
+    'Add Note' => 'إضافة ملاحظة',
+    'Change Status' => 'تغيير الحالة',
+    'Close' => 'إغلاق',
+    'Class' => 'الفئة',
+    'Quantity Available' => 'الكمية المتاحة',
+    'Expiration Date' => 'تاريخ انتهاء الصلاحية',
+    'Assigned Quantity' => 'الكمية المخصصة',
+    'Used Quantity' => 'الكمية المستخدمة',
 
     //sidebar
     'Users' => 'المستخدمون',
@@ -146,4 +178,8 @@ return [
     'Visits' => 'الزيارات',
     'View Visits' => 'عرض الزيارات',
     'Logout' => 'تسجيل الخروج',
+
+     //navbar
+     'Notifications' => 'الإشعارات',
+    'See all notifications' => 'مشاهدة جميع الإشعارات',
 ];

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexRepVisitsRequest;
 use App\Http\Requests\IndexVisitRequest;
+use App\Http\Requests\ShowVisitRequest;
 use App\Http\Requests\StoreVisitRequest;
+use App\Http\Requests\UpdateVisitStatusRequest;
 use App\Models\Representative;
 use App\Models\Visit;
 use App\Services\VisitService;
@@ -59,14 +61,7 @@ class VisitController extends Controller
         ->with('success', __('local.Visit created successfully.'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $visit = $this->visitService->show($id);
-        return view('visits.show',compact('visit'));
-    }
+
 
     public function byRepresentative(IndexRepVisitsRequest $request, Representative $representative)
     {
@@ -78,7 +73,31 @@ class VisitController extends Controller
         return view('visits.by-representative', compact('representative'));
     }
 
-    /**
+
+
+        public function show(ShowVisitRequest $request, Visit $visit)
+        {
+            $data = $request->afterValidation();
+
+            $visitData = $this->visitService->show(data: $data, withes: [
+                'representative.user',
+                'doctor',
+                'notes.user',
+                'samples.brand',
+                'samples.sampleClass'
+            ]);
+
+
+            return view('visits.show', compact('visitData'));
+        }
+
+    public function updateStatus(UpdateVisitStatusRequest $request, Visit $visit)
+    {
+        $data = $request->afterValidation();
+        $visitData = $this->visitService->updateStatus(data: $data, visit: $visit);
+        return back()->with('success', 'Visit status updated.');
+    }
+        /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->tinyInteger('status')->default(VisitStatusEnum::SCHEDULED->value);
             $table->dateTime('scheduled_at')->nullable();
+            $table->dateTime('actual_visit_time')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

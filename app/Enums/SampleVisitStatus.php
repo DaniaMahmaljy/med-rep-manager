@@ -16,13 +16,13 @@ enum SampleVisitStatus: int
         return constant("self::$name");
     }
 
-      public function label()
+      public function label(): string
     {
         return match($this) {
             self::PENDING => __('local.status.pending'),
             self::DELIVERED => __('local.status.delivered'),
             self::RETURNED => __('local.status.returned'),
-            self::PARTIALLY_DELIVERED => ('local.partially_delivered'),
+            self::PARTIALLY_DELIVERED => __('local.partially_delivered'),
         };
     }
 
