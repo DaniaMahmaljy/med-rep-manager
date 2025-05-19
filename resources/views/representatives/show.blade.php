@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Representatives Profile')
+@section('title','Representative Profile')
 
 @section('content')
 
@@ -105,7 +105,6 @@
                 <h5 class="card-title mb-0">{{ __('local.Representative Location') }}</h5>
                 @if($representative->latitude && $representative->longitude)
                     <a href="https://www.google.com/maps?q={{ $representative->latitude }},{{ $representative->longitude }}"
-                       target="_blank"
                        class="btn btn-sm btn-outline-primary">
                        <i class="bi bi-google me-1"></i> {{ __('local.Open in Google Maps') }}
                     </a>

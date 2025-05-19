@@ -170,6 +170,42 @@ return [
     'Assigned Quantity' => 'الكمية المخصصة',
     'Used Quantity' => 'الكمية المستخدمة',
 
+    //doctors
+    'Doctors Overview' => 'نظرة عامة على الأطباء',
+    'Manage and track all Doctors' => 'إدارة وتتبع جميع الأطباء',
+    'Doctors List' => 'قائمة الأطباء',
+    'Completed Visits' => 'الزيارات المكتملة',
+    'Upcoming Visits' => 'الزيارات القادمة',
+    'Cancelled Visits' => 'الزيات غير المكتملة',
+    'no_visits_data' => 'لا توجد بيانات زيارات متاحة لهذا الطبيب',
+    'Doctor Profile' => 'ملف الطبيب',
+    'Doctor profile overview and visit history' => 'نظرة عامة على ملف الطبيب وسجل الزيارات',
+    'Total Assigned' => 'إجمالي المعين',
+    'Total Used' => 'إجمالي المستخدم',
+    'Utilization Rate' => 'معدل الاستخدام',
+    'Doctor Location' => 'موقع الطبيب',
+    'Description' => 'الوصف',
+    'Specialty' => 'التخصص',
+    'Last visit' => 'آخر زيارة',
+    'Sample Utilization' => 'استخدام العينات',
+    'no_visits_data' => 'لا توجد بيانات زيارات متاحة',
+    'Add New Doctor' => 'إضافة طبيب جديد',
+    'Doctor Information' => 'معلومات الطبيب',
+    'Phone' => 'الهاتف',
+    'Select Specialty' => 'اختر التخصص',
+    'Visits assigned to this doctor' => 'الزيارات المخصصة لهذا الطبيب',
+
+    //Supervisors
+    'Supervisors Overview' => 'نظرة عامة على المشرفين',
+    'Manage and track all Supervisors' => 'إدارة وتتبع جميع المشرفين',
+    'Supervisors List' => 'قائمة المشرفين',
+
+    //admins
+    'Admins Overview' => 'نظرة عامة على المسؤولين',
+    'Manage and track all Admins' => 'إدارة وتتبع جميع المسؤولين',
+    'Admins List' => 'قائمة المسؤولين',
+
+
     //sidebar
     'Users' => 'المستخدمون',
     'Add New' => 'إضافة جديد',
@@ -177,6 +213,9 @@ return [
     'View All' => 'عرض الكل',
     'Visits' => 'الزيارات',
     'View Visits' => 'عرض الزيارات',
+    'Doctors' => 'الأطباء',
+    'Supervisors' => 'المشرفون',
+    'Admins' => 'المدراء',
     'Logout' => 'تسجيل الخروج',
 
      //navbar

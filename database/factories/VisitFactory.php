@@ -21,6 +21,7 @@ class VisitFactory extends Factory
      */
     public function definition(): array
     {
+         $status = $this->faker->randomElement(VisitStatusEnum::cases());
         return [
             'representative_id' => Representative::inRandomOrder()->first()?->id ?? Representative::factory()->create()->id,
             'doctor_id' => Doctor::inRandomOrder()->first()?->id ?? Doctor::factory()->create()->id,
@@ -29,6 +30,9 @@ class VisitFactory extends Factory
               'userable_type' => Supervisor::class,])->id,
             'status' => $this->faker->randomElement(VisitStatusEnum::cases())->value,
             'scheduled_at' => $this->faker->dateTimeBetween('-30 days', '+30 days'),
+            'status' => $status->value,
+            'scheduled_at' => $this->faker->dateTimeBetween('-30 days', '+30 days'),
+            'actual_visit_time' => $status === VisitStatusEnum::COMPLETED ? $this->faker->dateTimeBetween('-30 days', 'now') : null,
         ];
     }
 }

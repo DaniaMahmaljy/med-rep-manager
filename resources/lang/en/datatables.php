@@ -14,6 +14,10 @@ return [
         'created_at' => 'Created At',
         'priority'  => 'Priority',
         'title' => 'Title',
+        'specialty' => 'Specialty',
+        'username' => 'Username',
+        'email' => 'Email',
+        'city' => 'City',
 
     ],
     'ui' => [
@@ -23,7 +27,10 @@ return [
         'reps' => 'Name, municipal, city',
         'visits' => 'Search reps or doctors',
         'repsVisits' => 'Search for doctors',
-         'tickets' => 'Search representatives ',
+        'tickets' => 'Search representatives ',
+        'doctors' =>' Name, municipal',
+        'doctorVisits' => 'Search representatives',
+        'search' => 'Search..',
         ],
 
         'lengthMenu' => 'Show _MENU_ entries',

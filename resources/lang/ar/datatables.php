@@ -14,16 +14,21 @@ return [
         'created_at' => 'تاريخ الإنشاء',
         'priority' => 'الأولوية',
         'title' => 'العنوان',
+        'city' => 'المدينة',
 
     ],
     'ui' => [
         'processing' => 'جار المعالجة...',
         'search' => 'بحث:',
         'searchPlaceholder' => [
-        'reps' => 'الاسم اوالبلدية اوالمدينة',
+        'reps' => 'الاسم اوالمنطقة اوالمدينة',
         'visits' => 'ابحث عن مناديب أو أطباء',
         'repsVisits' => 'ابحث عن طبيب',
-        ],
+        'tickets' => 'بحث عن المندوبين',
+        'doctors' => 'الاسم، المنطقة',
+        'doctorVisits' => 'بحث عن المندوبين',
+        'search' => 'بحث...',
+                ],
 
         'lengthMenu' => 'عرض _MENU_ سجلات',
         'info' => 'عرض _START_ إلى _END_ من _TOTAL_ سجلات',

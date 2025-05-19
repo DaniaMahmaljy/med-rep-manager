@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\LanguageController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Dashboard\NoteController;
 use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\RepresentativeController;
 use App\Http\Controllers\Dashboard\SampleController;
+use App\Http\Controllers\Dashboard\SupervisorController;
 use App\Http\Controllers\Dashboard\TicketController;
 use App\Http\Controllers\Dashboard\TicketReplyController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -34,6 +36,16 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::middleware('auth',)->group(function () {
     Route::get('swap', [LanguageController::class, 'swap'])->name('swap');
     Route::post('logout',[AuthController::class, 'destroy'])->name('logout');
+    Route::get('user', [UserController::class, 'create'])->name('user.create')->middleware('can:view_add_user');
+    Route::post('user', [UserController::class, 'store'])->name('user.store')->middleware('can:create_user');
+    Route::get('doctors/create', [DoctorController::class, 'create'])->name('doctors.create')->middleware('can:view_add_doctor');
+    Route::post('doctors/store', [DoctorController::class, 'store'])->name('doctors.store')->middleware('can:create_doctor');
+    Route::get('supervisors', [SupervisorController::class, 'index'])->name('supervisors.index')->middleware('role:superadmin|admin');;
+    Route::get('admins', [AdminController::class, 'index'])->name('admins.index')->middleware('role:superadmin|admin');;
+
+    Route::post('/doctors/{doctor}/assign-supervisors', [DoctorController::class, 'assignSupervisors']) ->name('doctors.assignSupervisors');
+    Route::post('/representatives/{representative}/update-assignments', [RepresentativeController::class, 'updateAssignments'])->middleware('role:superadmin|admin');
+
 
     Route::middleware('role:superadmin|admin|supervisor')->group(function () {
 
@@ -51,6 +63,17 @@ Route::middleware('auth',)->group(function () {
         Route::get('representatives/{representative}/visits', [VisitController::class, 'byRepresentative'])->name('representatives.visits');
 
         Route::get('samples/by-doctor/{doctor}', [SampleController::class, 'getByDoctor'])->name('samples.byDoctor');
+
+
+        Route::get('doctors', [DoctorController::class, 'index'])->name('doctors.index');
+        Route::get('doctors/{id}', [DoctorController::class, 'show'])->name('doctors.show');
+        Route::get('doctors/{doctor}/stats-json', [DoctorController::class, 'statistics'])->name('doctors.statistics');
+        Route::get('doctors/{doctor}/visits', [VisitController::class, 'byDoctor'])->name('doctors.visits');
+
+
+
+
+
 
 
 
@@ -72,8 +95,7 @@ Route::middleware('auth',)->group(function () {
 
     });
 
-        Route::get('user', [UserController::class, 'create'])->name('user.create')->middleware('can:view_add_user');
-        Route::post('user', [UserController::class, 'store'])->name('user.store')->middleware('can:create_user');
+
 
 
 

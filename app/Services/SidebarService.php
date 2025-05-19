@@ -77,6 +77,46 @@ class SidebarService extends Service
                     ],
                 ]
             ],
+
+
+            [
+            'name' => __('local.Doctors'),
+                'key' => 'Doctors',
+                'icon' => 'heart-pulse-fill',
+                'submenu' => [
+                    [
+                        'name' => __('local.View All'),
+                        'url' => route('doctors.index')
+                    ],
+                    [
+                        'permission' => 'view_add_doctor',
+                        'name' => __('local.Add New'),
+                        'url' => route('doctors.create')
+                    ],
+                ]
+            ],
+             [
+            'name' => __('local.Supervisors'),
+                'key' => 'Supervisor',
+                'icon' => 'person-lines-fill',
+                'submenu' => [
+                    [
+                        'name' => __('local.View All'),
+                        'url' => route('supervisors.index')
+                    ],
+                ]
+            ],
+             [
+            'name' => __('local.Admins'),
+                'key' => 'Supervisor',
+                'icon' => 'shield-lock-fill',
+                'submenu' => [
+                    [
+                        'name' => __('local.View All'),
+                        'url' => route('admins.index')
+                    ],
+                ]
+            ],
             [
                 'name' => __('local.Logout'),
                 'key' => 'logout',

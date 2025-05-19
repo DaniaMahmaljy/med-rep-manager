@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IndexDoctorVisitsRequest;
 use App\Http\Requests\IndexRepVisitsRequest;
 use App\Http\Requests\IndexVisitRequest;
 use App\Http\Requests\ShowVisitRequest;
 use App\Http\Requests\StoreVisitRequest;
 use App\Http\Requests\UpdateVisitStatusRequest;
+use App\Models\Doctor;
 use App\Models\Representative;
 use App\Models\Visit;
 use App\Services\VisitService;
@@ -71,6 +73,16 @@ class VisitController extends Controller
             return $this->visitService->getVisitsForRepresentativeDataTable($representative, $filters);
         }
         return view('visits.by-representative', compact('representative'));
+    }
+
+    public function byDoctor(IndexDoctorVisitsRequest $request, Doctor $doctor)
+    {
+        $this->authorize('view', $doctor);
+        if ($request->ajax()) {
+            $filters = $request->filters();
+            return $this->visitService->getVisitsForDoctorDataTable($doctor, $filters);
+        }
+        return view('visits.by-doctor', compact('doctor'));
     }
 
 

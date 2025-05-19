@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexRepresentativeRequest;
+use App\Http\Requests\UpdateRepresentativeAssignmentsRequest;
 use App\Models\Representative;
+use App\Services\MunicipalService;
 use App\Services\RepresentativeService;
+use App\Services\SupervisorService;
 use Illuminate\Http\Request;
 
 class RepresentativeController extends Controller
@@ -14,7 +17,7 @@ class RepresentativeController extends Controller
      * Display a listing of the resource.
      */
 
-      public function __construct(protected RepresentativeService $representativeService)
+      public function __construct(protected RepresentativeService $representativeService, protected MunicipalService $municipalService, protected SupervisorService $supervisorService)
      {
 
      }
@@ -25,7 +28,10 @@ class RepresentativeController extends Controller
         $filters = $request->filters();
         return $this->representativeService->getRepresentativesDataTable($filters);
         }
-       return view('representatives.index');
+
+        $municipals = $this->municipalService->all(paginated: false);
+        $supervisors =  $this->supervisorService->all(withes:['user'], paginated: false);
+       return view('representatives.index', compact('municipals','supervisors'));
     }
 
 
@@ -58,7 +64,13 @@ public function statistics(Representative $representative)
 }
 
 
+public function updateAssignments(UpdateRepresentativeAssignmentsRequest $request, Representative $representative, )
+{
+    $data = $request->validated();
+    $service = $this->representativeService->updateAssignments($representative,$data);
 
+    return response()->json(['message' => 'Updated successfully']);
+}
 
     /**
      * Show the form for editing the specified resource.

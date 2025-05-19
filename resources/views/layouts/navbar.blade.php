@@ -84,10 +84,8 @@
                     <li>
                         <h6 class="dropdown-header">Hello, {{ auth()->user()->first_name }}</h6>
                     </li>
-                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My Profile</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i> Settings</a></li>
                     <hr class="dropdown-divider">
-                    <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="icon-mid bi bi-power me-2"></i> {{('local.Logout')}}</a></li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="icon-mid bi bi-power me-2"></i> {{__('local.Logout')}}</a></li>
                 </ul>
             </div>
         </div>

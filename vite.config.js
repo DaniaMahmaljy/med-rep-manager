@@ -17,6 +17,9 @@ export default defineConfig({
               'resources/static/js/pages/repStatistics.js',
               'resources/static/js/pages/doctorSamples.js',
               'resources/static/js/pages/ticketsTable.js',
+              'resoursces/static/js/pages/doctorAllVisits.js',
+              'resources/static/js/pages/adminsTable.js',
+              'resources/static/js/pages/supervisorTable.js',
             ],
 
             refresh: true,

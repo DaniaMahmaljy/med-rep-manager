@@ -117,6 +117,10 @@ div.dataTables_wrapper div.dataTables_info {
 @include data-table-styles('#representative_table');
 @include data-table-styles('#rep-visits_table');
 @include data-table-styles('#ticket_table');
+@include data-table-styles('#doctor_table');
+@include data-table-styles('#doctor-visits_table');
+@include data-table-styles('#admin_table');
+@include data-table-styles('#supervisor_table');
 
 .status-badge {
     display: inline-block;

@@ -58,7 +58,7 @@ return [
     'Select date' => 'Select date..',
 
     //view reps
-    'Representative Overview' => 'Representative Overview',
+    'Representative Overview' => 'Representatives Overview',
     'Manage and track all Representatives' => 'Manage and track all Representatives',
     'Representative List' => 'Representative List',
 
@@ -169,6 +169,43 @@ return [
     'Assigned Quantity' => 'Assigned Quantity',
     'Used Quantity' => 'Used Quantity',
 
+    //doctors
+    'Doctors Overview' => 'Doctors Overview',
+    'Manage and track all Doctors' => 'Manage and track all Doctors',
+    'Doctors List' => 'Doctors List',
+    'Completed Visits' => 'Completed Visits',
+    'Upcoming Visits' => 'Upcoming Visits',
+    'Cancelled Visits' => 'Incomplete Visits',
+    'no_visits_data' => 'No visit data available for this doctor',
+    'Doctor Profile' => 'Doctor Profile',
+    'Doctor profile overview and visit history' => 'Doctor profile overview and visit history',
+    'Total Assigned' => 'Total Assigned',
+    'Total Used' => 'Total Used',
+    'Utilization Rate' => 'Utilization Rate',
+    'Doctor Location' => 'Doctor Location',
+    'Description' => 'Description',
+    'Specialty' => 'Specialty',
+    'Last visit' => 'Last visit',
+    'Sample Utilization' => 'Sample Utilization',
+    'no_visits_data' => 'No visits data available',
+    'Add New Doctor' => 'Add New Doctor',
+    'Doctor Information' => 'Doctor Information',
+    'Phone' => 'Phone',
+    'Select Specialty' => 'Select Specialty',
+    'Visits assigned to this doctor' => 'Visits assigned to this doctor',
+
+    //Supervisors
+
+    'Supervisors Overview' => 'Supervisors Overview',
+    'Manage and track all Supervisors' => 'Manage and track all Supervisors',
+    'Supervisors List' => 'Supervisors List',
+
+    //admins
+    'Admins Overview' => 'Admins Overview',
+    'Manage and track all Admins' => 'Manage and track all Admins',
+    'Admins List' => 'Admins List',
+
+
     //sidebar
     'Users' => 'Users',
     'Add New' => 'Add New',
@@ -176,6 +213,9 @@ return [
     'View All' => 'View All',
     'Visits' => 'Visits',
     'View Visits' => 'View Visits',
+    'Doctors' => 'Doctors',
+    'Supervisors' => 'Supervisors',
+    'Admins' => 'Admins',
     'Logout' => 'Logout',
 
     //navbar

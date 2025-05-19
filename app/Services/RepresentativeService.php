@@ -17,65 +17,75 @@ class RepresentativeService extends Service
 
     }
 
-      public function getRepresentativesDataTable($filters)
+
+
+    public function getRepresentativesDataTable($filters)
     {
         $groupBy = $filters['group_by'];
         $search = $filters['search'];
         $user = $filters['user'];
 
-        $query = Representative::with(['user', 'residingMunicipal.city'])->visibleTo($user);
+        $query = Representative::with(['user', 'residingMunicipal.city', 'workingMunicipals'])
+            ->visibleTo($user);
+
         if (! $user->hasRole('supervisor')) {
             $query->with('supervisor.user');
         }
 
-           $query->when($search, function($query) use ($search) {
-                $searchTerm = '%' . str_replace(' ', '%', $search) . '%';
-                $query->where(function($q) use ($searchTerm) {
-                    $q->whereHas('user', function($q2) use ($searchTerm) {
-                        $q2->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", [$searchTerm])
-                           ->orWhere('first_name', 'LIKE', $searchTerm)
-                           ->orWhere('last_name', 'LIKE', $searchTerm);
-                    })
-                    ->orWhereHas('residingMunicipal.translations', function($q2) use ($searchTerm) {
-                          $q2->Where('name', 'LIKE', $searchTerm);
-                    })
-                     ->orWhereHas('residingMunicipal.city.translations', function($q3) use ($searchTerm) {
-                        $q3->where('name', 'LIKE', $searchTerm);
-                    });
+        if ($search) {
+            $searchTerm = '%' . str_replace(' ', '%', $search) . '%';
+            $query->where(function($q) use ($searchTerm) {
+                $q->whereHas('user', function($q2) use ($searchTerm) {
+                    $q2->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", [$searchTerm])
+                    ->orWhere('first_name', 'LIKE', $searchTerm)
+                    ->orWhere('last_name', 'LIKE', $searchTerm);
+                })
+                ->orWhereHas('residingMunicipal.translations', function($q2) use ($searchTerm) {
+                    $q2->where('name', 'LIKE', $searchTerm);
+                })
+                ->orWhereHas('residingMunicipal.city.translations', function($q3) use ($searchTerm) {
+                    $q3->where('name', 'LIKE', $searchTerm);
                 });
-            })
+        });
+    }
 
-        ->when($groupBy === 'municipal', function($query) {
-            $query->orderBy('municipal_id');
+    $query->when($groupBy === 'municipal', fn($q) => $q->orderBy('municipal_id'))
+          ->when($groupBy === 'supervisor', fn($q) => $q->orderBy('supervisor_id'))
+          ->latest();
+
+    return $this->dataTables->eloquent($query)
+        ->addColumn('name', fn($r) => $r->user->full_name ?? 'N/A')
+        ->addColumn('residingMunicipal', function($r) {
+            $municipal = $r->residingMunicipal;
+            if (!$municipal) return '—';
+            $city = $municipal->city->name ?? '';
+            return $municipal->name . ($city ? " ($city)" : '');
         })
-         ->when($groupBy === 'supervisor', function($query) {
-            $query->orderBy('supervisor_id');
+        ->addColumn('workingMunicipals', function($r) {
+            return $r->workingMunicipals ? $r->workingMunicipals->pluck('name')->toArray() : [];
         })
-         ->latest();
-
-        return $this->dataTables->eloquent($query)
-            ->addColumn('name', function($r) {
-                return $r->user->full_name ?? 'N/A';
-            })
-            ->addColumn('supervisor', function($r) {
-                return  $r->supervisor && $r->supervisor->user? $r->supervisor->user->full_name: 'No Supervisor Assigned';;
-            })
-            ->addColumn('municipal', function($r) {
-              $municipal = $r->residingMunicipal;
-                if (!$municipal) return '—';
-                $city = $municipal->city->name ?? '';
-                return $municipal->name . ($city ? " ($city)" : '');
-            })
-
-          ->addColumn('action', function($r) {
+        ->addColumn('action', function($r) {
             $icon = app()->getLocale() === 'ar' ? 'bi-box-arrow-up-left' : 'bi-box-arrow-up-right';
             return '<a href="'.route('representatives.show', $r->id).'"><i class="bi ' . $icon . '"></i></a>';
-          })
+        })
+
+        ->addColumn('workingMunicipalsIds', fn($r) => $r->workingMunicipals->pluck('id'))
+         ->addColumn('supervisor', function ($r) {
+          if ($r->supervisor && $r->supervisor->user) {
+            return [
+                'id' => $r->supervisor->id,
+                'user' => [
+                    'full_name' => $r->supervisor->user->full_name,
+                ],
+            ];
+        }
+         return null;
+        })
 
         ->rawColumns(['action'])
-
         ->toJson();
     }
+
 
 
     public function show($id, $withes =[])
@@ -172,4 +182,16 @@ public function allVisits($data = [], $paginated = true, $withes = [], $today = 
         }
 }
 
-};
+    public function updateAssignments(Representative $representative, array $data)
+     {
+        if (array_key_exists('supervisor_id', $data)) {
+        $representative->supervisor_id = $data['supervisor_id'];
+        $representative->save();
+        }
+
+        if (array_key_exists('working_municipals', $data)) {
+            $representative->workingMunicipals()->sync($data['working_municipals']);
+        }
+        }
+
+    };
