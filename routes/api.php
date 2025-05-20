@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\NotificationController;
+use App\Http\Controllers\API\PasswordController;
 use App\Http\Controllers\API\RepresentativeController;
 use App\Http\Controllers\API\TicketController;
 use App\Http\Controllers\API\TicketReplyController;
@@ -25,9 +26,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::post('logout', [AuthController::class, 'logout']) ->middleware('auth:sanctum');
+Route::post('logout', [AuthController::class, 'logout']) ->middleware('auth:sanctum')->name('api.logout');
 
 Route::middleware('role:representative', 'auth:sanctum')->group(function () {
+
+    Route::post('password/change', [PasswordController::class, 'changePassword'])->name('api.password.change');
+    Route::post('password/email', [PasswordController::class, 'sendOTPEmail']);
+    Route::post('password/reset-password', [PasswordController::class, 'resetPasswordOTP']);
 
     Route::get('visits', [RepresentativeController::class, 'allVisits']);
 

@@ -1,22 +1,21 @@
 <div class="sidebar-wrapper active">
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
-            <div class="logo">
-                <a href="{{ route('dashboard') }}">
-                    <img src="" alt="Logo">
+            <div class="logo" style="padding-left: 1rem;">
+                <a href="{{ route('dashboard') }}" class="d-flex align-items-center text-decoration-none">
+                    <i class="bi bi-heart-pulse fs-4 text-primary me-2"></i>
+                    <span class="text-primary fw-semibold" style="font-size: 1.1rem;">MedRep</span>
                 </a>
             </div>
-            <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
-                {{-- Light/Dark Mode Toggle --}}
+            <div class="theme-toggle d-flex gap-2 align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21" class="theme-icon">
-
                     <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2" opacity=".3"></path>
                         <g transform="translate(-210 -1)">
                             <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
                             <circle cx="220.5" cy="11.5" r="4"></circle>
                             <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path>
-                    </g>
+                        </g>
                     </g>
                 </svg>
                 <div class="form-check form-switch fs-6">
@@ -35,7 +34,6 @@
     <div class="sidebar-menu">
         <ul class="menu">
             @foreach($sidebarItems as $sidebarItem)
-
                 @if($sidebarItem['isTitle'] ?? false)
                     <li class="sidebar-title">{{ $sidebarItem['name'] }}</li>
                 @else
@@ -45,48 +43,46 @@
                         $hasSubmenu = !empty($sidebarItem['submenu']);
                     @endphp
 
-                        @if(!empty($sidebarItem['isForm']) && $sidebarItem['isForm'])
+                    @if(!empty($sidebarItem['isForm']) && $sidebarItem['isForm'])
                         <li class="sidebar-item logout-item">
-                        <form id="logout-form" method="POST" action="{{ $sidebarItem['url'] }}" class="sidebar-link-form">
-                            @csrf
-                            <button type="submit" class="logout-btn">
+                            <form id="logout-form" method="POST" action="{{ $sidebarItem['url'] }}" class="sidebar-link-form">
+                                @csrf
+                                <button type="submit" class="logout-btn">
+                                    <i class="bi bi-{{ $sidebarItem['icon'] }}"></i>
+                                    <span>{{ $sidebarItem['name'] }}</span>
+                                </button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="sidebar-item {{ $isActive ? 'active' : '' }} {{ $hasSubmenu ? 'has-sub' : '' }}">
+                            <a href="{{ $sidebarItem['url'] ?? '#' }}" class="sidebar-link">
                                 <i class="bi bi-{{ $sidebarItem['icon'] }}"></i>
                                 <span>{{ $sidebarItem['name'] }}</span>
-                            </button>
-                        </form>
-                    </li>
-                        @else
-                        <li class="sidebar-item {{ $isActive ? 'active' : '' }} {{ $hasSubmenu ? 'has-sub' : '' }}">
-                        <a href="{{ $sidebarItem['url'] ?? '#' }}" class="sidebar-link">
-                            <i class="bi bi-{{ $sidebarItem['icon'] }}"></i>
-                            <span>{{ $sidebarItem['name'] }}</span>
-                        </a>
-                        @endif
-                        @if($hasSubmenu)
-                            <ul class="submenu {{ $isActive ? 'active' : '' }}">
-                                @foreach($sidebarItem['submenu'] as $sub)
-                                    @php
-                                        $isSubActive = request()->is($sub['url'] ?? '') ||
-                                                     (isset($sub['key']) && str_starts_with(request()->path(), $sub['key']));
-                                    @endphp
-
-                                    <li class="submenu-item {{ $isSubActive ? 'active' : '' }} {{ !empty($sub['submenu']) ? 'has-sub' : '' }}">
-                                        <a href="{{ $sub['url'] }}" class="submenu-link">{{ $sub['name'] }}</a>
-
-                                        @if(!empty($sub['submenu']))
-                                            <ul class="submenu submenu-level-2">
-                                                @foreach($sub['submenu'] as $subsub)
-                                                    <li class="submenu-item {{ request()->is($subsub['url']) ? 'active' : '' }}">
-                                                        <a href="{{ $subsub['url'] }}" class="submenu-link">{{ $subsub['name'] }}</a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </li>
+                            </a>
+                            @if($hasSubmenu)
+                                <ul class="submenu {{ $isActive ? 'active' : '' }}">
+                                    @foreach($sidebarItem['submenu'] as $sub)
+                                        @php
+                                            $isSubActive = request()->is($sub['url'] ?? '') ||
+                                                         (isset($sub['key']) && str_starts_with(request()->path(), $sub['key']));
+                                        @endphp
+                                        <li class="submenu-item {{ $isSubActive ? 'active' : '' }} {{ !empty($sub['submenu']) ? 'has-sub' : '' }}">
+                                            <a href="{{ $sub['url'] }}" class="submenu-link">{{ $sub['name'] }}</a>
+                                            @if(!empty($sub['submenu']))
+                                                <ul class="submenu submenu-level-2">
+                                                    @foreach($sub['submenu'] as $subsub)
+                                                        <li class="submenu-item {{ request()->is($subsub['url']) ? 'active' : '' }}">
+                                                            <a href="{{ $subsub['url'] }}" class="submenu-link">{{ $subsub['name'] }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endif
                 @endif
             @endforeach
         </ul>

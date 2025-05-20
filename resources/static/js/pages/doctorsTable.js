@@ -18,6 +18,7 @@ function initializeTable() {
     ...(!isSupervisor ? [{
       data: 'supervisors',
       title: translations.headers?.supervisor ?? 'Supervisors',
+      orderable: false,
       className: 'text-start',
       render: function (data) {
         return Array.isArray(data) ? data.join(', ') : (data ?? '—');

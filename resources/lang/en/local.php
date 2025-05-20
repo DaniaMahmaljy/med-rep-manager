@@ -29,6 +29,7 @@ return [
     'Submit' => 'Submit',
     'Reset' => 'Reset',
     'User created successfully' => 'User created successfully',
+    'User created successfully, credentials sent to  user email' => 'User created successfully, credentials sent to  user email',
 
     'Super Admin' => 'Super Admin',
     'Admin' => 'Admin',
@@ -193,6 +194,9 @@ return [
     'Phone' => 'Phone',
     'Select Specialty' => 'Select Specialty',
     'Visits assigned to this doctor' => 'Visits assigned to this doctor',
+    'Doctor created successfully' => 'Doctor created successfully',
+    'No supervisors assigned' => 'No supervisors assigned',
+    'No specialty assigned' => 'No specialty assigned',
 
     //Supervisors
 
@@ -205,6 +209,35 @@ return [
     'Manage and track all Admins' => 'Manage and track all Admins',
     'Admins List' => 'Admins List',
 
+    //password
+    'passwords-change' => 'passwords-change',
+    'New Password' => 'New Password',
+    'Confirm Password' => 'Confirm Password',
+    'Change Password' => 'Change Password',
+    'Confirm your new password' => 'Confirm your new password',
+    'Please enter your new password' => 'Please enter your new password',
+    'Enter new password' => 'Enter new password',
+
+    'Enter your email' => 'Enter your email',
+    'Please reset your password' => 'Please reset your password',
+    'Verification Code' => 'Verification Code',
+    'Enter verification code' => 'Enter verification code',
+    'Password changed successfully!' => 'Password changed successfully!',
+    'Your verification code has been sent to your email'=> 'Your verification code has been sent to your email',
+
+
+  //dasshboard
+  'System_Statistics' => 'System Statistics',
+    'Monthly_Overview' => 'Monthly Visits Overview',
+    'Visits' => 'Visits',
+    'Completed' => 'Completed',
+    'MISSED'=> 'MISSED',
+    'Scheduled' => 'Scheduled',
+    'Cancelled' => 'Cancelled',
+    'Total_Representatives' => 'Total Representatives',
+    'Total_Doctors' => 'Total Doctors',
+    'Last_Month_Visits' => 'Last Month Visits',
+    'Completed_This_Month' => 'Completed (This Month)',
 
     //sidebar
     'Users' => 'Users',

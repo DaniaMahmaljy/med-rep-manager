@@ -5,7 +5,6 @@
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
     <div class="card shadow-sm p-4 border-0" style="width: 100%; max-width: 420px; border-radius: 12px;">
         <div class="text-center mb-4">
-            <img src="/logo.svg" alt="Logo" height="48" class="mb-3">
             <h3 class="mt-2 mb-3 fw-bold text-primary">MedRep</h3>
             <p class="text-muted">{{__ ('local.Please sign in to your account') }}</p>
         </div>
@@ -43,7 +42,7 @@
                     <input class="form-check-input" type="checkbox" name="remember" id="remember" value="1" {{ old('remember') ? 'checked' : '' }}>
                     <label class="form-check-label text-muted" for="remember">{{ __('local.Remember me') }}</label>
                 </div>
-                <a href= "" class="text-decoration-none text-primary">{{ __('local.Forgot password?') }}</a>
+                <a href= "{{ route('password.forget') }}" class="text-decoration-none text-primary">{{ __('local.Forgot password?') }}</a>
             </div>
 
             <button type="submit" class="btn btn-primary w-100 py-2 fw-medium rounded-pill">

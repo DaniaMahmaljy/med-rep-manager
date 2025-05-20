@@ -13,9 +13,6 @@
 
     @vite(['resources/scss/app.scss', 'resources/scss/themes/dark/app-dark.scss'])
 
-    <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.svg') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('assets/static/images/logo/favicon.png') }}" type="image/png">
-
     @yield('styles')
 </head>
 
@@ -52,38 +49,47 @@
 
 @if(auth()->check())
 <script>
+
 function appendNotificationToNavbar(notification) {
     const dropdown = document.querySelector('.notification-dropdown');
     if (!dropdown) return;
-
-    let title, url, icon;
+    let title, url, type;
 
     if (notification.type === 'ticket.created') {
-        title = notification.title || `New Ticket #${notification.ticket_id}`;
-        url = notification.url || `/tickets/${notification.ticket_id}`;
-        icon = notification.icon || 'bi-ticket-detailed';
+        type = notification.view_type;
+        title = notification.title ||  `New Ticket #${notification.ticket_id}`;
+        url = notification.url || `tickets/${notification.ticket_id}`;
     }
     else if (notification.type === 'ticket.reply') {
+        type = notification.view_type;
         title = notification.title || `New Reply on Ticket #${notification.ticket_id}`;
         url = notification.url || `/tickets/${notification.ticket_id}`;
-        icon = notification.icon || 'bi-reply';
     }
     else {
+        type = notification.view_type || 'New';
         title = notification.title || 'Notification';
         url = notification.url || '#';
-        icon = notification.icon || 'bi-bell';
     }
+    console.log('Received notification:', notification);
+
 
     const li = document.createElement('li');
     li.classList.add('dropdown-item', 'notification-item');
     li.innerHTML = `
         <a href="${url}">
             <div class="notification-text ms-4">
-                <p class="notification-title font-bold">${title}</p>
+                <p class="notification-title font-bold">${type}: ${title}</p>
                 <span class="notification-subtitle font-thin text-sm">just now</span>
             </div>
         </a>
     `;
+
+   const maxItems = 5;
+    const notificationItems = dropdown.querySelectorAll('.notification-item');
+
+    if (notificationItems.length >= maxItems) {
+        notificationItems[notificationItems.length - 1].remove();
+    }
 
     const header = dropdown.querySelector('.dropdown-header');
     if (header) {
@@ -92,13 +98,6 @@ function appendNotificationToNavbar(notification) {
         dropdown.prepend(li);
     }
 
-    const notificationItems = dropdown.querySelectorAll('.notification-item');
-    const maxItems = 5;
-    if (notificationItems.length > maxItems) {
-        for (let i = maxItems; i < notificationItems.length; i++) {
-            notificationItems[i].remove();
-        }
-    }
 
     const badge = document.querySelector('.badge-notification');
     if (badge) {
@@ -108,38 +107,21 @@ function appendNotificationToNavbar(notification) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const userId = {{ auth()->id() }};
-    const userType = @json(auth()->user()->userable_type);
+document.addEventListener('DOMContentLoaded', function() {
+    const user = @json(auth()->user());
+    if (!user) return;
 
-    window.Echo.private(`App.Models.User.${userId}`)
-        .notification((notification) => {
-             const audio = new Audio('/sounds/notification.mp3');
-             audio.play();
-            appendNotificationToNavbar(notification);
+    const playSound = () => new Audio('/sounds/notification.mp3').play();
+
+    window.Echo.private(`tickets.${user.id}`)
+        .listen('.ticket.created', e => {
+            playSound();
+            appendNotificationToNavbar(e);
+        })
+        .listen('.ticket.reply', e => {
+            playSound();
+            appendNotificationToNavbar(e);
         });
-
-    if (userType === 'App\\Models\\Supervisor') {
-        const supervisorId = {{ auth()->user()->userable_id }};
-
-        window.Echo.private(`tickets.supervisor.${supervisorId}`)
-            .listen('.ticket.created', (e) => {
-                 const audio = new Audio('/sounds/notification.mp3');
-                      audio.play();
-                appendNotificationToNavbar({
-                    ...e,
-                    type: 'ticket.created'
-                });
-            })
-            .listen('.ticket.reply', (e) => {
-                 const audio = new Audio('/sounds/notification.mp3');
-                audio.play();
-                appendNotificationToNavbar({
-                    ...e,
-                    type: 'ticket.reply'
-                });
-            });
-    }
 });
 </script>
 @endif

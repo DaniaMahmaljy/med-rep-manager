@@ -26,22 +26,20 @@ class SidebarService extends Service
 
             [
                 'name' => __('local.Users'),
-                'key' => 'Users',
-                'icon' => 'people-fill',
                 'permission' => 'user_management_access',
+                'key' => 'user',
+                'icon' => 'people-fill',
                 'submenu' => [
                     [
                         'name' => __('local.Add New'),
-                        'key' => 'Add User',
                         'url' => route('user.create'),
-                        'permission' => 'view_add_user',
                     ],
                 ]
             ],
 
             [
                 'name' => __('local.Visits'),
-                'key' => 'Visits',
+                'key' => 'visits',
                 'icon' => 'calendar-check-fill',
                 'submenu' => [
                     [
@@ -57,7 +55,7 @@ class SidebarService extends Service
 
              [
                 'name' => __('local.Representatives'),
-                'key' => 'Representatives',
+                'key' => 'representatives',
                 'icon' => 'briefcase-fill',
                 'submenu' => [
                     [
@@ -68,7 +66,7 @@ class SidebarService extends Service
             ],
              [
                 'name' => __('local.Tickets'),
-                'key' => 'Tickets',
+                'key' => 'tickets',
                 'icon' => 'calendar-check-fill',
                 'submenu' => [
                     [
@@ -81,7 +79,7 @@ class SidebarService extends Service
 
             [
             'name' => __('local.Doctors'),
-                'key' => 'Doctors',
+                'key' => 'doctors',
                 'icon' => 'heart-pulse-fill',
                 'submenu' => [
                     [
@@ -97,7 +95,8 @@ class SidebarService extends Service
             ],
              [
             'name' => __('local.Supervisors'),
-                'key' => 'Supervisor',
+             'permission' => 'supervisor_management_access',
+                'key' => 'supervisors',
                 'icon' => 'person-lines-fill',
                 'submenu' => [
                     [
@@ -108,7 +107,8 @@ class SidebarService extends Service
             ],
              [
             'name' => __('local.Admins'),
-                'key' => 'Supervisor',
+             'permission' => 'admin_management_access',
+                'key' => 'admins',
                 'icon' => 'shield-lock-fill',
                 'submenu' => [
                     [

@@ -41,18 +41,18 @@ class TicketService extends Service
 
     }
 
-    public function store($data)
+    public function store($data, $withes = [])
     {
-        return DB::transaction(function () use ($data) {
-        $ticket = Ticket::create($data);
+        return DB::transaction(function () use ($data, $withes) {
+            $ticket = Ticket::create($data);
 
-        $representative = $ticket->user->userable;
-        $supervisor = $representative->supervisor;
+            $representative = $ticket->user->userable;
+            $supervisor = $representative->supervisor;
 
-        $supervisor->user->notify(new NewTicketNotification($ticket));
+            $supervisor->user->notify(new NewTicketNotification($ticket));
 
-        return $ticket;
-    });
+            return Ticket::with($withes)->findOrFail($ticket->id);
+        });
 
     }
 

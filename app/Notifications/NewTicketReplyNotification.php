@@ -75,7 +75,7 @@ class NewTicketReplyNotification extends Notification  implements ShouldBroadcas
         'title' => $this->reply->ticket->title,
         'user_id' => $this->reply->ticket->user_id,
         'message' => $this->reply->reply,
-        'type' => 'ticket.reply',
+        'view_type' => 'Ticket reply',
         'url' => url('/tickets/' . $this->reply->ticket->id),
         ]);
     }
@@ -87,11 +87,22 @@ class NewTicketReplyNotification extends Notification  implements ShouldBroadcas
 
      public function broadcastOn()
     {
-        return [
-            new PrivateChannel("App.Models.User.{$this->reply->ticket->user_id}"),
-            new PrivateChannel("tickets.supervisor.{$this->reply->ticket->user->userable->supervisor_id}"),
-        ];
+
+        $representative = $this->reply->ticket->user->userable;
+        $supervisor = $representative->supervisor;
+        $supervisorUser = $supervisor->user;
+
+        if ($supervisorUser && $supervisorUser->id !== $this->reply->user_id) {
+             $userId =  $supervisorUser->id;
+        }
+
+         if ($this->reply->user_id !== $this->reply->ticket->user_id) {
+            $userId =  $this->reply->ticket->user->id;
+        }
+
+        return new PrivateChannel("tickets.{$userId}");
     }
+
 
     public function broadcastAs()
     {

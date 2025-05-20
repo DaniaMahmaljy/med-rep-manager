@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\LanguageController;
 use App\Http\Controllers\Dashboard\NoteController;
 use App\Http\Controllers\Dashboard\NotificationController;
+use App\Http\Controllers\Dashboard\PasswordController;
 use App\Http\Controllers\Dashboard\RepresentativeController;
 use App\Http\Controllers\Dashboard\SampleController;
 use App\Http\Controllers\Dashboard\SupervisorController;
@@ -32,8 +34,16 @@ Broadcast::routes(['middleware' => ['web', 'auth:sanctum']]);
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::get('password/forget-password', [PasswordController::class, 'showForgetPasswordForm'])->name('password.forget');
+Route::post('password/email', [PasswordController::class, 'sendOTPEmail'])->name('password.email');
+Route::get('password/reset-password', [PasswordController::class, 'showResetPasswordForm'])->name('password.reset.form');
+Route::post('password/reset-password', [PasswordController::class, 'resetPasswordOTP'])->name('password.reset');
+
 
 Route::middleware('auth',)->group(function () {
+    Route::get('password/change', [PasswordController::class, 'showChangeForm'])->name('password.change.form');
+    Route::post('password/change', [PasswordController::class, 'changePassword'])->name('password.change');
+
     Route::get('swap', [LanguageController::class, 'swap'])->name('swap');
     Route::post('logout',[AuthController::class, 'destroy'])->name('logout');
     Route::get('user', [UserController::class, 'create'])->name('user.create')->middleware('can:view_add_user');
@@ -49,8 +59,7 @@ Route::middleware('auth',)->group(function () {
 
     Route::middleware('role:superadmin|admin|supervisor')->group(function () {
 
-        Route::get('/', function () {return view('dashboard');})->name('dashboard');
-
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('visits', [VisitController::class, 'index'])->name('visits.index');
         Route::get('visits/create', [VisitController::class, 'create'])->name('visits.create');
         Route::post('visits/store', [VisitController::class, 'store'])->name('visits.store');

@@ -40,7 +40,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <h6 class="text-muted small">{{ __('local.Scheduled At') }}</h6>
-                                        <p class="fw-bold">{{ $visitData->scheduled_at->format('M d, Y H:i') }}</p>
+                                        <p class="fw-bold">{{$visitData->scheduled_at ? $visitData->scheduled_at->format('M d, Y H:i')  : '--' }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

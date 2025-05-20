@@ -29,6 +29,7 @@ return [
     'Reset' => 'إعادة تعيين',
 
     'User created successfully' => 'تم إنشاء المستخدم بنجاح' ,
+    'User created successfully, credentials sent to user email' => 'تم إنشاء المستخدم بنجاح، تم إرسال بيانات تسجيل الدخول إلى البريد الإلكتروني الخاص به',
 
     'Super Admin' => 'المشرف الرئيسي',
     'Admin' => 'مدير للنظام',
@@ -194,6 +195,10 @@ return [
     'Phone' => 'الهاتف',
     'Select Specialty' => 'اختر التخصص',
     'Visits assigned to this doctor' => 'الزيارات المخصصة لهذا الطبيب',
+    'Doctor created successfully' => 'تم إنشاء الطبيب بنجاح',
+    'No supervisors assigned' => 'لم يتم تعيين مشرفين',
+    'No specialty assigned' => 'لم يتم تعيين تخصص',
+
 
     //Supervisors
     'Supervisors Overview' => 'نظرة عامة على المشرفين',
@@ -205,6 +210,34 @@ return [
     'Manage and track all Admins' => 'إدارة وتتبع جميع المسؤولين',
     'Admins List' => 'قائمة المسؤولين',
 
+    //password
+    'passwords-change' => 'تغيير كلمة المرور',
+    'New Password' => 'كلمة المرور الجديدة',
+    'Confirm Password' => 'تأكيد كلمة المرور',
+    'Change Password' => 'تغيير كلمة المرور',
+    'Confirm your new password' => 'قم بتأكيد كلمة المرور الجديدة',
+    'Please enter your new password' => 'الرجاء إدخال كلمة المرور الجديدة',
+    'Enter new password' => 'أدخل كلمة المرور الجديدة',
+
+    'Enter your email' => 'أدخل بريدك الإلكتروني',
+    'Please reset your password' => 'الرجاء إعادة تعيين كلمة المرور',
+    'Verification Code' => 'رمز التحقق',
+    'Enter verification code' => 'أدخل رمز التحقق',
+    'Password changed successfully!' => 'تم تغيير كلمة المرور بنجاح!',
+    'Your verification code has been sent to your email' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني',
+
+    //dashboard
+    'System_Statistics' => 'إحصائيات النظام',
+    'Monthly_Overview' => 'نظرة شهرية على الزيارات',
+    'Visits' => 'الزيارات',
+    'Completed' => 'مكتمل',
+    'MISSED' => 'فائت',
+    'Scheduled' => 'مجدول',
+    'Cancelled' => 'ملغى',
+    'Total_Representatives' => 'إجمالي المندوبين',
+    'Total_Doctors' => 'إجمالي الأطباء',
+    'Last_Month_Visits' => 'زيارات الشهر الماضي',
+    'Completed_This_Month' => 'مكتمل (هذا الشهر)',
 
     //sidebar
     'Users' => 'المستخدمون',

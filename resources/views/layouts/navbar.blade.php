@@ -29,13 +29,24 @@
                 <li class="nav-item dropdown me-3">
                     <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                         <i class='bi bi-bell bi-sub fs-4'></i>
-                        <span class="badge badge-notification bg-danger">{{ auth()->user()->unreadNotifications->count() }}</span>
+                        @php
+                            $unreadCount = auth()->user()->unreadNotifications()->count();
+                        @endphp
+
+                        <span class="badge badge-notification bg-danger {{ $unreadCount === 0 ? 'd-none' : '' }}">
+                            {{ min($unreadCount, 99) }}
+                        </span>
+
                     </a>
                     <ul class="dropdown-menu dropdown-center dropdown-menu-sm-end notification-dropdown">
                         <li class="dropdown-header">
                             <h6>{{__('local.Notifications')}}</h6>
                         </li>
-                        @foreach(auth()->user()->unreadNotifications as $notification)
+                        @php
+                            $limitedNotifications = auth()->user()->unreadNotifications()->latest()->take(5)->get();
+                        @endphp
+
+                        @foreach($limitedNotifications as $notification)
                             <li class="dropdown-item notification-item">
                                 <a href="{{ route('notifications.read', $notification->id) }}">
                                     <div class="notification-text ms-4">
@@ -85,7 +96,14 @@
                         <h6 class="dropdown-header">Hello, {{ auth()->user()->first_name }}</h6>
                     </li>
                     <hr class="dropdown-divider">
-                    <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="icon-mid bi bi-power me-2"></i> {{__('local.Logout')}}</a></li>
+                    <li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="icon-mid bi bi-power me-2"></i> {{__('local.Logout')}}
+                            </a>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTicketReplyRequest;
+use App\Http\Resources\TicketReplyResource;
 use App\Models\Ticket;
 use App\Services\TicketReplyService;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class TicketReplyController extends Controller
 
         $ticket = $this->ticketReplyService->store($data);
 
-        return $this->answer($ticket);
+        return $this->answer(data: TicketReplyResource::make($ticket));
 
     }
 }

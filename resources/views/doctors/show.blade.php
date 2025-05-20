@@ -99,7 +99,7 @@
 
             @if($doctor->supervisors && $doctor->supervisors->count())
                 @foreach ($doctor->supervisors as $supervisor)
-                    <span class="ms-2">{{ $supervisor->user->full_name }},</span>
+                    <span class="ms-2">{{ $supervisor->user->full_name  ?? '-' }},</span>
                 @endforeach
             @else
                 <span class="text-muted">{{ __('local.No supervisors assigned') }}</span>

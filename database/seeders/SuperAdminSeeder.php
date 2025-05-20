@@ -30,6 +30,7 @@ class SuperAdminSeeder extends Seeder
                 'username' => 'daniamahmaljy',
                 'email' => env('SUPERADMIN_EMAIL'),
                 'email_verified_at' => now(),
+                'password_changed_at' => now(),
                 'password' => Hash::make(env('SUPERADMIN_INITIAL_PASSWORD')),
                 'remember_token' => Str::random(10),
             ]

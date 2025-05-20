@@ -42,7 +42,7 @@ class UserController extends Controller
         $data = $request->validated();
         $user = $this->userService->storeUser($data);
         return redirect()->route('user.create')
-        ->with('success',  __('local.User created successfully'));
+        ->with('success',  __('local.User created successfully, credentials sent to  user email'));
     }
 
     /**

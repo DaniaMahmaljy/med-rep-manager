@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AssignSupervisorsRequest extends FormRequest
+class SendOTPRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class AssignSupervisorsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'supervisor_ids' => 'array',
-            'supervisor_ids.*' => 'exists:users,id',
+           'email' => ['required', 'email', 'exists:users,email'],
         ];
     }
 }

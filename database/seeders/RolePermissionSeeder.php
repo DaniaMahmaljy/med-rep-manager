@@ -30,6 +30,8 @@ class RolePermissionSeeder extends Seeder
             'create_representative',
             'view_add_doctor',
             'create_doctor',
+            'admin_management_access',
+            'supervisor_management_access',
         ];
 
         foreach ($permissions as $permission) {
@@ -43,7 +45,7 @@ class RolePermissionSeeder extends Seeder
 
         $superadmin->syncPermissions(Permission::all());
 
-        $admin->syncPermissions(['user_management_access','view_add_user', 'create_user', 'create_supervisor','create_representative', 'view_add_doctor', 'create_doctor']);
+        $admin->syncPermissions(['user_management_access','view_add_user', 'create_user', 'create_supervisor','create_representative', 'view_add_doctor', 'create_doctor', 'supervisor_management_access']);
 
     }
 }

@@ -22,7 +22,7 @@ class TicketResource extends JsonResource
             'status'      => $this->status->label(),
             'priority'    => $this->priority->label(),
             'created_at'  => $this->created_at->toDateTimeString(),
-            'user'        => new UserResource($this->whenLoaded('user')),
+            'user'        => UserSummaryResource::make($this->whenLoaded('user')),
             'replies' => TicketReplyResource::collection($this->whenLoaded('replies')),
             'ticketable' => $this->when($this->ticketable, function () use ($request) {
              return $this->getTicketableResource($request);

@@ -70,9 +70,8 @@ class NewTicketNotification extends Notification implements ShouldBroadcast
         'title' => $this->ticket->title,
         'user_id' => $this->ticket->user_id,
         'url' => route('tickets.show', $this->ticket),
-        'icon' => 'bi-ticket-detailed',
         'time' => now()->diffForHumans(),
-        'type' => 'ticket.created',
+        'view_type' => 'Ticket created',
         'url' => url('/tickets/' . $this->ticket->id),
 
     ]);
@@ -87,10 +86,10 @@ class NewTicketNotification extends Notification implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return [
-            new PrivateChannel("tickets.supervisor.{$this->ticket->user->userable->supervisor_id}"),
-            new PrivateChannel("App.Models.User.{$this->ticket->user_id}")
-        ];
+        $representative = $this->ticket->user->userable;
+        $userId = $representative->supervisor->user->id;
+
+        return new PrivateChannel("tickets.{$userId}");
     }
 
     public function broadcastAs()

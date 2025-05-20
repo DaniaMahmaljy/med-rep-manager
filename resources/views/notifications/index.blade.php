@@ -35,17 +35,11 @@
                     <a href="{{ route('notifications.read', $notification->id) }}"
                        class="list-group-item list-group-item-action {{ $notification->unread() ? 'bg-light-primary' : '' }} p-3 border-bottom">
                         <div class="d-flex align-items-start">
-                            <div class="flex-shrink-0 me-3 pt-1">
-                                <div class="avatar bg-light-{{ $notification->data['color'] ?? 'primary' }} p-2 rounded">
-                                    <i class="bi bi-{{ $notification->data['icon'] ?? 'bell' }} fs-4"></i>
-                                </div>
-                            </div>
-
                             <div class="flex-grow-1">
                                 @if(isset($notification->data['type']))
                                 <div class="mb-1">
                                     <span class="badge bg-light-{{ $notification->data['color'] ?? 'primary' }} text-{{ $notification->data['color'] ?? 'primary' }}">
-                                        <i class="bi bi-{{ $notification->data['icon'] ?? 'bell' }} me-1"></i>
+                                        <i class="bi bi-{{ $notification->data['icon'] ?? 'bell-fill' }} me-1"></i>
                                         {{ ucfirst($notification->data['type']) }}
                                     </span>
                                 </div>
@@ -77,7 +71,7 @@
                 </div>
 
                 @if($notifications->hasPages())
-                <div class="card-footer bg-white">
+                <div class="card-footer">
                     {{ $notifications->links() }}
                 </div>
                 @endif

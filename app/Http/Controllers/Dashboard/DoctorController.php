@@ -54,7 +54,7 @@ class DoctorController extends Controller
     {
         $data = $request->validated();
         $doctor = $this->doctorService->store($data);
-        return redirect()->route('doctors.create')
+        return redirect()->route('doctors.index')
         ->with('success',  __('local.Doctor created successfully'));
     }
 

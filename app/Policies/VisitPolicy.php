@@ -55,7 +55,7 @@ class VisitPolicy
 
         if ($user->hasRole('supervisor')) {
             return $representative->supervisor_id === $user->userable_id  &&
-            $doctor->supervisor_id === $user->userable_id;
+            $doctor->supervisors()->where('supervisor_id', $user->userable_id);
         }
         return false;
     }

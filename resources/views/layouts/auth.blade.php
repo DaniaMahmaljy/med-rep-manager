@@ -12,7 +12,18 @@
 </head>
 
 <body>
+
     <div id="auth">
+         @if (session()->has('success'))
+            <div class="alert alert-light-success color-success"><i class="bi bi-check-circle"></i>
+                {{ session()->get('success') }}
+            </div>
+            @endif
+
+            @if (session()->has('error'))
+                <div class="alert alert-light-danger color-danger" role="alert"><i class="bi bi-exclamation-circle"></i> {{ session()->get('error') }}
+                </div>
+            @endif
         @yield('content')
     </div>
 </body>

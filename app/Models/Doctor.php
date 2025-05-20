@@ -46,7 +46,7 @@ class Doctor extends Model
     public function scopeVisibleTo($query, $user)
     {
         if ($user->hasRole('supervisor')) {
-        return $query->whereHas('doctots', function ($q) use ($user) {
+        return $query->whereHas('supervisors', function ($q) use ($user) {
             $q->where('supervisor_id', $user->userable_id);
             });
         }

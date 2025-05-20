@@ -34,7 +34,7 @@ class TicketController extends Controller
     {
         $data = $request->afterValidation();
         $ticket = $this->ticketService->store($data);
-        return $this->answer($ticket);
+        return $this->answer(data: TicketResource::make($ticket));
     }
 
     /**

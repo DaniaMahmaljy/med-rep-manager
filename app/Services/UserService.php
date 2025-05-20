@@ -10,6 +10,8 @@ use App\Services\PasswordService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Mail\UserCredentialsMail;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -60,7 +62,7 @@ class UserService extends Service
        $user->save();
 
        $user->assignRole($roleName);
-
+       Mail::to($user->email)->send(new UserCredentialsMail($user->username, $plainPassword));
        DB::commit();
 
        return $user;

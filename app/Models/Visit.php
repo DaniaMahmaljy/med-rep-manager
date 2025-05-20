@@ -17,6 +17,7 @@ class Visit extends Model
     protected $casts = [
         'status' => VisitStatusEnum::class,
         'scheduled_at' => 'datetime',
+        'actual_visit_time' => 'datetime',
 
     ];
 

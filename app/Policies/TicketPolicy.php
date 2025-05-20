@@ -61,9 +61,7 @@ class TicketPolicy
             return false;
         }
 
-
-
-        return $this->view($user, $ticket);
+         return true;
     }
 
     /**
