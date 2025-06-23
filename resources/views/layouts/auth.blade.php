@@ -7,8 +7,6 @@
     <title>@yield('title')</title>
 
     @vite(['resources/scss/app.scss', 'resources/scss/themes/dark/app-dark.scss', 'resources/scss/pages/auth.scss'])
-    <link rel="shortcut icon" href="assets/static/images/logo/favicon.svg" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/static/images/logo/favicon.png" type="image/png">
 </head>
 
 <body>

@@ -1,7 +1,11 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
+    define: {
+        __BASE_URL__: JSON.stringify(process.env.NODE_ENV === 'production' ? '/dania_mah/public' : ''),
+    },
     plugins: [
         laravel({
             input: [
@@ -32,9 +36,23 @@ export default defineConfig({
                 'resources/static/js/pages/supervisorTable.js',
                 'resources/static/js/pages/sampleTable.js',
             ],
+
             refresh: true,
         }),
-    ],
+
+     viteStaticCopy({
+        targets: [
+            {
+           src: 'node_modules/@fontsource/nunito/files/*.woff*',
+           dest: 'assets/fonts'
+            },
+            {
+            src: 'node_modules/bootstrap-icons/font/fonts/*.woff*',
+             dest: 'assets/fonts'
+            }
+        ]
+        })
+            ],
     resolve: {
         alias: {
             '@': '/resources/js',
@@ -51,9 +69,23 @@ export default defineConfig({
         emptyOutDir: true,
         rollupOptions: {
             output: {
-                entryFileNames: 'assets/[name]-[hash].js',
-                chunkFileNames: 'assets/[name]-[hash].js',
-                assetFileNames: 'assets/[name]-[hash][extname]'
+               assetFileNames: (assetInfo) => {
+                if (/\.(woff2?|ttf|eot|otf)$/.test(assetInfo.name)) {
+                    return 'assets/fonts/[name][extname]';
+                }
+                return 'assets/[name]-[hash][extname]';
+                }
+            }
+        }
+    },
+     css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `
+                    @use "sass:math";
+                    $bootstrap-icons-font-src: url('~bootstrap-icons/font/fonts/bootstrap-icons.woff2') format("woff2"),
+                                              url('~bootstrap-icons/font/fonts/bootstrap-icons.woff') format("woff");
+                `
             }
         }
     }
