@@ -134,14 +134,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     @vite([
-        'resources/static/js/components/dark.js'
+        'resources/static/js/components/dark.js',
+        'resources/js/app.js'
         ])
-
-        @env('local', 'development')
-        @vite(['resources/js/app.js'])
-        @else
-            @vite(['public/build/assets/app.js'])
-        @endenv
 
     @yield('js')
 </body>
