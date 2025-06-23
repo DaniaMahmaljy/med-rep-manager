@@ -27,6 +27,8 @@ class SupervisorService extends Service
       public function getSupervisorsDataTable($filters)
     {
         $search = $filters['search'];
+        $groupBy = $filters['group_by'] ?? null;
+
 
         $query = Supervisor::with('user','city')
             ->latest();
@@ -42,6 +44,9 @@ class SupervisorService extends Service
                     });
         });
     }
+
+     $query->when($groupBy === 'city', fn($q) => $q->orderBy('city_id'))
+          ->latest();
 
 
 

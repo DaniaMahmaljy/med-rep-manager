@@ -32,6 +32,7 @@ use Spatie\Permission\Contracts\Role;
 Broadcast::routes(['middleware' => ['web', 'auth:sanctum']]);
 
 
+
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('password/forget-password', [PasswordController::class, 'showForgetPasswordForm'])->name('password.forget');
@@ -51,7 +52,10 @@ Route::middleware('auth',)->group(function () {
     Route::get('doctors/create', [DoctorController::class, 'create'])->name('doctors.create')->middleware('can:view_add_doctor');
     Route::post('doctors/store', [DoctorController::class, 'store'])->name('doctors.store')->middleware('can:create_doctor');
     Route::get('supervisors', [SupervisorController::class, 'index'])->name('supervisors.index')->middleware('role:superadmin|admin');;
-    Route::get('admins', [AdminController::class, 'index'])->name('admins.index')->middleware('role:superadmin|admin');;
+    Route::get('admins', [AdminController::class, 'index'])->name('admins.index')->middleware('role:superadmin|admin');
+    Route::get('samples/create', [SampleController::class, 'create'])->name('samples.create')->middleware('role:superadmin|admin');
+    Route::post('samples/store', [SampleController::class, 'store'])->name('samples.store')->middleware('role:superadmin|admin');;
+
 
     Route::post('/doctors/{doctor}/assign-supervisors', [DoctorController::class, 'assignSupervisors']) ->name('doctors.assignSupervisors');
     Route::post('/representatives/{representative}/update-assignments', [RepresentativeController::class, 'updateAssignments'])->middleware('role:superadmin|admin');
@@ -81,16 +85,15 @@ Route::middleware('auth',)->group(function () {
 
 
 
-
-
-
-
-
-
         Route::get('representatives', [RepresentativeController::class, 'index'])->name('representatives.index');
         Route::get('representatives/{id}', [RepresentativeController::class, 'show'])->name('representatives.show');
         Route::get('representatives/{representative}/today-visits', [RepresentativeController::class, 'todayVisits'])->name('representatives.today-visits');
         Route::get('representatives/{representative}/stats-json', [RepresentativeController::class, 'statistics'])->name('representatives.statistics');
+
+        Route::get('samples', [SampleController::class, 'index'])->name('samples.index');
+        Route::get('samples/{id}', [SampleController::class, 'show'])->name('samples.show');
+
+
 
 
         Route::get('tickets', [TicketController::class, 'index'])->name('tickets.index');
@@ -98,6 +101,8 @@ Route::middleware('auth',)->group(function () {
         Route::get('tickets/{id}', [TicketController::class, 'show'])->name('tickets.show');
 
         Route::post('tickets/{ticket}/replies', [TicketReplyController::class, 'store'])->name('tickets.replies.store');
+        Route::post('tickets/{ticket}/active',  [TicketController::class, 'active']);
+
 
         Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
         Route::get('notifications/read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.read');

@@ -72,6 +72,13 @@ class TicketController extends Controller
         return back()->with('success', 'Ticket status updated.');
     }
 
+     public function active(Ticket $ticket)
+    {
+        $this->ticketService->active($ticket);
+
+        return response()->noContent();
+    }
+
 
     /**
      * Remove the specified resource from storage.

@@ -23,8 +23,8 @@
       </div>
     </div>
 
-    <div class="mt-4">
-      <canvas id="doctorStatsChart" height="150"></canvas>
+     <div class="chart-container" style="height: 300px; mt-4">
+        <canvas id="doctorStatsChart" height="150"></canvas>
     </div>
 
     <div class="mt-4">

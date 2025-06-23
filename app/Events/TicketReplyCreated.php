@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Ticket;
+use App\Models\TicketReply;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,18 +11,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TicketCreated implements ShouldBroadcast
+class TicketReplyCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $ticket;
 
-    public function __construct($ticket)
+    protected $reply;
+
+    public function __construct($reply)
     {
-        $this->ticket = $ticket;
+        $this->reply = $reply;
     }
 
     /**
@@ -32,27 +33,24 @@ class TicketCreated implements ShouldBroadcast
      */
     public function broadcastOn(): array
     {
-        $representative = $this->ticket->user->userable;
-        $supervisorId = $representative->supervisor_id;
-
-
         return [
-            new PrivateChannel("tickets.supervisor.{$supervisorId}"),
-            new PrivateChannel("tickets.{$this->ticket->user_id}")
-        ];
-    }
-
-    public function broadcastWith()
-    {
-        return [
-            'id' => $this->ticket->id,
-            'title' => $this->ticket->title,
-            'user_id' => $this->ticket->user_id,
+            new PrivateChannel('ticketreplies.' . $this->reply->ticket_id),
         ];
     }
 
     public function broadcastAs()
     {
-        return 'ticket.created';
+        return 'ticket.reply.created';
+    }
+
+
+    public function broadcastWith()
+    {
+        return [
+            'id' => $this->reply->id,
+            'user' => $this->reply->user->full_name,
+            'reply' => $this->reply->reply,
+            'created_at' => $this->reply->created_at->format('M d, Y H:i'),
+        ];
     }
 }

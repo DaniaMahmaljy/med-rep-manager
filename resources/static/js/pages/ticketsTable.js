@@ -14,12 +14,23 @@ function initializeTable() {
         { data: 'priority', title: translations.headers.priority, className: 'text-start group-header' },
         { data: 'action', title: translations.headers.action, orderable: false, searchable: false, className: 'text-center' }
     ], {
+        serverSide: true,
+        processing: true,
+
         ajax: {
-            data: function (d) {
-                d.group_by = currentGroupBy;
-                d.date_from = $('#dateFrom').val();
-                d.date_to = $('#dateTo').val();
-                d.search = $('#searchInput').val();
+           data: function(d) {
+                return {
+                    group_by: currentGroupBy,
+                    date_from: $('#dateFrom').val(),
+                    date_to: $('#dateTo').val(),
+                    search: $('#searchInput').val(),
+                    draw: d.draw,
+                    start: d.start,
+                    length: d.length,
+                    order: d.order,
+                    columns: d.columns
+                };
+
             },
             error: function (xhr) {
                 $('#validationErrors').hide().empty();
@@ -44,7 +55,7 @@ function initializeTable() {
             dataSrc: () => currentGroupBy
         },
 
-        order: [[1, 'desc']]
+        order: [[2, 'desc']]
     });
 
     $('#ticket_table thead').on('click', '.group-header', function () {

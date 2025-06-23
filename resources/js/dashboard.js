@@ -2,70 +2,113 @@
  * @param {object} stats
  * @param {object} translations
  */
-function initDashboardCharts(stats, translations) {
-    const ctx = document.getElementById('visitsChart');
-    if (!ctx) return;
 
-    new Chart(ctx.getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: [
-                translations.completed,
-                translations.missed,
-                translations.scheduled,
-                translations.cancelled
-            ],
-            datasets: [{
-                label: translations.visits,
-                data: [
-                    stats.chart_data.completed || 0,
-                    stats.chart_data.missed || 0,
-                    stats.chart_data.scheduled || 0,
-                    stats.chart_data.cancelled || 0
-                ],
-                backgroundColor: [
-                    'rgba(40, 167, 69, 0.8)',
-                    'rgba(255, 193, 7, 0.8)',
-                    'rgba(13, 110, 253, 0.8)',
-                    'rgba(220, 53, 69, 0.8)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `${context.dataset.label}: ${context.raw}`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        precision: 0
-                    }
-                }
-            }
-        }
-    });
-}
+
 
 document.addEventListener("DOMContentLoaded", function() {
-    try {
-        const translations = JSON.parse(document.getElementById('translations').textContent);
-        const stats = JSON.parse(document.getElementById('stats-data').textContent);
+  const ctx = document.getElementById('visitsChart');
 
-        initDashboardCharts(stats, translations);
-    } catch (error) {
-        console.error('Failed to initialize dashboard charts:', error);
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [
+      {
+        label: 'Completed',
+        data: [12, 19, 15, 25, 18, 22],
+        backgroundColor: '#20c997',
+        borderColor: 'rgba(74, 222, 128, 1)',
+        borderWidth: 1,
+        borderRadius: 6,
+        borderSkipped: false
+      },
+      {
+        label: 'Scheduled',
+        data: [8, 12, 10, 15, 12, 14],
+        backgroundColor: 'rgba(33, 150, 243, 0.85)',
+        borderColor: 'rgba(96, 165, 250, 1)',
+        borderWidth: 1,
+        borderRadius: 6,
+        borderSkipped: false
+      },
+      {
+        label: 'Missed',
+        data: [3, 5, 2, 4, 3, 5],
+        backgroundColor: 'rgba(244, 67, 54, 0.85)',
+        borderColor: 'rgba(251, 146, 60, 1)',
+        borderWidth: 1,
+        borderRadius: 6,
+        borderSkipped: false
+      }
+    ]
+  };
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            usePointStyle: true,
+            padding: 20,
+            font: {
+              family: 'inherit',
+              size: 13
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(30, 41, 59, 0.95)',
+          titleFont: {
+            size: 14,
+            weight: 'bold'
+          },
+          bodyFont: {
+            size: 12
+          },
+          padding: 12,
+          usePointStyle: true,
+          cornerRadius: 6,
+          displayColors: true,
+          callbacks: {
+            label: function(context) {
+              return `${context.dataset.label}: ${context.raw}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            font: {
+              family: 'inherit'
+            }
+          }
+        },
+        y: {
+          grid: {
+            drawBorder: false,
+            color: 'rgba(226, 232, 240, 0.5)'
+          },
+          ticks: {
+            precision: 0,
+            font: {
+              family: 'inherit'
+            }
+          },
+          beginAtZero: true
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index'
+      }
     }
+  });
 });

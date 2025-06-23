@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('styles')
+<style>
+    #replies-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+</style>
+@endsection
+
 @section('content')
 <div class="page-heading">
     <div class="page-title">
@@ -88,13 +98,24 @@
             </div>
         </div>
 
-        @if ($ticket->replies->isNotEmpty())
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h5>{{ __('local.Replies') }}</h5>
+     @php
+    $replyCount = $ticket->replies->count();
+    $visibleReplies = $ticket->replies->slice(-5);
+    $hasMoreReplies = $replyCount > $visibleReplies->count();
+    @endphp
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5>{{ __('local.Replies') }}</h5>
+        </div>
+        <div id="replies-container" class="card-body">
+            @if ($hasMoreReplies)
+                <div class="d-flex align-items-center justify-content-center">
+                    <button id="load-older-replies" class="btn btn-link">{{ __('local.Show earlier replies') }}</button>
                 </div>
-                <div class="card-body">
-                    @foreach ($ticket->replies as $reply)
+
+                <div id="older-replies" class="d-none">
+                    @foreach ($ticket->replies->slice(0, $replyCount - 5) as $reply)
                         <div class="mb-3 border-bottom pb-2">
                             <strong>{{ $reply->user->full_name }}</strong>
                             <p>{{ $reply->reply }}</p>
@@ -102,8 +123,24 @@
                         </div>
                     @endforeach
                 </div>
+            @endif
+
+            <div id="new-replies">
+                @if ($visibleReplies->isEmpty())
+                    <p id="no-replies-message" class="text-muted">{{ __('local.No replies yet.') }}</p>
+                @else
+                    @foreach ($visibleReplies as $reply)
+                        <div class="mb-3 border-bottom pb-2">
+                            <strong>{{ $reply->user->full_name }}</strong>
+                            <p>{{ $reply->reply }}</p>
+                            <p class="text-muted small">{{ $reply->created_at->format('M d, Y H:i') }}</p>
+                        </div>
+                    @endforeach
+                @endif
             </div>
-        @endif
+        </div>
+    </div>
+
 
         @role('supervisor')
         @can('addReply', $ticket)
@@ -112,13 +149,14 @@
                     <h5>{{ __('local.Add Reply') }}</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('tickets.replies.store', $ticket) }}" method="POST">
+                    <form id="reply-form" action="{{ route('tickets.replies.store', $ticket) }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <textarea name="reply" class="form-control" rows="4" required></textarea>
+                            <textarea name="reply" class="form-control" id="reply-text" rows="4" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('local.Send') }}</button>
                     </form>
+
                 </div>
             </div>
         @endcan
@@ -154,4 +192,82 @@
         @endrole
     </section>
 </div>
+@endsection
+
+@section('js')
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ticketId = {{ $ticket->id }};
+        const form = document.getElementById('reply-form');
+        const textarea = document.getElementById('reply-text');
+        const repliesContainer = document.getElementById('replies-container');
+
+        setInterval(() => {
+            fetch(`/tickets/${ticketId}/active`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_id: {{ auth()->id() }} })
+            });
+        }, 10000);
+
+         const playSound = () => new Audio('/sounds/message.mp3').play();
+
+
+        window.Echo.private(`ticketreplies.${ticketId}`)
+            .listen('.ticket.reply.created', (e) => {
+                const replyHtml = `
+                    <div class="mb-3 border-bottom pb-2">
+                        <strong>${e.user}</strong>
+                        <p>${e.reply}</p>
+                        <p class="text-muted small">${e.created_at}</p>
+                    </div>
+                `;
+
+                const noReplyMessage = document.getElementById('no-replies-message');
+                if (noReplyMessage) {
+                    noReplyMessage.remove();
+                }
+
+                playSound();
+                repliesContainer.insertAdjacentHTML('beforeend', replyHtml);
+                repliesContainer.scrollTo({ top: repliesContainer.scrollHeight, behavior: 'smooth' });
+            });
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const reply = textarea.value.trim();
+            if (!reply) return;
+
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ reply })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Reply failed');
+                textarea.value = '';
+            })
+            .catch(err => {
+                alert('Failed to submit reply.');
+                console.error(err);
+            });
+        });
+        const loadOlderBtn = document.getElementById('load-older-replies');
+        const olderReplies = document.getElementById('older-replies');
+
+        if (loadOlderBtn) {
+            loadOlderBtn.addEventListener('click', () => {
+                olderReplies.classList.remove('d-none');
+                loadOlderBtn.remove();
+            });
+        }
+    });
+    </script>
 @endsection

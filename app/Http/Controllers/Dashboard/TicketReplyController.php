@@ -15,13 +15,16 @@ class TicketReplyController extends Controller
 
      }
 
-    public function store(StoreTicketReplyRequest $request, Ticket $ticket)
+   public function store(StoreTicketReplyRequest $request, Ticket $ticket)
     {
-
         $data = $request->afterValidation();
+        $reply = $this->ticketReplyService->store($data);
 
-        $ticket = $this->ticketReplyService->store($data);
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true, 'reply' => $reply]);
+        }
 
         return back()->with('success', 'Reply added.');
     }
+
 }

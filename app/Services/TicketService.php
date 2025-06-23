@@ -6,6 +6,7 @@ use App\Events\TicketCreated;
 use App\Models\Ticket;
 use App\Notifications\NewTicketNotification;
 use DB;
+use Illuminate\Support\Facades\Cache;
 use Yajra\DataTables\DataTables;
 
 class TicketService extends Service
@@ -58,7 +59,18 @@ class TicketService extends Service
 
     public function show($id, $withes)
     {
-        return Ticket::with($withes)->findOrFail($id);
+        $ticket = Ticket::with($withes)->findOrFail($id);
+
+        $user = auth()->user();
+
+        $user->unreadNotifications()
+        ->where('data->ticket_id', $ticket->id)
+        ->get()
+        ->each(function ($notification) {
+            $notification->markAsRead();
+        });
+
+        return $ticket;
     }
 
   public function getTicketsDataTable($filters)
@@ -139,6 +151,12 @@ class TicketService extends Service
       $ticket->update(['status' => $data['status']]);
 
       return $ticket;
+    }
+
+    public function active($ticket)
+    {
+        $user = auth()->user();
+        Cache::put("user_viewing_ticket_{$ticket->id}_{$user->id}", true, now()->addSeconds(15));
     }
 
 

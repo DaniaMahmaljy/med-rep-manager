@@ -135,6 +135,8 @@ return [
     'Add Reply' => 'Add Reply',
     'Send' => 'Send',
     'Update' => 'Update',
+    'Show earlier replies' => 'Show earlier replies',
+    'No replies yet.' => 'No replies yet.',
 
     //notifications
     'My Notifications' => 'My Notifications',
@@ -150,6 +152,38 @@ return [
     'Bottle' => 'Bottle',
     'Tube' => 'Tube',
     'Injection' => 'Injection',
+
+    //view sample
+    'Sample Details' => 'Sample Details',
+    'View detailed information about this sample' => 'View detailed information about this sample',
+    'Sample Details' => 'Sample Details',
+    'Edit Sample' => 'Edit Sample',
+    'Unit' => 'Unit',
+    'Not Specified', 'Not Specified',
+    'Related Specialties' => 'Related Specialties',
+    'No specialties assigned to this sample.' => '.No specialties assigned to this sample.',
+
+    //index samples
+    'Samples Overview' => 'Samples Overview',
+    'Manage and track all Samples' => 'Manage and track all Samples',
+    'Samples List' => 'Samples List',
+
+    //add sample
+    'Create New Sample' => 'Create New Sample',
+    'Complete the form to add a new sample' => 'Complete the form to add a new sample',
+    'New Sample' => 'New Sample',
+    'Sample Information' => 'Sample Information',
+    'Name (English)' => 'Name (English)',
+    'Name (Arabic)' => 'Name (Arabic)',
+    'Select Brand' => 'Select Brand',
+    'Sample Class' => 'Sample Class',
+    'Select Class' => 'Select Class',
+    'Select Unit' => 'Select Unit',
+    'Specialties' => 'Specialties',
+    'Select specialties this sample is relevant for' => 'Select specialties this sample is relevant for',
+    'Create Sample' => 'Create Sample',
+    'Samples added successfully' => 'Sample added successfully',
+
 
     //view visit
     'Visit' => 'Visit',
@@ -169,6 +203,8 @@ return [
     'Expiration Date' => 'Expiration Date',
     'Assigned Quantity' => 'Assigned Quantity',
     'Used Quantity' => 'Used Quantity',
+    'Note added successfully.' => 'Note added successfully.',
+    'Visit status updated.' => 'Visit status updated.',
 
     //doctors
     'Doctors Overview' => 'Doctors Overview',

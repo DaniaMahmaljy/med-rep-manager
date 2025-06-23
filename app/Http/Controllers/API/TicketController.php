@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexTicketRequest;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Resources\TicketResource;
+use App\Models\Ticket;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
-
 class TicketController extends Controller
 {
     public function __construct(private TicketService $ticketService)

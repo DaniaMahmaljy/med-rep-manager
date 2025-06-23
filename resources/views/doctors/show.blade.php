@@ -1,6 +1,30 @@
 @extends('layouts.app')
 @section('title','Doctor Profile')
 
+@section('styles')
+<style>/
+#stats .chart-container {
+  height: 300px !important;
+  min-height: 300px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.no-data-container {
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.no-data-alert, .stats-error-alert {
+  margin-top: 1rem;
+  margin-bottom: 0 !important;
+}
+
+</style>
+@endsection
+
 @section('content')
 
 <div class="page-heading">

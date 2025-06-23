@@ -1,12 +1,12 @@
 <div class="sidebar-wrapper active">
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
-            <div class="logo" style="padding-left: 1rem;">
-                <a href="{{ route('dashboard') }}" class="d-flex align-items-center text-decoration-none">
-                    <i class="bi bi-heart-pulse fs-4 text-primary me-2"></i>
-                    <span class="text-primary fw-semibold" style="font-size: 1.1rem;">MedRep</span>
-                </a>
-            </div>
+           <div class="logo">
+            <a href="{{ route('dashboard') }}" class="d-flex align-items-end text-decoration-none" style="gap: 8px">
+                <img src="{{ asset('images/logo.svg') }}" alt="logo" style="width: auto; position: relative; top: -1px;">
+                <p class="m-0" style="font-size: 1.2rem; line-height: 1">MedRep</p>
+            </a>
+        </div>
             <div class="theme-toggle d-flex gap-2 align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 21" class="theme-icon">
                     <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -65,8 +65,11 @@
                                         @php
                                             $isSubActive = request()->is($sub['url'] ?? '') ||
                                                          (isset($sub['key']) && str_starts_with(request()->path(), $sub['key']));
+                                             $user = Auth::user();
+                                             $hasPermission = !isset($sub['permission']) || $user->can($sub['permission']);
                                         @endphp
-                                        <li class="submenu-item {{ $isSubActive ? 'active' : '' }} {{ !empty($sub['submenu']) ? 'has-sub' : '' }}">
+                                        @if($hasPermission)
+                                         <li class="submenu-item {{ $isSubActive ? 'active' : '' }} {{ !empty($sub['submenu']) ? 'has-sub' : '' }}">
                                             <a href="{{ $sub['url'] }}" class="submenu-link">{{ $sub['name'] }}</a>
                                             @if(!empty($sub['submenu']))
                                                 <ul class="submenu submenu-level-2">
@@ -77,7 +80,9 @@
                                                     @endforeach
                                                 </ul>
                                             @endif
-                                        </li>
+                                         </li>
+                                         @endif
+
                                     @endforeach
                                 </ul>
                             @endif

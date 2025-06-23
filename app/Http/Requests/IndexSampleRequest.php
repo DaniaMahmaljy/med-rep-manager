@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexSupervisorRequest extends FormRequest
+class IndexSampleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,18 @@ class IndexSupervisorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'group_by' => ['nullable', 'in:city'],
+            'group_by' => ['nullable', 'in:brand,sampleClass'],
             'search.value' => ['nullable', 'string', 'max:255'],
         ];
     }
 
-     public function filters()
+    public function filters()
     {
        $validated = $this->validated();
 
         return [
+            'group_by' => $validated['group_by'] ?? 'brand',
             'search' => data_get($validated, 'search.value'),
-            'group_by' => $validated['group_by'] ?? 'city',
             'user' => $this->user(),
             ];
     }

@@ -5,40 +5,56 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-              'resources/sass/app.scss',
-              'resources/scss/pages/datatables.scss',
-              'resources/js/app.js',
-              'resources/static/js/pages/user-form.js',
-              'resources/js/pages/ui-map-leaflet.js',
-              'resources/static/js/pages/datatables.js',
-              'resources/static/js/pages/visitsTable.js',
-              'resources/static/js/pages/viewRepMap.js',
-              'resoursces/static/js/pages/repAllVisits.js',
-              'resources/static/js/pages/repStatistics.js',
-              'resources/static/js/pages/doctorSamples.js',
-              'resources/static/js/pages/ticketsTable.js',
-              'resoursces/static/js/pages/doctorAllVisits.js',
-              'resources/static/js/pages/adminsTable.js',
-              'resources/static/js/pages/supervisorTable.js',
+                'resources/scss/app.scss',
+                'resources/scss/themes/dark/app-dark.scss',
+                'resources/scss/pages/datatables.scss',
+                'resources/scss/iconly.scss',
+                'resources/scss/pages/auth.scss',
+                'resources/js/app.js',
+                'resources/css/app.css',
+                'resources/static/js/initTheme.js',
+                'resources/static/js/components/dark.js',
+                'resources/js/dashboard.js',
+                'resources/static/js/pages/user-form.js',
+                'resources/static/js/pages/ui-map-leaflet.js',
+                'resources/static/js/pages/datatables.js',
+                'resources/static/js/pages/visitsTable.js',
+                'resources/static/js/pages/viewRepMap.js',
+                'resources/static/js/pages/doctorsTable.js',
+                'resources/static/js/pages/doctorStatistics.js',
+                'resources/static/js/pages/repAllVisits.js',
+                'resources/static/js/pages/representativesTable.js',
+                'resources/static/js/pages/repStatistics.js',
+                'resources/static/js/pages/doctorSamples.js',
+                'resources/static/js/pages/ticketsTable.js',
+                'resources/static/js/pages/doctorAllVisits.js',
+                'resources/static/js/pages/adminsTable.js',
+                'resources/static/js/pages/supervisorTable.js',
+                'resources/static/js/pages/sampleTable.js',
             ],
-
             refresh: true,
         }),
     ],
-
-
-
-
     resolve: {
         alias: {
-          '@': '/resources/js',
-          '~': '/resources/scss',
-          '~themes': '/resources/scss/themes',
-          '~bootstrap-icons': 'bootstrap-icons',
-          '~@fontsource': '/node_modules/@fontsource',
-          '/assets/static/js':'/public/static/js',
-          'jquery': 'jquery/dist/jquery.min.js',
+            '@': '/resources/js',
+            '~': '/resources/scss',
+            '~themes': '/resources/scss/themes',
+            '~bootstrap-icons': 'bootstrap-icons',
+            '~@fontsource': '/node_modules/@fontsource',
+            'jquery': 'jquery/dist/jquery.min.js',
         }
-      },
-
+    },
+    build: {
+        manifest: 'manifest.json',
+        outDir: 'public/build',
+        emptyOutDir: true,
+        rollupOptions: {
+            output: {
+                entryFileNames: 'assets/[name]-[hash].js',
+                chunkFileNames: 'assets/[name]-[hash].js',
+                assetFileNames: 'assets/[name]-[hash][extname]'
+            }
+        }
+    }
 });

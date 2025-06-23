@@ -1,8 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const statsTab = document.getElementById('stats-tab');
+    let chartData = null;
+
+    statsTab.addEventListener('shown.bs.tab', function() {
+        if (chartData) {
+            renderChart(chartData);
+        }
+    });
+
     const doctorId = window.doctorId;
     const statsUrl = `/doctors/${doctorId}/stats-json`;
     const isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const textColor = isDarkMode ? "#eee" : "#333";
+    const textColor = isDarkMode ? "#adb5bd" : "#666666";
     const chartColors = {
         green: '#28a745',
         yellow: '#ffc107',
@@ -14,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then((responseData) => {
             const data = responseData.data || responseData;
+            const chartContainer = document.querySelector(".chart-container");
+            const canvas = document.getElementById("doctorStatsChart");
 
             document.getElementById("totalVisits").textContent = data.total_visits;
             document.getElementById("linkedRepresentatives").textContent = data.distinct_representatives;
@@ -25,40 +36,37 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("utilizationRate").textContent = data.sample_stats.utilization_rate;
             }
 
-            const colors = data.colors && data.colors.length
-                ? data.colors
-                : [chartColors.green, chartColors.yellow, chartColors.red];
-
-            const labels = [
-                window.translations['local.status.completed'] || 'Completed',
-                window.translations['local.status.scheduled'] || 'Scheduled',
-                window.translations['local.status.canceled'] || 'Canceled'
-            ];
-
-            const values = [
-                data.completed_visits || 0,
-                data.upcoming_visits || 0,
-                data.cancelled_visits || 0
-            ];
-
-            const canvas = document.getElementById("doctorStatsChart");
-            if (!canvas) return;
-
-            if (isDarkMode) {
-                canvas.style.backgroundColor = "#222";
-            } else {
-                canvas.style.backgroundColor = "transparent";
-            }
-
-            const ctx = canvas.getContext('2d');
+            document.querySelectorAll('.no-data-alert, .stats-error-alert').forEach(el => el.remove());
 
             if (data.has_visits) {
-                new Chart(ctx, {
+                chartContainer.classList.remove('no-data-container');
+                canvas.style.display = 'block';
+
+                const colors = data.colors && data.colors.length
+                    ? data.colors
+                    : [chartColors.green, chartColors.yellow, chartColors.red];
+
+                const labels = [
+                    window.translations['local.status.completed'] || 'Completed',
+                    window.translations['local.status.scheduled'] || 'Scheduled',
+                    window.translations['local.status.canceled'] || 'Canceled'
+                ];
+
+                if (window.doctorChart) {
+                    window.doctorChart.destroy();
+                }
+
+                const ctx = canvas.getContext('2d');
+                window.doctorChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
                         labels: labels,
                         datasets: [{
-                            data: values,
+                            data: [
+                                data.completed_visits || 0,
+                                data.upcoming_visits || 0,
+                                data.cancelled_visits || 0
+                            ],
                             backgroundColor: colors,
                             borderColor: isDarkMode ? "#444" : "#fff",
                             borderWidth: 1
@@ -86,43 +94,34 @@ document.addEventListener("DOMContentLoaded", function() {
                                     size: 18,
                                     weight: "bold"
                                 }
-                            },
-                            tooltip: {
-                                bodyColor: textColor,
-                                backgroundColor: isDarkMode ? "#222" : "#fff",
-                                borderColor: textColor,
-                                borderWidth: 1,
-                                callbacks: {
-                                    label: function(tooltipItem) {
-                                        const label = tooltipItem.label || '';
-                                        const value = tooltipItem.raw || 0;
-                                        return `${label}: ${value}`;
-                                    }
-                                }
                             }
                         }
                     }
                 });
             } else {
+                chartContainer.classList.add('no-data-container');
                 canvas.style.display = 'none';
+
                 const noDataAlert = document.createElement('div');
-                noDataAlert.className = 'alert alert-info';
+                noDataAlert.className = 'no-data-alert alert alert-info';
                 noDataAlert.textContent = window.translations['local.no_visits_data'] || 'No visits data available';
-                canvas.parentNode.insertBefore(noDataAlert, canvas.nextSibling);
+                chartContainer.parentNode.insertBefore(noDataAlert, chartContainer.nextSibling);
             }
         })
         .catch(error => {
             console.error("Error loading statistics:", error);
-            const chart = document.getElementById("doctorStatsChart");
-            if (chart) chart.style.display = 'none';
+            const chartContainer = document.querySelector(".chart-container");
+            const canvas = document.getElementById("doctorStatsChart");
+
+            chartContainer.classList.add('no-data-container');
+            canvas.style.display = 'none';
 
             const errorDiv = document.createElement('div');
-            errorDiv.className = 'alert alert-danger mt-3';
+            errorDiv.className = 'stats-error-alert alert alert-danger';
             errorDiv.innerHTML = `
                 <i class="bi bi-exclamation-triangle me-2"></i>
                 ${window.translations['local.stats_load_error'] || 'Failed to load statistics'}
-                <small class="d-block mt-1">${error.message}</small>
             `;
-            document.querySelector(".card-body").appendChild(errorDiv);
+            chartContainer.parentNode.insertBefore(errorDiv, chartContainer.nextSibling);
         });
 });

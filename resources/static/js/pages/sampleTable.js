@@ -1,15 +1,30 @@
 import { initDataTable } from '../pages/datatables.js';
 
-let supervisorTable;
-let currentGroupBy = 'city';
+let sampleTable;
+let currentGroupBy = 'brand';
 
 function initializeTable() {
     const translations = window.dataTableTranslations;
 
-    supervisorTable = initDataTable('#supervisor_table', '/supervisors', [
-        { data: 'name', title: translations.headers.name, className: 'text-start group-header' },
-        { data: 'username', title: translations.headers.username, className: 'text-start group-header' },
-        { data: 'city', title: translations.headers.city, className: 'text-start group-header' },
+    sampleTable = initDataTable('#sample_table', '/samples', [
+       { data: 'name', title: translations.headers.name, className: 'text-start group-header' },
+        { data: 'brand', title: translations.headers.brand, className: 'text-start group-header' },
+        { data: 'sampleClass', title: translations.headers.sampleClass, className: 'text-start group-header' },
+        {
+      data: 'action',
+      title: translations.headers?.action ?? 'Action',
+      orderable: false,
+      searchable: false,
+      className: 'text-center',
+      render: function (data, type, row) {
+        const showBtn = `
+          <a href="/samples/${row.id}" class="btn btn-sm btn-outline-info me-1" title="View">
+            <i class="bi bi-eye"></i>
+          </a>
+        `;
+        return showBtn;
+      }
+    }
     ], {
         ajax: {
             error: function (xhr) {
@@ -35,18 +50,22 @@ function initializeTable() {
             dataSrc: () => currentGroupBy
         },
 
+        order: [[1, 'desc']]
     });
 
-    $('#supervisor_table thead').on('click', '.group-header', function () {
+    $('#sample_table thead').on('click', '.group-header', function () {
         const columnIndex = $(this).index();
         $('.group-header').removeClass('active-group');
 
-        if (columnIndex === 2) {
-            currentGroupBy = 'city';
+        if (columnIndex === 1) {
+            currentGroupBy = 'brand';
+        } else if (columnIndex === 2) {
+            currentGroupBy = 'sampleClass';
         }
+
         $(this).addClass('active-group');
-        supervisorTable.destroy();
-        $('#supervisor_table').empty();
+        sampleTable.destroy();
+        $('#sample_table').empty();
         initializeTable();
     });
 
@@ -55,15 +74,4 @@ function initializeTable() {
 
 $(document).ready(function () {
     initializeTable();
-
-    $('#applyFilter').on('click', function () {
-        $('#validationErrors').hide().html('');
-        supervisorTable.ajax.reload();
-    });
-
-    $('#resetFilter').on('click', function () {
-        $('#validationErrors').hide().html('');
-        $('#searchInput').val('');
-        supervisorTable.ajax.reload();
-    });
 });

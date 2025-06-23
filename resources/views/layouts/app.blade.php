@@ -55,6 +55,7 @@ function appendNotificationToNavbar(notification) {
     if (!dropdown) return;
     let title, url, type;
 
+
     if (notification.type === 'ticket.created') {
         type = notification.view_type;
         title = notification.title ||  `New Ticket #${notification.ticket_id}`;
@@ -70,8 +71,12 @@ function appendNotificationToNavbar(notification) {
         title = notification.title || 'Notification';
         url = notification.url || '#';
     }
-    console.log('Received notification:', notification);
 
+    if (notification.id && notification.url) {
+        url = `/notifications/read/${notification.id}`;
+    } else {
+        url = notification.url || '#';
+    }
 
     const li = document.createElement('li');
     li.classList.add('dropdown-item', 'notification-item');
@@ -129,13 +134,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     @vite([
-        'resources/js/app.js',
         'resources/static/js/components/dark.js'
         ])
 
-    {{-- @env
-    <script src="assets/compiled/js/app.js"></script>
-    @endenv --}}
+        @env('local', 'development')
+        @vite(['resources/js/app.js'])
+        @else
+            @vite(['public/build/assets/app.js'])
+        @endenv
 
     @yield('js')
 </body>

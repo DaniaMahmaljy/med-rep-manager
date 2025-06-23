@@ -18,6 +18,8 @@ return [
         'username' => 'Username',
         'email' => 'Email',
         'city' => 'City',
+        'brand' => 'Brand',
+        'sampleClass' => 'Class',
 
     ],
     'ui' => [

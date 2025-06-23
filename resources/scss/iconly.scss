@@ -325,3 +325,199 @@
 .iconly-boldWork:before {
   content: "\e963";
 }
+
+
+.stats-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  .card-body {
+    padding: 1.25rem;
+
+    .d-flex {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      .stats-icon {
+        display: grid;
+        place-items: center;
+        width: 50px;
+        height: 50px;
+        margin-right: 1rem;
+        flex-shrink: 0;
+
+        i {
+          font-size: 1.5rem;
+          line-height: 1;
+        }
+      }
+
+      div:last-child {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+.chart-card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+
+
+}
+
+
+
+.stat-label {
+  font-size: 0.850rem;
+  color: #7f8c8d;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.chart-container {
+  position: relative;
+  height: 300px;
+}
+
+@media (max-width: 768px) {
+  .stats-card {
+    .card-body {
+      padding: 1rem;
+    }
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-heading {
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .stats-icon {
+    width: 40px;
+    height: 40px;
+
+    i {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+$chart-height: 350px;
+$bar-border-radius: 6px;
+$font-family: inherit;
+
+$completed-color: rgba(74, 222, 128, 0.8);
+$completed-border: rgba(74, 222, 128, 1);
+$scheduled-color: rgba(96, 165, 250, 0.8);
+$scheduled-border: rgba(96, 165, 250, 1);
+$missed-color: rgba(251, 146, 60, 0.8);
+$missed-border: rgba(251, 146, 60, 1);
+$tooltip-bg: rgba(30, 41, 59, 0.95);
+$grid-color: rgba(226, 232, 240, 0.5);
+
+.chart-container {
+  position: relative;
+  height: $chart-height;
+  width: 100%;
+
+  canvas {
+    transition: all 0.3s ease;
+  }
+}
+
+.chartjs-tooltip {
+  opacity: 0;
+  position: absolute;
+  background: $tooltip-bg;
+  color: white;
+  border-radius: $bar-border-radius;
+  padding: 0.5rem 1rem;
+  pointer-events: none;
+  transform: translate(-50%, 0);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+
+  &-header {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+  }
+
+  &-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 0.5rem;
+  }
+}
+
+.chartjs-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 1rem;
+
+  &-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.875rem;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    border: 1px solid white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    height: 300px;
+  }
+
+  .chartjs-legend {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 576px) {
+  .chart-container {
+    height: 250px;
+  }
+}

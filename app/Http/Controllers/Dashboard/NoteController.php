@@ -24,6 +24,6 @@ class NoteController extends Controller
 
         $this->noteService->createForVisit(visit: $visit, data: $data);
 
-        return back()->with('success', 'Note added successfully.');
+        return back()->with('success', __('local.Note added successfully.'));
     }
 }

@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="mt-4">
+    <div class="chart-container" style="height: 300px; mt-4">
       <canvas id="repStatsChart" height="150"></canvas>
     </div>
   </div>

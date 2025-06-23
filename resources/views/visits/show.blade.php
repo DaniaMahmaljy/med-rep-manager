@@ -197,7 +197,7 @@
                         </div>
                         <div class="mb-3">
                             <h6 class="text-muted small">{{ __('local.Expiration Date') }}</h6>
-                            <p>{{ \App\Enums\SampleUnitEnum::from($sample->unit)->label()}} </p>
+                                 {{ $sample->expiration_date ? \Illuminate\Support\Carbon::parse($sample->expiration_date)->format('M d, Y') : __('local.Not Specified') }}
                         </div>
                         <div class="mb-3">
                             <h6 class="text-muted small">{{ __('local.Assigned Quantity') }}</h6>

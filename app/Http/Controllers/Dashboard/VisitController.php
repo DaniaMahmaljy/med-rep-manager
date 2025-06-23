@@ -107,7 +107,7 @@ class VisitController extends Controller
     {
         $data = $request->afterValidation();
         $visitData = $this->visitService->updateStatus(data: $data, visit: $visit);
-        return back()->with('success', 'Visit status updated.');
+        return back()->with('success', __('local.Visit status updated.'));
     }
         /**
      * Show the form for editing the specified resource.

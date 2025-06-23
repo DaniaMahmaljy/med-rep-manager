@@ -65,17 +65,21 @@ class SidebarService extends Service
                 ]
             ],
              [
-                'name' => __('local.Tickets'),
-                'key' => 'tickets',
-                'icon' => 'calendar-check-fill',
+                'name' => __('local.Samples'),
+                'key' => 'samples',
+                'icon' => 'capsule',
                 'submenu' => [
                     [
                         'name' => __('local.View All'),
-                        'url' => route('tickets.index')
+                        'url' => route('samples.index')
+                    ],
+                     [
+                        'permission' => 'create_doctor',
+                        'name' => __('local.Add New'),
+                        'url' => route('samples.create')
                     ],
                 ]
             ],
-
 
             [
             'name' => __('local.Doctors'),
@@ -87,12 +91,25 @@ class SidebarService extends Service
                         'url' => route('doctors.index')
                     ],
                     [
-                        'permission' => 'view_add_doctor',
+                        'permission' => 'create_doctor',
                         'name' => __('local.Add New'),
                         'url' => route('doctors.create')
                     ],
                 ]
             ],
+
+             [
+                'name' => __('local.Tickets'),
+                'key' => 'tickets',
+                'icon' => 'calendar-check-fill',
+                'submenu' => [
+                    [
+                        'name' => __('local.View All'),
+                        'url' => route('tickets.index')
+                    ],
+                ]
+            ],
+
              [
             'name' => __('local.Supervisors'),
              'permission' => 'supervisor_management_access',
@@ -133,15 +150,14 @@ class SidebarService extends Service
                 return false;
             }
 
-            if (!empty($item['submenu'])) {
-                $item['submenu'] = array_filter($item['submenu'], function ($sub) use ($user) {
-                    return !isset($sub['permission']) || $user->can($sub['permission']);
-                });
+             if (!empty($item['submenu'])) {
+            $item['submenu'] = collect($item['submenu'])->filter(function ($sub) use ($user) {
+                return !isset($sub['permission']) || $user->can($sub['permission']);
+            })->values()->toArray();
 
-                if (empty($item['submenu'])) {
-                    return false;
-
-                }
+            if (empty($item['submenu'])) {
+                return false;
+            }
             }
 
             return true;

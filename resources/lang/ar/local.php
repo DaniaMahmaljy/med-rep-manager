@@ -29,7 +29,7 @@ return [
     'Reset' => 'إعادة تعيين',
 
     'User created successfully' => 'تم إنشاء المستخدم بنجاح' ,
-    'User created successfully, credentials sent to user email' => 'تم إنشاء المستخدم بنجاح، تم إرسال بيانات تسجيل الدخول إلى البريد الإلكتروني الخاص به',
+    'User created successfully, credentials sent to  user email' => 'تم إنشاء المستخدم بنجاح، تم إرسال بيانات تسجيل الدخول إلى البريد الإلكتروني الخاص به',
 
     'Super Admin' => 'المشرف الرئيسي',
     'Admin' => 'مدير للنظام',
@@ -135,6 +135,8 @@ return [
     'Add Reply' => 'إضافة رد',
     'Send' => 'إرسال',
     'Update' => 'تحديث',
+    'Show earlier replies' => 'إظهار الردود السابقة',
+    'No replies yet.' => 'لا توجد ردود بعد',
 
     //notifications
     'My Notifications' => 'إشعاراتي',
@@ -151,6 +153,37 @@ return [
     'Bottle' => 'زجاجة',
     'Tube' => 'أنبوب',
     'Injection' => 'حقنة',
+
+
+//view sample
+'Sample Details' => 'تفاصيل العينة',
+'View detailed information about this sample' => 'عرض المعلومات التفصيلية عن هذه العينة',
+'Edit Sample' => 'تعديل العينة',
+'Unit' => 'الوحدة',
+'Not Specified' => 'غير محدد',
+'Related Specialties' => 'التخصصات المرتبطة',
+'No specialties assigned to this sample.' => 'لا توجد تخصصات مرتبطة بهذه العينة.',
+
+//index samples
+'Samples Overview' => 'نظرة عامة على العينات',
+'Manage and track all Samples' => 'إدارة وتتبع جميع العينات',
+'Samples List' => 'قائمة العينات',
+
+//add sample
+'Create New Sample' => 'إنشاء عينة جديدة',
+'Complete the form to add a new sample' => 'أكمل النموذج لإضافة عينة جديدة',
+'New Sample' => 'عينة جديدة',
+'Sample Information' => 'معلومات العينة',
+'Name (English)' => 'الاسم (الإنجليزية)',
+'Name (Arabic)' => 'الاسم (العربية)',
+'Select Brand' => 'اختر العلامة التجارية',
+'Sample Class' => 'فئة العينة',
+'Select Class' => 'اختر الفئة',
+'Select Unit' => 'اختر الوحدة',
+'Specialties' => 'التخصصات',
+'Select specialties this sample is relevant for' => 'اختر التخصصات المناسبة لهذه العينة',
+'Create Sample' => 'إنشاء العينة',
+'Samples added successfully' => 'تم إضافة العينة بنجاح',
 
     //show visit
     'Visit' => 'زيارة',
@@ -170,6 +203,8 @@ return [
     'Expiration Date' => 'تاريخ انتهاء الصلاحية',
     'Assigned Quantity' => 'الكمية المخصصة',
     'Used Quantity' => 'الكمية المستخدمة',
+    'Note added successfully.' => 'تم إضافة الملاحظة بنجاح',
+    'Visit status updated.' => 'تم تحديث حالة الزيارة',
 
     //doctors
     'Doctors Overview' => 'نظرة عامة على الأطباء',

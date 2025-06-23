@@ -25,7 +25,10 @@ class IndexTicketTableRequest extends FormRequest
             'group_by' => 'nullable|in:user,created_at,status,priority',
             'date_from' => 'nullable|date',
             'date_to' => 'nullable|date|after_or_equal:date_from',
-            'search.value' => 'nullable|string|max:255',
+            'search' => 'nullable|string|max:255',
+            'draw' => 'sometimes|numeric',
+            'start' => 'sometimes|numeric',
+            'length' => 'sometimes|numeric',
         ];
     }
 
@@ -34,11 +37,14 @@ class IndexTicketTableRequest extends FormRequest
         $validated = $this->validated();
 
         return [
-            'group_by' => $validated['group_by'] ?? 'user',
-            'search' => data_get($validated, 'search.value'),
+            'group_by' => $validated['group_by'] ?? 'created_at',
+            'search' => $validated['search'] ?? null,
             'date_from' => $validated['date_from'] ?? null,
             'date_to' => $validated['date_to'] ?? null,
             'auth_user' => $this->user(),
-            ];
+            'draw' => $validated['draw'] ?? null,
+            'start' => $validated['start'] ?? 0,
+            'length' => $validated['length'] ?? 10,
+        ];
     }
 }
