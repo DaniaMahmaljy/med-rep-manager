@@ -58,7 +58,7 @@ Route::middleware('auth',)->group(function () {
 
 
     Route::post('/doctors/{doctor}/assign-supervisors', [DoctorController::class, 'assignSupervisors']) ->name('doctors.assignSupervisors');
-    Route::post('/representatives/{representative}/update-assignments', [RepresentativeController::class, 'updateAssignments'])->middleware('role:superadmin|admin');
+    Route::post('/representatives/{representative}/update-assignments', [RepresentativeController::class, 'updateAssignments'])->middleware('role:superadmin|admin')->name('representatives.update_assignments');
 
 
     Route::middleware('role:superadmin|admin|supervisor')->group(function () {

@@ -6,7 +6,9 @@ repSelect.addEventListener('change', function () {
     const repId = this.value;
 
     if (repId) {
-        repVisitsBtn.href = `/representatives/${repId}/visits`;
+        repVisitsBtn.href = route('representatives.visits', { representative: repId });
+
+
         repVisitsBtnWrapper.style.visibility = 'visible';
     } else {
         repVisitsBtnWrapper.style.visibility = 'hidden';
@@ -33,8 +35,12 @@ document.addEventListener('DOMContentLoaded', function () {
         container.innerHTML = `<div class="text-center py-3"><div class="spinner-border" role="status"></div></div>`;
 
         try {
-            const response = await fetch(`/samples/by-doctor/${doctorId}`, {
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            const response = await fetch(route('samples.byDoctor', { doctor: doctorId }), {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            }
+
             });
 
             if (!response.ok) throw new Error('Failed to fetch samples');

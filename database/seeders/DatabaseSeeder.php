@@ -17,8 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SyrianCitiesAndMunicipalsSeeder::class,
             RolePermissionSeeder::class,
-            AdminSeeder::class,
+            SuperAdminSeeder::class,
             UserTestSeeder::class,
+            AdminSeeder::class,
             SpecialtySeeder::class,
             DoctorSeeder::class,
             SupervisorSeeder::class,

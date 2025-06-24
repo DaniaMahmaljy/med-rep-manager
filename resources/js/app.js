@@ -1,6 +1,25 @@
 // Feather icons are used on some pages
 // Replace() replaces [data-feather] elements with icons
 
+// Apply fetch override
+const originalFetch = window.fetch;
+window.fetch = async (url, options = {}) => {
+  if (typeof url === 'string' && !url.startsWith('http') && !url.startsWith(window.APP_BASE_URL || '')) {
+    url = `${window.APP_BASE_URL || ''}${url.startsWith('/') ? url : `/${url}`}`;
+  }
+  return originalFetch(url, options);
+};
+
+if (window.axios) {
+  window.axios.defaults.baseURL = window.APP_BASE_URL || '';
+}
+
+import { Ziggy } from './ziggy';
+import { route } from 'ziggy-js';
+
+window.route = route;
+window.Ziggy = Ziggy;
+
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
@@ -12,7 +31,10 @@ window.Echo = new Echo({
     forceTLS: true,
     encrypted: true,
     withCredentials: true,
-    authEndpoint: '/broadcasting/auth',
+   authEndpoint: window.APP_BASE_URL ?
+    `${window.APP_BASE_URL}/broadcasting/auth` :
+    '/broadcasting/auth',
+
     auth: {
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,

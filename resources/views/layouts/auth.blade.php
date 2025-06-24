@@ -4,6 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:,">
+
+    <link href="{{ asset('build/assets/fonts/nunito-latin-400-normal.woff2') }}" rel="stylesheet" type="font/woff2" />
+    <link href="{{ asset('build/assets/fonts/nunito-latin-400-normal.woff') }}" rel="stylesheet" type="font/woff" />
+    <link href="{{ asset('build/assets/fonts/nunito-latin-700-normal.woff2') }}" rel="stylesheet" type="font/woff2" />
+    <link href="{{ asset('build/assets/fonts/nunito-latin-700-normal.woff') }}" rel="stylesheet" type="font/woff" />
+
     <title>@yield('title')</title>
 
     @vite(['resources/scss/app.scss', 'resources/scss/themes/dark/app-dark.scss', 'resources/scss/pages/auth.scss'])

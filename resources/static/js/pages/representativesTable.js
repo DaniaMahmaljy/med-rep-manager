@@ -45,7 +45,7 @@ function initializeTable() {
       className: 'text-center',
       render: function (data, type, row) {
         const showBtn = `
-          <a href="/representatives/${row.id}" class="btn btn-sm btn-outline-info me-1" title="View">
+          <a href="${route('representatives.show', { id: row.id })}"  class="btn btn-sm btn-outline-info me-1" title="View">
             <i class="bi bi-eye"></i>
           </a>
         `;
@@ -166,7 +166,8 @@ $(document).ready(function () {
     const workingMunicipals = $('#workingMunicipalsSelect').val() || [];
 
     $.ajax({
-      url: `/representatives/${repId}/update-assignments`,
+      url: route('representatives.update_assignments', { id: repId }),
+
       method: 'POST',
       data: {
         supervisor_id: supervisorId,

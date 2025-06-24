@@ -36,19 +36,19 @@ export default defineConfig({
                 'resources/static/js/pages/supervisorTable.js',
                 'resources/static/js/pages/sampleTable.js',
             ],
+             define: {
+                'process.env': process.env
+            },
 
             refresh: true,
         }),
 
+
      viteStaticCopy({
         targets: [
             {
-           src: 'node_modules/@fontsource/nunito/files/*.woff*',
-           dest: 'assets/fonts'
-            },
-            {
-            src: 'node_modules/bootstrap-icons/font/fonts/*.woff*',
-             dest: 'assets/fonts'
+            src: 'node_modules/@fontsource/nunito/files/*.woff*',
+            dest: 'assets/fonts'
             }
         ]
         })

@@ -10,7 +10,7 @@ function initializeTable() {
 
  const translations = window.dataTableTranslations;
 
-    visitsTable = initDataTable('#visit_table', '/visits', [
+    visitsTable = initDataTable('#visit_table', route('visits.index'), [
         { data: 'representative', title: translations.headers.representative, className: 'text-start group-header' },
         { data: 'doctor', title: translations.headers.doctor, className: 'text-start group-header' },
         { data: 'scheduled_at', title: translations.headers.scheduled_at, className: 'text-start group-header' },
