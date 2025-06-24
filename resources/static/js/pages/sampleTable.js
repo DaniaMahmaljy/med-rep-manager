@@ -18,10 +18,10 @@ function initializeTable() {
       className: 'text-center',
       render: function (data, type, row) {
         const showBtn = `
-          <a href="/samples/${row.id}" class="btn btn-sm btn-outline-info me-1" title="View">
-            <i class="bi bi-eye"></i>
-          </a>
-        `;
+            <a href="${window.APP_BASE_URL || ''}/samples/${row.id}" class="btn btn-sm btn-outline-info me-1" title="View">
+                <i class="bi bi-eye"></i>
+            </a>
+            `;
         return showBtn;
       }
     }

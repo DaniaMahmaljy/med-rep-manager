@@ -27,7 +27,6 @@
 
 <body>
     <audio id="notificationSound" src="{{ asset('sounds/notification.mp3') }}" preload="auto"></audio>
-    @routes
 
     @vite(['resources/static/js/initTheme.js'])
     <div id="app">
@@ -69,12 +68,12 @@ function appendNotificationToNavbar(notification) {
     if (notification.type === 'ticket.created') {
         type = notification.view_type;
         title = notification.title ||  `New Ticket #${notification.ticket_id}`;
-        url = notification.url || `tickets/${notification.ticket_id}`;
+        url = notification.url || `${window.APP_BASE_URL || ''}/tickets/${notification.ticket_id}`;
     }
     else if (notification.type === 'ticket.reply') {
         type = notification.view_type;
         title = notification.title || `New Reply on Ticket #${notification.ticket_id}`;
-        url = notification.url || `/tickets/${notification.ticket_id}`;
+        url = notification.url || `${window.APP_BASE_URL || ''}/tickets/${notification.ticket_id}`;
     }
     else {
         type = notification.view_type || 'New';
@@ -83,7 +82,7 @@ function appendNotificationToNavbar(notification) {
     }
 
     if (notification.id && notification.url) {
-        url = `/notifications/read/${notification.id}`;
+        url = `${window.APP_BASE_URL || ''}/notifications/read/${notification.id}`;
     } else {
         url = notification.url || '#';
     }

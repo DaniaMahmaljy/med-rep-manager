@@ -3,9 +3,7 @@ import laravel from 'laravel-vite-plugin';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
-    define: {
-        __BASE_URL__: JSON.stringify(process.env.APP_ENV === 'production' ? '/dania_mah/public' : ''),
-    },
+    base: '/dania_mah/public/build/',
     plugins: [
         laravel({
             input: [

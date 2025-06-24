@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     const doctorId = window.doctorId;
-    const statsUrl = `/doctors/${doctorId}/stats-json`;
+    const statsUrl = `${window.APP_BASE_URL || ''}/doctors/${doctorId}/stats-json`;
     const isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
     const textColor = isDarkMode ? "#adb5bd" : "#666666";
     const chartColors = {

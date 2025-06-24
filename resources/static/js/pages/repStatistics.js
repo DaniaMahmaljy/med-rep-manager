@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const repId = window.representativeId;
-    const statsUrl = `/representatives/${repId}/stats-json`;
+    const statsUrl = `${window.APP_BASE_URL || ''}/representatives/${repId}/stats-json`;
 
     const isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
     const textColor = isDarkMode ? "#eee" : "#666666";

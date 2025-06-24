@@ -203,7 +203,7 @@
         const repliesContainer = document.getElementById('replies-container');
 
         setInterval(() => {
-            fetch(`/tickets/${ticketId}/active`, {
+            fetch(`${window.APP_BASE_URL || ''}/tickets/${ticketId}/active`,  {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
