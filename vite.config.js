@@ -4,7 +4,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
     define: {
-        __BASE_URL__: JSON.stringify(process.env.NODE_ENV === 'production' ? '/dania_mah/public' : ''),
+        __BASE_URL__: JSON.stringify(process.env.APP_ENV === 'production' ? '/dania_mah/public' : ''),
     },
     plugins: [
         laravel({
@@ -36,9 +36,6 @@ export default defineConfig({
                 'resources/static/js/pages/supervisorTable.js',
                 'resources/static/js/pages/sampleTable.js',
             ],
-             define: {
-                'process.env': process.env
-            },
 
             refresh: true,
         }),
@@ -67,26 +64,18 @@ export default defineConfig({
         manifest: 'manifest.json',
         outDir: 'public/build',
         emptyOutDir: true,
+        assetsInlineLimit: 0,
+        cssCodeSplit: true,
         rollupOptions: {
             output: {
-               assetFileNames: (assetInfo) => {
-                if (/\.(woff2?|ttf|eot|otf)$/.test(assetInfo.name)) {
+                  assetFileNames: (assetInfo) => {
+                    if (/\.(woff2?|ttf|eot|otf)$/.test(assetInfo.name)) {
                     return 'assets/fonts/[name][extname]';
-                }
-                return 'assets/[name]-[hash][extname]';
+                    }
+                    return 'assets/[name]-[hash][extname]';
+
                 }
             }
         }
     },
-     css: {
-        preprocessorOptions: {
-            scss: {
-                additionalData: `
-                    @use "sass:math";
-                    $bootstrap-icons-font-src: url('~bootstrap-icons/font/fonts/bootstrap-icons.woff2') format("woff2"),
-                                              url('~bootstrap-icons/font/fonts/bootstrap-icons.woff') format("woff");
-                `
-            }
-        }
-    }
 });

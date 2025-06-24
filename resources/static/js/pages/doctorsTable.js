@@ -33,10 +33,10 @@ function initializeTable() {
       className: 'text-center',
       render: function (data, type, row) {
         const showBtn = `
-          <a href="/doctors/${row.id}" class="btn btn-sm btn-outline-info me-1" title="View">
-            <i class="bi bi-eye"></i>
-          </a>
-        `;
+            <a href="${window.APP_BASE_URL || ''}/doctors/${row.id}" class="btn btn-sm btn-outline-info me-1" title="View">
+                <i class="bi bi-eye"></i>
+            </a>
+            `;
 
         if (isSupervisor) return showBtn;
 
@@ -140,7 +140,7 @@ $(document).ready(function () {
     const supervisorIds = $('#doctorSupervisorSelect').val() || [];
 
     $.ajax({
-      url: `/doctors/${doctorId}/assign-supervisors`,
+      url: `${window.APP_BASE_URL || ''}/doctors/${doctorId}/assign-supervisors`,
       method: 'POST',
       data: {
         supervisor_ids: supervisorIds,

@@ -45,9 +45,9 @@ function initializeTable() {
       className: 'text-center',
       render: function (data, type, row) {
         const showBtn = `
-          <a href="${route('representatives.show', { id: row.id })}"  class="btn btn-sm btn-outline-info me-1" title="View">
+        <a href="${window.APP_BASE_URL || ''}/representatives/${row.id}" class="btn btn-sm btn-outline-info me-1" title="View">
             <i class="bi bi-eye"></i>
-          </a>
+        </a>
         `;
 
         if (isSupervisor) return showBtn;
@@ -166,8 +166,7 @@ $(document).ready(function () {
     const workingMunicipals = $('#workingMunicipalsSelect').val() || [];
 
     $.ajax({
-      url: route('representatives.update_assignments', { id: repId }),
-
+      url: `${window.APP_BASE_URL || ''}/representatives/${repId}/update-assignments`,
       method: 'POST',
       data: {
         supervisor_id: supervisorId,

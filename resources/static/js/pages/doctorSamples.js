@@ -6,8 +6,7 @@ repSelect.addEventListener('change', function () {
     const repId = this.value;
 
     if (repId) {
-        repVisitsBtn.href = route('representatives.visits', { representative: repId });
-
+        repVisitsBtn.href = `${window.APP_BASE_URL || ''}/representatives/${repId}/visits`;
 
         repVisitsBtnWrapper.style.visibility = 'visible';
     } else {
@@ -35,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
         container.innerHTML = `<div class="text-center py-3"><div class="spinner-border" role="status"></div></div>`;
 
         try {
-            const response = await fetch(route('samples.byDoctor', { doctor: doctorId }), {
+            const response = await fetch(`${window.APP_BASE_URL || ''}/samples/by-doctor/${doctorId}`, {
             headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Accept': 'application/json'
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
             }
 
             });

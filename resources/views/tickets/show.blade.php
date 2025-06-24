@@ -213,7 +213,11 @@
             });
         }, 10000);
 
-         const playSound = () => new Audio('/sounds/message.mp3').play();
+         const playSound = () => {
+            const audio = new Audio(`${window.APP_BASE_URL}/sounds/message.mp3`);
+            audio.play();
+        };
+
 
 
         window.Echo.private(`ticketreplies.${ticketId}`)

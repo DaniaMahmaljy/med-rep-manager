@@ -11,21 +11,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <link href="{{ asset('build/assets/fonts/nunito-latin-300-normal.woff2') }}" rel="stylesheet" type="font/woff2" />
-    <link href="{{ asset('build/assets/fonts/nunito-latin-300-normal.woff') }}" rel="stylesheet" type="font/woff" />
-
-    <link href="{{ asset('build/assets/fonts/nunito-latin-400-normal.woff2') }}" rel="stylesheet" type="font/woff2" />
-    <link href="{{ asset('build/assets/fonts/nunito-latin-400-normal.woff') }}" rel="stylesheet" type="font/woff" />
-
-    <link href="{{ asset('build/assets/fonts/nunito-latin-600-normal.woff2') }}" rel="stylesheet" type="font/woff2" />
-    <link href="{{ asset('build/assets/fonts/nunito-latin-600-normal.woff') }}" rel="stylesheet" type="font/woff" />
-
-    <link href="{{ asset('build/assets/fonts/nunito-latin-700-normal.woff2') }}" rel="stylesheet" type="font/woff2" />
-    <link href="{{ asset('build/assets/fonts/nunito-latin-700-normal.woff') }}" rel="stylesheet" type="font/woff" />
-
-    <link href="{{ asset('build/assets/fonts/nunito-latin-800-normal.woff2') }}" rel="stylesheet" type="font/woff2" />
-    <link href="{{ asset('build/assets/fonts/nunito-latin-800-normal.woff') }}" rel="stylesheet" type="font/woff" />
-
     <script>
     window.APP_BASE_URL = "{{ url('/') }}";
     </script>
@@ -33,7 +18,7 @@
     <title>@yield('title')</title>
     @yield('stylesfirst')
 
-     @routes
+
 
     @vite(['resources/scss/app.scss', 'resources/scss/themes/dark/app-dark.scss'])
 
@@ -42,6 +27,7 @@
 
 <body>
     <audio id="notificationSound" src="{{ asset('sounds/notification.mp3') }}" preload="auto"></audio>
+    @routes
 
     @vite(['resources/static/js/initTheme.js'])
     <div id="app">
@@ -140,7 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const user = @json(auth()->user());
     if (!user) return;
 
-    const playSound = () => new Audio('/sounds/notification.mp3').play();
+    const playSound = () => {
+    const sound = new Audio(`${window.APP_BASE_URL}/sounds/notification.mp3`);
+    sound.play();
+    };
+
 
     window.Echo.private(`tickets.${user.id}`)
         .listen('.ticket.created', e => {
